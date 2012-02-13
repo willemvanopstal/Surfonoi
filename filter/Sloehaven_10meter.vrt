@@ -1,0 +1,8 @@
+<OGRVRTDataSource>
+    <OGRVRTLayer name="Sloehaven_10meter">
+        <SrcDataSource>Sloehaven_10meter.csv</SrcDataSource>
+	<LayerSRS>WGS84</LayerSRS>
+	<GeometryType>wkbPoint</GeometryType>
+	<GeometryField encoding="PointFromColumns" x="field_1" y="field_2" z="field_3"/>
+    </OGRVRTLayer>
+</OGRVRTDataSource>
