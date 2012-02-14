@@ -41,7 +41,7 @@ int main (int argc, const char ** argv)
             g.calcGrid(&f_min);
         
         g.write(outputArg.getValue().c_str());
-        g.write(outputArg.getValue().c_str(), ',');
+        //g.write(outputArg.getValue().c_str(), ',');
 
     
     } catch (TCLAP::ArgException &e)  // catch any exceptions
