@@ -7,8 +7,11 @@
 //
 
 #include <iostream>
-#include <tclap/CmdLine.h>
+#include "../tclap/CmdLine.h"
 #include "Grid.h"
+
+void f_max(Point& p, double& x, double& y, double& z);
+void f_min(Point& p, double& x, double& y, double& z);
 
 void f_min(Point& p, double& x, double& y, double& z)
 {

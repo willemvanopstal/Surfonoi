@@ -52,6 +52,30 @@
 		4190356614D7FF2B0041640B /* linfilter.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = linfilter.1; sourceTree = "<group>"; };
 		4190356B14D8019F0041640B /* Filter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Filter.cpp; sourceTree = "<group>"; };
 		4190356C14D8019F0041640B /* Filter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Filter.h; sourceTree = "<group>"; };
+		41B3A91414F7D1DA007C6E32 /* Arg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
+		41B3A91514F7D1DA007C6E32 /* ArgException.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
+		41B3A91614F7D1DA007C6E32 /* ArgTraits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
+		41B3A91714F7D1DA007C6E32 /* CmdLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CmdLine.h; sourceTree = "<group>"; };
+		41B3A91814F7D1DA007C6E32 /* CmdLineInterface.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CmdLineInterface.h; sourceTree = "<group>"; };
+		41B3A91914F7D1DA007C6E32 /* CmdLineOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CmdLineOutput.h; sourceTree = "<group>"; };
+		41B3A91A14F7D1DA007C6E32 /* Constraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		41B3A91B14F7D1DA007C6E32 /* DocBookOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocBookOutput.h; sourceTree = "<group>"; };
+		41B3A91C14F7D1DA007C6E32 /* HelpVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HelpVisitor.h; sourceTree = "<group>"; };
+		41B3A91D14F7D1DA007C6E32 /* IgnoreRestVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IgnoreRestVisitor.h; sourceTree = "<group>"; };
+		41B3A92014F7D1DA007C6E32 /* MultiArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiArg.h; sourceTree = "<group>"; };
+		41B3A92114F7D1DA007C6E32 /* MultiSwitchArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MultiSwitchArg.h; sourceTree = "<group>"; };
+		41B3A92214F7D1DA007C6E32 /* OptionalUnlabeledTracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OptionalUnlabeledTracker.h; sourceTree = "<group>"; };
+		41B3A92314F7D1DA007C6E32 /* StandardTraits.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StandardTraits.h; sourceTree = "<group>"; };
+		41B3A92414F7D1DA007C6E32 /* StdOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StdOutput.h; sourceTree = "<group>"; };
+		41B3A92514F7D1DA007C6E32 /* SwitchArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwitchArg.h; sourceTree = "<group>"; };
+		41B3A92614F7D1DA007C6E32 /* UnlabeledMultiArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlabeledMultiArg.h; sourceTree = "<group>"; };
+		41B3A92714F7D1DA007C6E32 /* UnlabeledValueArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UnlabeledValueArg.h; sourceTree = "<group>"; };
+		41B3A92814F7D1DA007C6E32 /* ValueArg.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValueArg.h; sourceTree = "<group>"; };
+		41B3A92914F7D1DA007C6E32 /* ValuesConstraint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ValuesConstraint.h; sourceTree = "<group>"; };
+		41B3A92A14F7D1DA007C6E32 /* VersionVisitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VersionVisitor.h; sourceTree = "<group>"; };
+		41B3A92B14F7D1DA007C6E32 /* Visitor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		41B3A92C14F7D1DA007C6E32 /* XorHandler.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
+		41B3A92D14F7D1DA007C6E32 /* ZshCompletionOutput.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +99,7 @@
 		4190353614D69E0F0041640B = {
 			isa = PBXGroup;
 			children = (
+				41B3A91314F7D1DA007C6E32 /* tclap */,
 				4190354414D69E0F0041640B /* filter */,
 				4190356314D7FF2A0041640B /* linfilter */,
 				4190354214D69E0F0041640B /* Products */,
@@ -112,6 +137,37 @@
 				4190356614D7FF2B0041640B /* linfilter.1 */,
 			);
 			path = linfilter;
+			sourceTree = "<group>";
+		};
+		41B3A91314F7D1DA007C6E32 /* tclap */ = {
+			isa = PBXGroup;
+			children = (
+				41B3A91414F7D1DA007C6E32 /* Arg.h */,
+				41B3A91514F7D1DA007C6E32 /* ArgException.h */,
+				41B3A91614F7D1DA007C6E32 /* ArgTraits.h */,
+				41B3A91714F7D1DA007C6E32 /* CmdLine.h */,
+				41B3A91814F7D1DA007C6E32 /* CmdLineInterface.h */,
+				41B3A91914F7D1DA007C6E32 /* CmdLineOutput.h */,
+				41B3A91A14F7D1DA007C6E32 /* Constraint.h */,
+				41B3A91B14F7D1DA007C6E32 /* DocBookOutput.h */,
+				41B3A91C14F7D1DA007C6E32 /* HelpVisitor.h */,
+				41B3A91D14F7D1DA007C6E32 /* IgnoreRestVisitor.h */,
+				41B3A92014F7D1DA007C6E32 /* MultiArg.h */,
+				41B3A92114F7D1DA007C6E32 /* MultiSwitchArg.h */,
+				41B3A92214F7D1DA007C6E32 /* OptionalUnlabeledTracker.h */,
+				41B3A92314F7D1DA007C6E32 /* StandardTraits.h */,
+				41B3A92414F7D1DA007C6E32 /* StdOutput.h */,
+				41B3A92514F7D1DA007C6E32 /* SwitchArg.h */,
+				41B3A92614F7D1DA007C6E32 /* UnlabeledMultiArg.h */,
+				41B3A92714F7D1DA007C6E32 /* UnlabeledValueArg.h */,
+				41B3A92814F7D1DA007C6E32 /* ValueArg.h */,
+				41B3A92914F7D1DA007C6E32 /* ValuesConstraint.h */,
+				41B3A92A14F7D1DA007C6E32 /* VersionVisitor.h */,
+				41B3A92B14F7D1DA007C6E32 /* Visitor.h */,
+				41B3A92C14F7D1DA007C6E32 /* XorHandler.h */,
+				41B3A92D14F7D1DA007C6E32 /* ZshCompletionOutput.h */,
+			);
+			path = tclap;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +273,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -238,7 +294,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 			};
@@ -247,7 +303,7 @@
 		4190354C14D69E0F0041640B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -255,7 +311,7 @@
 		4190354D14D69E0F0041640B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				GCC_VERSION = 4.2;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -293,6 +349,7 @@
 				4190354D14D69E0F0041640B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4190356814D7FF2B0041640B /* Build configuration list for PBXNativeTarget "linfilter" */ = {
 			isa = XCConfigurationList;
@@ -301,6 +358,7 @@
 				4190356A14D7FF2B0041640B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

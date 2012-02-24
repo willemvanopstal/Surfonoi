@@ -7,10 +7,8 @@
 //
 
 #include <iostream>
-#include <tclap/CmdLine.h>
+#include "../tclap/CmdLine.h"
 #include "Filter.h"
-
-//#include "Grid.h"
 
 int main (int argc, const char * argv[])
 {

@@ -70,7 +70,7 @@ void Grid::write(const char* outFile, char d)
     ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl << minz << std::endl << maxz << std::endl;
     for(it=v.begin(); it!=v.end(); ++it)
     {
-        if((*it).isSet()) ofs << std::setprecision(9) << (*it).x() << d << (*it).y() << d << (*it).z() << std::endl;
+        if(it->isSet()) ofs << std::setprecision(9) << it->x() << d << it->y() << d << it->z() << std::endl;
     }
     
     ofs.close();
