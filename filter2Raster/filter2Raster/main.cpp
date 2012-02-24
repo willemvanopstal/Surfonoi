@@ -9,7 +9,7 @@
 #include <iostream>
 #include <string>
 
-#include <tclap/CmdLine.h>
+#include "../tclap/CmdLine.h"
 
 #include "Raster.h"
 

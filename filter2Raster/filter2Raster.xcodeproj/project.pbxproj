@@ -26,6 +26,32 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		41B3A93414F7D558007C6E32 /* Arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
+		41B3A93514F7D558007C6E32 /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
+		41B3A93614F7D558007C6E32 /* ArgTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
+		41B3A93714F7D558007C6E32 /* CmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLine.h; sourceTree = "<group>"; };
+		41B3A93814F7D558007C6E32 /* CmdLineInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineInterface.h; sourceTree = "<group>"; };
+		41B3A93914F7D558007C6E32 /* CmdLineOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineOutput.h; sourceTree = "<group>"; };
+		41B3A93A14F7D558007C6E32 /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		41B3A93B14F7D558007C6E32 /* DocBookOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocBookOutput.h; sourceTree = "<group>"; };
+		41B3A93C14F7D558007C6E32 /* HelpVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVisitor.h; sourceTree = "<group>"; };
+		41B3A93D14F7D558007C6E32 /* IgnoreRestVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreRestVisitor.h; sourceTree = "<group>"; };
+		41B3A93E14F7D558007C6E32 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		41B3A93F14F7D558007C6E32 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		41B3A94014F7D558007C6E32 /* MultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiArg.h; sourceTree = "<group>"; };
+		41B3A94114F7D558007C6E32 /* MultiSwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSwitchArg.h; sourceTree = "<group>"; };
+		41B3A94214F7D558007C6E32 /* OptionalUnlabeledTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionalUnlabeledTracker.h; sourceTree = "<group>"; };
+		41B3A94314F7D558007C6E32 /* StandardTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTraits.h; sourceTree = "<group>"; };
+		41B3A94414F7D558007C6E32 /* StdOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdOutput.h; sourceTree = "<group>"; };
+		41B3A94514F7D558007C6E32 /* SwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchArg.h; sourceTree = "<group>"; };
+		41B3A94614F7D558007C6E32 /* UnlabeledMultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledMultiArg.h; sourceTree = "<group>"; };
+		41B3A94714F7D558007C6E32 /* UnlabeledValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledValueArg.h; sourceTree = "<group>"; };
+		41B3A94814F7D558007C6E32 /* ValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueArg.h; sourceTree = "<group>"; };
+		41B3A94914F7D558007C6E32 /* ValuesConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuesConstraint.h; sourceTree = "<group>"; };
+		41B3A94A14F7D558007C6E32 /* VersionVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionVisitor.h; sourceTree = "<group>"; };
+		41B3A94B14F7D558007C6E32 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		41B3A94C14F7D558007C6E32 /* XorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
+		41B3A94D14F7D558007C6E32 /* ZshCompletionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
 		41CF2AA314DAD2C4003F0AD8 /* filter2Raster */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = filter2Raster; sourceTree = BUILT_PRODUCTS_DIR; };
 		41CF2AA714DAD2C4003F0AD8 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		41CF2AA914DAD2C4003F0AD8 /* filter2Raster.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = filter2Raster.1; sourceTree = "<group>"; };
@@ -44,9 +70,43 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41B3A93314F7D558007C6E32 /* tclap */ = {
+			isa = PBXGroup;
+			children = (
+				41B3A93414F7D558007C6E32 /* Arg.h */,
+				41B3A93514F7D558007C6E32 /* ArgException.h */,
+				41B3A93614F7D558007C6E32 /* ArgTraits.h */,
+				41B3A93714F7D558007C6E32 /* CmdLine.h */,
+				41B3A93814F7D558007C6E32 /* CmdLineInterface.h */,
+				41B3A93914F7D558007C6E32 /* CmdLineOutput.h */,
+				41B3A93A14F7D558007C6E32 /* Constraint.h */,
+				41B3A93B14F7D558007C6E32 /* DocBookOutput.h */,
+				41B3A93C14F7D558007C6E32 /* HelpVisitor.h */,
+				41B3A93D14F7D558007C6E32 /* IgnoreRestVisitor.h */,
+				41B3A93E14F7D558007C6E32 /* Makefile.am */,
+				41B3A93F14F7D558007C6E32 /* Makefile.in */,
+				41B3A94014F7D558007C6E32 /* MultiArg.h */,
+				41B3A94114F7D558007C6E32 /* MultiSwitchArg.h */,
+				41B3A94214F7D558007C6E32 /* OptionalUnlabeledTracker.h */,
+				41B3A94314F7D558007C6E32 /* StandardTraits.h */,
+				41B3A94414F7D558007C6E32 /* StdOutput.h */,
+				41B3A94514F7D558007C6E32 /* SwitchArg.h */,
+				41B3A94614F7D558007C6E32 /* UnlabeledMultiArg.h */,
+				41B3A94714F7D558007C6E32 /* UnlabeledValueArg.h */,
+				41B3A94814F7D558007C6E32 /* ValueArg.h */,
+				41B3A94914F7D558007C6E32 /* ValuesConstraint.h */,
+				41B3A94A14F7D558007C6E32 /* VersionVisitor.h */,
+				41B3A94B14F7D558007C6E32 /* Visitor.h */,
+				41B3A94C14F7D558007C6E32 /* XorHandler.h */,
+				41B3A94D14F7D558007C6E32 /* ZshCompletionOutput.h */,
+			);
+			path = tclap;
+			sourceTree = "<group>";
+		};
 		41CF2A9814DAD2C3003F0AD8 = {
 			isa = PBXGroup;
 			children = (
+				41B3A93314F7D558007C6E32 /* tclap */,
 				41CF2AA614DAD2C4003F0AD8 /* filter2Raster */,
 				41CF2AA414DAD2C4003F0AD8 /* Products */,
 			);
@@ -216,6 +276,7 @@
 				41CF2AAF14DAD2C4003F0AD8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
