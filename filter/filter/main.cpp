@@ -30,13 +30,14 @@ int main (int argc, const char ** argv)
     try {
         
         TCLAP::CmdLine cmd("A virtual grid with configurable cellsize is overlaid on the input points. For every grid cell the extreme in z (min or max) point is kept. Default is the max z value", ' ', "none", false);
-        TCLAP::ValueArg<double> csArg("c","cellsize","Cellsize to be used",true,10,"float", cmd);
+        TCLAP::ValueArg<double> csArg("c","cellsize","Cellsize to be used",true,50,"float", cmd);
+        TCLAP::SwitchArg projectSwitch("p","project","Project x y values fron WGS84 to auto utm-zone", cmd, false);
         TCLAP::SwitchArg reverseSwitch("r","reverse","Keep minima instead of maxima", cmd, false);
         TCLAP::UnlabeledValueArg<std::string>  inputArg( "input", "path to .xyz file", true, "", "input file", cmd);
         TCLAP::UnlabeledValueArg<std::string>  outputArg( "ouput", "path to .xyz file", true, "", "output file", cmd);
         cmd.parse(argc,argv);
         
-        Grid g(inputArg.getValue().c_str(), csArg.getValue());
+        Grid g(inputArg.getValue().c_str(), csArg.getValue(), projectSwitch.getValue());
         
         if (!reverseSwitch.getValue())
             g.calcGrid(&f_max);

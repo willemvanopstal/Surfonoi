@@ -6,18 +6,38 @@
 //  Copyright 2012 __MyCompanyName__. All rights reserved.
 //
 
-#include <iostream>
-#include <iomanip>
-#include <cmath>
 #include "Grid.h"
 
-Grid::Grid(const char* inputFile, double cellSize): 
-ifs(inputFile), cellSize(cellSize)//, minx(0), maxx(0), miny(0), maxy(0)
+Grid::Grid(const char* inputFile, double cellSize, bool pfW): 
+ifs(inputFile), cellSize(cellSize), projectFromWGS84(pfW)
 {
     findBounds();
+    
+    if(projectFromWGS84) {
+        if (!(pj_latlong = pj_init_plus("+init=epsg:4326")) )
+            exit(1);
+
+        std::stringstream utm_ss;
+        int utmzone = 30+static_cast<int>( floor((minx+(maxx-minx)/2)/6) );
+        
+        utm_ss << "+proj=utm +zone=" << utmzone << " +ellps=WGS84";
+        std::cout << "Projecting on: " << utm_ss.str() << std::endl;
+
+        if (!(pj_utm = pj_init_plus(utm_ss.str().c_str() )) )
+            exit(1);
+        
+        minx *= DEG_TO_RAD;
+        maxx *= DEG_TO_RAD;
+        miny *= DEG_TO_RAD;
+        maxy *= DEG_TO_RAD;
+        
+        pj_transform(pj_latlong, pj_utm, 1, 1, &minx, &miny, NULL );
+        pj_transform(pj_latlong, pj_utm, 1, 1, &maxx, &maxy, NULL );
+    }
+    
     cols = static_cast<size_t> ((maxx-minx)/cellSize + 1);
     rows = static_cast<size_t> ((maxy-miny)/cellSize + 1);
-    
+    std::cout << cols << " " << rows << std::endl;
     v = std::vector<Point>(cols*rows);
 }
 
@@ -43,7 +63,7 @@ void Grid::findBounds()
         if(z > maxz) maxz=z;
     }
     
-    std::cout << minx << " " << maxx << " " << miny << " " << maxy << " " << minz << " " << maxz <<std::endl;
+//    std::cout << minx << " " << maxx << " " << miny << " " << maxy << " " << minz << " " << maxz <<std::endl;
     
     ifs.clear();
     ifs.seekg(0);
@@ -54,6 +74,12 @@ void Grid::calcGrid(void (*func)(Point&, double&, double&, double&))
     double x,y,z;
 
     while (ifs >> x >> y >> z) {
+
+        if(projectFromWGS84){
+            x *= DEG_TO_RAD;
+            y *= DEG_TO_RAD;
+            pj_transform(pj_latlong, pj_utm, 1, 1, &x, &y, NULL );
+        }
         size_t t = getCoord(x,y);
         if (!v[t].isSet())
             v[t] = Point::Point(x, y, z);
@@ -66,8 +92,10 @@ void Grid::write(const char* outFile, char d)
 {
     std::ofstream ofs(outFile);
     std::vector<Point>::const_iterator it;
-    
+        
+    // print boundaries to first 6 lines
     ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl << minz << std::endl << maxz << std::endl;
+
     for(it=v.begin(); it!=v.end(); ++it)
     {
         if(it->isSet()) ofs << std::setprecision(9) << it->x() << d << it->y() << d << it->z() << std::endl;
