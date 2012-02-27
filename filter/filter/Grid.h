@@ -25,7 +25,7 @@ class Grid
 {
 public:
     //Grid(const char* inputFile, double cellSize);
-    Grid(const char* inputFile, double cellSize, bool projectFromWGS84);
+    Grid(const char* inputFile, double cellSize, bool projectFromWGS84, bool flipZ);
     void calcGrid(void (*func)(Point&, double&, double&, double&));
     void write(const char* outFile, char delimiter = ' ');
     
@@ -41,6 +41,7 @@ private:
     
     bool projectFromWGS84;
     projPJ pj_utm, pj_latlong;
+    bool flipSignOnZ;
 };
 
 

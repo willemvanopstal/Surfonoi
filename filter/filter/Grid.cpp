@@ -8,8 +8,8 @@
 
 #include "Grid.h"
 
-Grid::Grid(const char* inputFile, double cellSize, bool pfW): 
-ifs(inputFile), cellSize(cellSize), projectFromWGS84(pfW)
+Grid::Grid(const char* inputFile, double cellSize, bool pfW, bool fSOZ): 
+ifs(inputFile), cellSize(cellSize), projectFromWGS84(pfW), flipSignOnZ(fSOZ)
 {
     findBounds();
     
@@ -63,7 +63,7 @@ void Grid::findBounds()
         if(z > maxz) maxz=z;
     }
     
-//    std::cout << minx << " " << maxx << " " << miny << " " << maxy << " " << minz << " " << maxz <<std::endl;
+    std::cout << minx << " " << maxx << " " << miny << " " << maxy << " " << minz << " " << maxz <<std::endl;
     
     ifs.clear();
     ifs.seekg(0);
@@ -94,11 +94,22 @@ void Grid::write(const char* outFile, char d)
     std::vector<Point>::const_iterator it;
         
     // print boundaries to first 6 lines
-    ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl << minz << std::endl << maxz << std::endl;
+    ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl;
+    if(flipSignOnZ)
+        ofs << -maxz << std::endl << -minz << std::endl;
+    else
+        ofs << minz << std::endl << maxz << std::endl;
 
     for(it=v.begin(); it!=v.end(); ++it)
     {
-        if(it->isSet()) ofs << std::setprecision(9) << it->x() << d << it->y() << d << it->z() << std::endl;
+        if(it->isSet()) {
+            
+            ofs << std::setprecision(9) << it->x() << d << it->y() << d;
+            if(flipSignOnZ)
+                ofs << -it->z() << std::endl;
+            else
+                ofs << it->z() << std::endl;
+        }
     }
     
     ofs.close();

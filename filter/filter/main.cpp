@@ -33,11 +33,12 @@ int main (int argc, const char ** argv)
         TCLAP::ValueArg<double> csArg("c","cellsize","Cellsize to be used",true,50,"float", cmd);
         TCLAP::SwitchArg projectSwitch("p","project","Project x y values fron WGS84 to auto utm-zone", cmd, false);
         TCLAP::SwitchArg reverseSwitch("r","reverse","Keep minima instead of maxima", cmd, false);
+        TCLAP::SwitchArg flipSignOnZSwitch("f","flip","flip the sign of z-values in output", cmd, false);
         TCLAP::UnlabeledValueArg<std::string>  inputArg( "input", "path to .xyz file", true, "", "input file", cmd);
         TCLAP::UnlabeledValueArg<std::string>  outputArg( "ouput", "path to .xyz file", true, "", "output file", cmd);
         cmd.parse(argc,argv);
         
-        Grid g(inputArg.getValue().c_str(), csArg.getValue(), projectSwitch.getValue());
+        Grid g(inputArg.getValue().c_str(), csArg.getValue(), projectSwitch.getValue(), flipSignOnZSwitch.getValue());
         
         if (!reverseSwitch.getValue())
             g.calcGrid(&f_max);
