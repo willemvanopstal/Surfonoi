@@ -21,7 +21,7 @@
 #include <GDAL/ogr_spatialref.h>
 
 enum alg {AVG,MIN,MAX};
-enum {buffN = 4*16184};
+//enum {buffN = 4*16184};
 class Raster
 {
 public:
@@ -40,7 +40,7 @@ private:
     void max(double &x, double &y, double &val, float [], int16_t []);
     std::ifstream ifs;
     OGRSpatialReference oSRS;
-    char _buffer[buffN];
+//    char _buffer[buffN];
     double noDataVal;
 };
 
