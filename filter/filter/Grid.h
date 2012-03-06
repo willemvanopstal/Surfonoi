@@ -25,12 +25,14 @@ class Grid
 {
 public:
     //Grid(const char* inputFile, double cellSize);
-    Grid(const char* inputFile, double cellSize, bool projectFromWGS84, bool flipZ);
+    Grid(const char* inputFile, double cellSize, bool projectFromWGS84, bool flipZ, bool fXY);
     void calcGrid(void (*func)(Point&, double&, double&, double&));
     void write(const char* outFile, char delimiter = ' ');
     
 private:
     void findBounds();
+    bool readLine(double &x, double &y, double &z);
+    void projectXY(double &x, double &y);
     size_t getCoord(double x, double y);
     
     std::ifstream ifs;
@@ -41,7 +43,7 @@ private:
     
     bool projectFromWGS84;
     projPJ pj_utm, pj_latlong;
-    bool flipSignOnZ;
+    bool flipSignOnZ, flipXY;
 };
 
 

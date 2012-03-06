@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4154DF2C150558BB00D5CE2D /* filter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4190354114D69E0F0041640B /* filter */; };
+		4154DF2D150558BB00D5CE2D /* linfilter in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4190356114D7FF2A0041640B /* linfilter */; };
 		4190354614D69E0F0041640B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4190354514D69E0F0041640B /* main.cpp */; };
 		4190354814D69E0F0041640B /* filter.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4190354714D69E0F0041640B /* filter.1 */; };
 		4190355814D6EF0A0041640B /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4190355714D6EF0A0041640B /* Grid.cpp */; };
@@ -17,6 +19,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4154DF2B150558A000D5CE2D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/bin/;
+			dstSubfolderSpec = 0;
+			files = (
+				4154DF2C150558BB00D5CE2D /* filter in CopyFiles */,
+				4154DF2D150558BB00D5CE2D /* linfilter in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4190353F14D69E0F0041640B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -180,6 +193,7 @@
 				4190353D14D69E0F0041640B /* Sources */,
 				4190353E14D69E0F0041640B /* Frameworks */,
 				4190353F14D69E0F0041640B /* CopyFiles */,
+				4154DF2B150558A000D5CE2D /* CopyFiles */,
 			);
 			buildRules = (
 			);

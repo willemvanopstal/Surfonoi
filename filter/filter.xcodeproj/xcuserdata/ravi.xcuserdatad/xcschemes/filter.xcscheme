@@ -49,7 +49,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Volumes/macData/dataset/atlis/US/H09955_1981.xyz"
+            argument = "/Volumes/macData/dataset/atlis/Antillen/HY1027_lm5-1972.xyz"
+            isEnabled = "YES">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-t"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument

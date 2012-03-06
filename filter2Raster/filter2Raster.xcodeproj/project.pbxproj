@@ -7,12 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4154DF30150559E600D5CE2D /* filter2Raster in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41CF2AA314DAD2C4003F0AD8 /* filter2Raster */; };
 		41CF2AA814DAD2C4003F0AD8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41CF2AA714DAD2C4003F0AD8 /* main.cpp */; };
 		41CF2AAA14DAD2C4003F0AD8 /* filter2Raster.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41CF2AA914DAD2C4003F0AD8 /* filter2Raster.1 */; };
 		41CF2AB914DAE91A003F0AD8 /* Raster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41CF2AB814DAE91A003F0AD8 /* Raster.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		4154DF2E150559DB00D5CE2D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/bin/;
+			dstSubfolderSpec = 0;
+			files = (
+				4154DF30150559E600D5CE2D /* filter2Raster in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41CF2AA114DAD2C4003F0AD8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -141,6 +152,7 @@
 				41CF2A9F14DAD2C4003F0AD8 /* Sources */,
 				41CF2AA014DAD2C4003F0AD8 /* Frameworks */,
 				41CF2AA114DAD2C4003F0AD8 /* CopyFiles */,
+				4154DF2E150559DB00D5CE2D /* CopyFiles */,
 			);
 			buildRules = (
 			);
