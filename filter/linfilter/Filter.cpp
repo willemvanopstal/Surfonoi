@@ -24,7 +24,6 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
             exit(1);
         
         std::stringstream utm_ss;
-        std::cout << (miny+(maxy-miny)/2);
         int utmzone = 30+static_cast<int>( floor((minx+(maxx-minx)/2)/6) );
         
         utm_ss << "+proj=utm +zone=" << utmzone;
