@@ -24,14 +24,19 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
             exit(1);
         
         std::stringstream utm_ss;
-//        std::cout << (miny+(maxy-miny)/2);
+        std::cout << (miny+(maxy-miny)/2);
         int utmzone = 30+static_cast<int>( floor((minx+(maxx-minx)/2)/6) );
         
-        utm_ss << "+proj=utm +zone=" << utmzone << " +ellps=WGS84";
+        utm_ss << "+proj=utm +zone=" << utmzone;
+        if ((miny+(maxy-miny)/2) < 0) utm_ss <<" +south";
+        utm_ss << " +ellps=WGS84" << " +datum=WGS84";
+        
         std::cout << "Projecting on: " << utm_ss.str() << std::endl;
         
-        if (!(pj_utm = pj_init_plus(utm_ss.str().c_str() )) )
+        if (!(pj_utm = pj_init_plus(utm_ss.str().c_str() )) ) {
+            std::cout << "Projection error: " << pj_utm << std::endl;
             exit(1);
+        }
         
         projectXY(minx, miny);
         projectXY(maxx, maxy);
@@ -92,8 +97,6 @@ void Filter::writeLine(double &x, double &y, double &z)
     else            ofs << z;
     
     ofs << std::endl;
-    
-    lineCount++;
 }
 
 void Filter::copy_all()
