@@ -66,6 +66,8 @@ void Filter::findBounds()
         if(z > maxz) maxz=z;
     }
     
+    std::cout << "boundaries are:\n" << minx<<std::endl<<maxx<<std::endl<<miny<<std::endl<<maxy<<std::endl<<minz<<std::endl<<maxz<<std::endl; 
+    
     ifs.clear();
     ifs.seekg(0);
 }
