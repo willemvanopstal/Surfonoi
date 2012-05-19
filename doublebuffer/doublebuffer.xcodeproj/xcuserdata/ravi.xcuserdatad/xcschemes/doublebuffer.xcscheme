@@ -58,7 +58,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Volumes/macData/dataset/atlis/conform/london/contour/contour.shp /Volumes/macData/dataset/atlis/conform/london/contourBuf"
+            argument = "/Volumes/macData/dataset/atlis/conform/london/contour/contour.shp /Volumes/macData/dataset/atlis/conform/london/contourBuf -d 12"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

@@ -12,6 +12,7 @@
 		4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4125DB6C1562895D0036C99A /* GDAL.framework */; };
 		4125DB6F156289900036C99A /* DoubleBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4125DB6E156289900036C99A /* DoubleBuffer.cpp */; };
 		4199CFC31562B0930008C906 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4199CFC21562B0930008C906 /* GEOS.framework */; };
+		4199CFE91567CC640008C906 /* doublebuffer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4125DB5D1562892A0036C99A /* doublebuffer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		4199CFE81567CC4A0008C906 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/local/bin/;
+			dstSubfolderSpec = 0;
+			files = (
+				4199CFE91567CC640008C906 /* doublebuffer in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +46,32 @@
 		4125DB6E156289900036C99A /* DoubleBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DoubleBuffer.cpp; sourceTree = "<group>"; };
 		4125DB70156289A00036C99A /* DoubleBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleBuffer.h; sourceTree = "<group>"; };
 		4199CFC21562B0930008C906 /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = "../../build/geos-3.3.3/build/usr/local/GEOS.framework"; sourceTree = "<group>"; };
+		4199CFC91567C9460008C906 /* Arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
+		4199CFCA1567C9460008C906 /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
+		4199CFCB1567C9460008C906 /* ArgTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
+		4199CFCC1567C9460008C906 /* CmdLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLine.h; sourceTree = "<group>"; };
+		4199CFCD1567C9460008C906 /* CmdLineInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineInterface.h; sourceTree = "<group>"; };
+		4199CFCE1567C9460008C906 /* CmdLineOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CmdLineOutput.h; sourceTree = "<group>"; };
+		4199CFCF1567C9460008C906 /* Constraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constraint.h; sourceTree = "<group>"; };
+		4199CFD01567C9460008C906 /* DocBookOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocBookOutput.h; sourceTree = "<group>"; };
+		4199CFD11567C9460008C906 /* HelpVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelpVisitor.h; sourceTree = "<group>"; };
+		4199CFD21567C9460008C906 /* IgnoreRestVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IgnoreRestVisitor.h; sourceTree = "<group>"; };
+		4199CFD31567C9460008C906 /* Makefile.am */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.am; sourceTree = "<group>"; };
+		4199CFD41567C9460008C906 /* Makefile.in */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Makefile.in; sourceTree = "<group>"; };
+		4199CFD51567C9460008C906 /* MultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiArg.h; sourceTree = "<group>"; };
+		4199CFD61567C9460008C906 /* MultiSwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSwitchArg.h; sourceTree = "<group>"; };
+		4199CFD71567C9460008C906 /* OptionalUnlabeledTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OptionalUnlabeledTracker.h; sourceTree = "<group>"; };
+		4199CFD81567C9460008C906 /* StandardTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StandardTraits.h; sourceTree = "<group>"; };
+		4199CFD91567C9460008C906 /* StdOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StdOutput.h; sourceTree = "<group>"; };
+		4199CFDA1567C9460008C906 /* SwitchArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchArg.h; sourceTree = "<group>"; };
+		4199CFDB1567C9460008C906 /* UnlabeledMultiArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledMultiArg.h; sourceTree = "<group>"; };
+		4199CFDC1567C9460008C906 /* UnlabeledValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnlabeledValueArg.h; sourceTree = "<group>"; };
+		4199CFDD1567C9460008C906 /* ValueArg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValueArg.h; sourceTree = "<group>"; };
+		4199CFDE1567C9460008C906 /* ValuesConstraint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ValuesConstraint.h; sourceTree = "<group>"; };
+		4199CFDF1567C9460008C906 /* VersionVisitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VersionVisitor.h; sourceTree = "<group>"; };
+		4199CFE01567C9460008C906 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
+		4199CFE11567C9460008C906 /* XorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
+		4199CFE21567C9460008C906 /* ZshCompletionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +90,7 @@
 		4125DB521562892A0036C99A = {
 			isa = PBXGroup;
 			children = (
+				4199CFC81567C9460008C906 /* tclap */,
 				4199CFC21562B0930008C906 /* GEOS.framework */,
 				4125DB6C1562895D0036C99A /* GDAL.framework */,
 				4125DB601562892A0036C99A /* doublebuffer */,
@@ -79,6 +117,39 @@
 			path = doublebuffer;
 			sourceTree = "<group>";
 		};
+		4199CFC81567C9460008C906 /* tclap */ = {
+			isa = PBXGroup;
+			children = (
+				4199CFC91567C9460008C906 /* Arg.h */,
+				4199CFCA1567C9460008C906 /* ArgException.h */,
+				4199CFCB1567C9460008C906 /* ArgTraits.h */,
+				4199CFCC1567C9460008C906 /* CmdLine.h */,
+				4199CFCD1567C9460008C906 /* CmdLineInterface.h */,
+				4199CFCE1567C9460008C906 /* CmdLineOutput.h */,
+				4199CFCF1567C9460008C906 /* Constraint.h */,
+				4199CFD01567C9460008C906 /* DocBookOutput.h */,
+				4199CFD11567C9460008C906 /* HelpVisitor.h */,
+				4199CFD21567C9460008C906 /* IgnoreRestVisitor.h */,
+				4199CFD31567C9460008C906 /* Makefile.am */,
+				4199CFD41567C9460008C906 /* Makefile.in */,
+				4199CFD51567C9460008C906 /* MultiArg.h */,
+				4199CFD61567C9460008C906 /* MultiSwitchArg.h */,
+				4199CFD71567C9460008C906 /* OptionalUnlabeledTracker.h */,
+				4199CFD81567C9460008C906 /* StandardTraits.h */,
+				4199CFD91567C9460008C906 /* StdOutput.h */,
+				4199CFDA1567C9460008C906 /* SwitchArg.h */,
+				4199CFDB1567C9460008C906 /* UnlabeledMultiArg.h */,
+				4199CFDC1567C9460008C906 /* UnlabeledValueArg.h */,
+				4199CFDD1567C9460008C906 /* ValueArg.h */,
+				4199CFDE1567C9460008C906 /* ValuesConstraint.h */,
+				4199CFDF1567C9460008C906 /* VersionVisitor.h */,
+				4199CFE01567C9460008C906 /* Visitor.h */,
+				4199CFE11567C9460008C906 /* XorHandler.h */,
+				4199CFE21567C9460008C906 /* ZshCompletionOutput.h */,
+			);
+			path = tclap;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -89,6 +160,7 @@
 				4125DB591562892A0036C99A /* Sources */,
 				4125DB5A1562892A0036C99A /* Frameworks */,
 				4125DB5B1562892A0036C99A /* CopyFiles */,
+				4199CFE81567CC4A0008C906 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -188,6 +260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "/Volumes/macData/build/geos-3.3.3/build/usr/local/";
+				HEADER_SEARCH_PATHS = ./;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -196,6 +269,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "/Volumes/macData/build/geos-3.3.3/build/usr/local/";
+				HEADER_SEARCH_PATHS = ./;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

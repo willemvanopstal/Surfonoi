@@ -22,9 +22,9 @@ DoubleBuffer::~DoubleBuffer() {
 
 void DoubleBuffer::perform(simplificationMethod method, double tolerance) {
     if (method == GEOSBIL){
-        writeShapefileLayer( performBIL(tolerance), "bil" );
+        performBIL(tolerance);
     } else if (method == DOUBLEBUFF) {
-        writeShapefileLayer( performDB(tolerance), "db" );
+        performDB(tolerance);
     }
 }
 
@@ -163,7 +163,7 @@ inline geos::geom::CoordinateArraySequence* DoubleBuffer::OGRLineString2GEOSCoor
     return cseq;    
 }
 
-
+// lame attempt at 'cleaning' the single buffer output
 const geos::geom::Geometry* DoubleBuffer::cleanSingleBufferOutput(const geos::geom::Geometry* inputGeom) {
     const geos::geom::Geometry* contourBufferUpClean;
 //    geos::geom::GeometryFactory geomFactory();
@@ -188,6 +188,15 @@ const geos::geom::Geometry* DoubleBuffer::cleanSingleBufferOutput(const geos::ge
     return contourBufferUpClean;
 }
 
+CoordinateArraySequence* DoubleBuffer::doSingleBIL(CoordinateSequence* inputLine, double bufferTolerance) {
+    std::auto_ptr<geos::geom::CoordinateSequence> coords_ = geos::operation::buffer::BufferInputLineSimplifier::simplify(*inputLine, bufferTolerance);
+    geos::geom::CoordinateSequence& coords = *coords_;
+    geos::geom::CoordinateSequence* coords_copy = coords.clone();
+    geos::geom::CoordinateArraySequence* coords_copy_ = dynamic_cast<geos::geom::CoordinateArraySequence *>(coords_copy);
+
+    return coords_copy_;
+}
+
 ContourMap DoubleBuffer::performBIL(double bufferTolerance) {
     
     ContourMap contourOut;
@@ -195,22 +204,16 @@ ContourMap DoubleBuffer::performBIL(double bufferTolerance) {
     for (ContourMap::iterator it = inputContours.begin(); it != inputContours.end(); ++it) {
         
         for (coordVec::iterator jt = it->second.begin(); jt != it->second.end(); ++jt) {
-            
-            std::auto_ptr<geos::geom::CoordinateSequence> coords_ = geos::operation::buffer::BufferInputLineSimplifier::simplify(**jt, bufferTolerance);
-            geos::geom::CoordinateSequence& coords = *coords_;
-            geos::geom::CoordinateSequence* coords_copy = coords.clone();
-            geos::geom::CoordinateArraySequence* coords_copy_ = dynamic_cast<geos::geom::CoordinateArraySequence *>(coords_copy) ;
-            
-            contourOut[it->first].push_back(coords_copy_);
+            contourOut[it->first].push_back( doSingleBIL(*jt, bufferTolerance) );
         }
     }
-    
+
     return contourOut;
 }
 
 ContourMap DoubleBuffer::performDB(double bufferTolerance) {
     
-    ContourMap contourOut;
+    ContourMap contourOut, intermediateOut;
     
     geos::geom::GeometryFactory geomFactory(precisionModel);
     geos::operation::buffer::BufferParameters bufferParam;
@@ -224,10 +227,11 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
         for (coordVec::iterator jt = it->second.begin(); jt != it->second.end(); ++jt) {
             
             const geos::geom::Geometry* contourBufferUp;
+//            const geos::geom::Geometry* contourBufferUp_;
             
             const geos::geom::LineString* geomLinestring = geomFactory.createLineString(*jt);
             contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
-            
+//            contourBufferUp = geomFactory.createLineString(doSingleBIL( contourBufferUp_->getCoordinates(), 0.01));
 //            if (geomLinestring->isClosed()) {
 //                geos::geom::LinearRing* geom = geomFactory.createLinearRing(geomLinestring->getCoordinates());
 ////                    const geos::geom::Geometry* poly = geomFactory.createPolygon(geom, NULL);
@@ -242,18 +246,38 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
 //                contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
 //            }
             
-            const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(cleanSingleBufferOutput(contourBufferUp));
+
+//            const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp);
 //            contourOut[it->first].push_back(geom->getCoordinates());
 //            contourOut[it->first].push_back(contourBufferUp->getCoordinates());
 //            std::cerr << geom->toString() << std::endl;
 //            contourBufferUpClean->buffer(bufferTolerance);
-            if ( !geom->isEmpty() ){
-                const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
-                contourOut[it->first].push_back(cleanSingleBufferOutput(contourBufferUpDown)->getCoordinates());
-//                contourOut[it->first].push_back(contourBufferUpDown->getCoordinates());
+            if ( !contourBufferUp->isEmpty() ){
+                if ( contourBufferUp->getGeometryType() == "LineString" ) {
+                    const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp);
+                    std::cerr << geom->toString() << std::endl;
+                    const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
+                    intermediateOut[it->first].push_back(geom->getCoordinates());
+                    for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+                        contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
+                    }
+                } else if ( contourBufferUp->getGeometryType() == "MultiLineString" ) {
+                    for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
+                        const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
+                        const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
+                        intermediateOut[it->first].push_back(geom->getCoordinates());
+                        for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+                            contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
+                        }
+                    }
+                } else { std::cerr << "Don't know what to do with a " << contourBufferUp->getGeometryType() << std::endl; }
+                
             }
         }
     }
+
+    writeShapefileLayer(intermediateOut, "singlebuffered");
+    writeShapefileLayer(contourOut, "doublebuffered");
     
     return contourOut;
 }

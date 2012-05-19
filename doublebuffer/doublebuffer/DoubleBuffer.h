@@ -37,6 +37,7 @@ public:
 private:
     inline geos::geom::CoordinateArraySequence* OGRLineString2GEOSCoordinateSequence(OGRLineString* ogrLineString);
     const geos::geom::Geometry* cleanSingleBufferOutput(const geos::geom::Geometry* inputGeom);
+    CoordinateArraySequence* doSingleBIL(CoordinateSequence* inputLine, double bufferTolerance);
     
     void readShapefile(const char* inputFile);
     void prepareOutputShapefile(const char* outputFile);
