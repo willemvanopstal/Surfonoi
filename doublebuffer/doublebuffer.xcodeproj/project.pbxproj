@@ -1,0 +1,227 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4125DB621562892A0036C99A /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4125DB611562892A0036C99A /* main.cpp */; };
+		4125DB641562892A0036C99A /* doublebuffer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4125DB631562892A0036C99A /* doublebuffer.1 */; };
+		4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4125DB6C1562895D0036C99A /* GDAL.framework */; };
+		4125DB6F156289900036C99A /* DoubleBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4125DB6E156289900036C99A /* DoubleBuffer.cpp */; };
+		4199CFC31562B0930008C906 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4199CFC21562B0930008C906 /* GEOS.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4125DB5B1562892A0036C99A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				4125DB641562892A0036C99A /* doublebuffer.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		4125DB5D1562892A0036C99A /* doublebuffer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = doublebuffer; sourceTree = BUILT_PRODUCTS_DIR; };
+		4125DB611562892A0036C99A /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4125DB631562892A0036C99A /* doublebuffer.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = doublebuffer.1; sourceTree = "<group>"; };
+		4125DB6C1562895D0036C99A /* GDAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GDAL.framework; path = Library/Frameworks/GDAL.framework; sourceTree = SDKROOT; };
+		4125DB6E156289900036C99A /* DoubleBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DoubleBuffer.cpp; sourceTree = "<group>"; };
+		4125DB70156289A00036C99A /* DoubleBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleBuffer.h; sourceTree = "<group>"; };
+		4199CFC21562B0930008C906 /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = "../../build/geos-3.3.3/build/usr/local/GEOS.framework"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		4125DB5A1562892A0036C99A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */,
+				4199CFC31562B0930008C906 /* GEOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		4125DB521562892A0036C99A = {
+			isa = PBXGroup;
+			children = (
+				4199CFC21562B0930008C906 /* GEOS.framework */,
+				4125DB6C1562895D0036C99A /* GDAL.framework */,
+				4125DB601562892A0036C99A /* doublebuffer */,
+				4125DB5E1562892A0036C99A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		4125DB5E1562892A0036C99A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4125DB5D1562892A0036C99A /* doublebuffer */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4125DB601562892A0036C99A /* doublebuffer */ = {
+			isa = PBXGroup;
+			children = (
+				4125DB70156289A00036C99A /* DoubleBuffer.h */,
+				4125DB6E156289900036C99A /* DoubleBuffer.cpp */,
+				4125DB611562892A0036C99A /* main.cpp */,
+				4125DB631562892A0036C99A /* doublebuffer.1 */,
+			);
+			path = doublebuffer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		4125DB5C1562892A0036C99A /* doublebuffer */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4125DB671562892A0036C99A /* Build configuration list for PBXNativeTarget "doublebuffer" */;
+			buildPhases = (
+				4125DB591562892A0036C99A /* Sources */,
+				4125DB5A1562892A0036C99A /* Frameworks */,
+				4125DB5B1562892A0036C99A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = doublebuffer;
+			productName = doublebuffer;
+			productReference = 4125DB5D1562892A0036C99A /* doublebuffer */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		4125DB541562892A0036C99A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = 4125DB571562892A0036C99A /* Build configuration list for PBXProject "doublebuffer" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 4125DB521562892A0036C99A;
+			productRefGroup = 4125DB5E1562892A0036C99A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				4125DB5C1562892A0036C99A /* doublebuffer */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4125DB591562892A0036C99A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4125DB621562892A0036C99A /* main.cpp in Sources */,
+				4125DB6F156289900036C99A /* DoubleBuffer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		4125DB651562892A0036C99A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		4125DB661562892A0036C99A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4125DB681562892A0036C99A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "/Volumes/macData/build/geos-3.3.3/build/usr/local/";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4125DB691562892A0036C99A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "/Volumes/macData/build/geos-3.3.3/build/usr/local/";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4125DB571562892A0036C99A /* Build configuration list for PBXProject "doublebuffer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4125DB651562892A0036C99A /* Debug */,
+				4125DB661562892A0036C99A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4125DB671562892A0036C99A /* Build configuration list for PBXNativeTarget "doublebuffer" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4125DB681562892A0036C99A /* Debug */,
+				4125DB691562892A0036C99A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 4125DB541562892A0036C99A /* Project object */;
+}
