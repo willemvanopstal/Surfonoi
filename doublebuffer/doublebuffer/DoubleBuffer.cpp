@@ -22,7 +22,11 @@ DoubleBuffer::~DoubleBuffer() {
 
 void DoubleBuffer::perform(simplificationMethod method, double tolerance) {
     if (method == GEOSBIL){
-        performBIL(tolerance);
+        #ifdef WITHGEOSBIL
+            performBIL(tolerance);
+        #else
+            std::cerr << "GEOSBIL is not enabled" << std::endl;
+        #endif
     } else if (method == DOUBLEBUFF) {
         performDB(tolerance);
     }
@@ -188,6 +192,7 @@ const geos::geom::Geometry* DoubleBuffer::cleanSingleBufferOutput(const geos::ge
     return contourBufferUpClean;
 }
 
+#ifdef WITHGEOSBIL
 CoordinateArraySequence* DoubleBuffer::doSingleBIL(CoordinateSequence* inputLine, double bufferTolerance) {
     std::auto_ptr<geos::geom::CoordinateSequence> coords_ = geos::operation::buffer::BufferInputLineSimplifier::simplify(*inputLine, bufferTolerance);
     geos::geom::CoordinateSequence& coords = *coords_;
@@ -210,6 +215,7 @@ ContourMap DoubleBuffer::performBIL(double bufferTolerance) {
 
     return contourOut;
 }
+#endif
 
 ContourMap DoubleBuffer::performDB(double bufferTolerance) {
     

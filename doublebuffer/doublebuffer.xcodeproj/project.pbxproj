@@ -11,8 +11,8 @@
 		4125DB641562892A0036C99A /* doublebuffer.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4125DB631562892A0036C99A /* doublebuffer.1 */; };
 		4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4125DB6C1562895D0036C99A /* GDAL.framework */; };
 		4125DB6F156289900036C99A /* DoubleBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4125DB6E156289900036C99A /* DoubleBuffer.cpp */; };
-		4199CFC31562B0930008C906 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4199CFC21562B0930008C906 /* GEOS.framework */; };
 		4199CFE91567CC640008C906 /* doublebuffer in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4125DB5D1562892A0036C99A /* doublebuffer */; };
+		4199CFF11567F4BF0008C906 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4199CFF01567F4BF0008C906 /* GEOS.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +45,6 @@
 		4125DB6C1562895D0036C99A /* GDAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GDAL.framework; path = Library/Frameworks/GDAL.framework; sourceTree = SDKROOT; };
 		4125DB6E156289900036C99A /* DoubleBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DoubleBuffer.cpp; sourceTree = "<group>"; };
 		4125DB70156289A00036C99A /* DoubleBuffer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DoubleBuffer.h; sourceTree = "<group>"; };
-		4199CFC21562B0930008C906 /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = "../../build/geos-3.3.3/build/usr/local/GEOS.framework"; sourceTree = "<group>"; };
 		4199CFC91567C9460008C906 /* Arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
 		4199CFCA1567C9460008C906 /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
 		4199CFCB1567C9460008C906 /* ArgTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		4199CFE01567C9460008C906 /* Visitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Visitor.h; sourceTree = "<group>"; };
 		4199CFE11567C9460008C906 /* XorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
 		4199CFE21567C9460008C906 /* ZshCompletionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
+		4199CFF01567F4BF0008C906 /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = "../../build/geos-3.3.3/build/usr/local/GEOS.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,8 +79,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4199CFF11567F4BF0008C906 /* GEOS.framework in Frameworks */,
 				4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */,
-				4199CFC31562B0930008C906 /* GEOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,9 +90,9 @@
 		4125DB521562892A0036C99A = {
 			isa = PBXGroup;
 			children = (
-				4199CFC81567C9460008C906 /* tclap */,
-				4199CFC21562B0930008C906 /* GEOS.framework */,
+				4199CFF01567F4BF0008C906 /* GEOS.framework */,
 				4125DB6C1562895D0036C99A /* GDAL.framework */,
+				4199CFC81567C9460008C906 /* tclap */,
 				4125DB601562892A0036C99A /* doublebuffer */,
 				4125DB5E1562892A0036C99A /* Products */,
 			);
