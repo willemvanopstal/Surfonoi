@@ -6,7 +6,8 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-//#define WITHGEOSBIL
+// Comment the next line when building against unpatched GEOS (see http://trac.osgeo.org/geos/ticket/548 ) :
+#define WITHGEOSBIL
 
 #ifndef doublebuffer_DoubleBuffer_h
 #define doublebuffer_DoubleBuffer_h
@@ -23,7 +24,6 @@
 #include <GEOS/operation/buffer/BufferBuilder.h>
 
 #ifdef WITHGEOSBIL
-//this requires a modified geos...:
 #include <GEOS/operation/buffer/BufferInputLineSimplifier.h>
 #endif
 
@@ -41,7 +41,6 @@ public:
     
 private:
     inline geos::geom::CoordinateArraySequence* OGRLineString2GEOSCoordinateSequence(OGRLineString* ogrLineString);
-    const geos::geom::Geometry* cleanSingleBufferOutput(const geos::geom::Geometry* inputGeom);
     
     void readShapefile(const char* inputFile);
     void prepareOutputShapefile(const char* outputFile);

@@ -25,7 +25,7 @@ void DoubleBuffer::perform(simplificationMethod method, double tolerance) {
         #ifdef WITHGEOSBIL
             performBIL(tolerance);
         #else
-            std::cerr << "GEOSBIL is not enabled" << std::endl;
+            std::cerr << "GEOSBIL is not enabled in this build" << std::endl;
         #endif
     } else if (method == DOUBLEBUFF) {
         performDB(tolerance);
@@ -167,31 +167,6 @@ inline geos::geom::CoordinateArraySequence* DoubleBuffer::OGRLineString2GEOSCoor
     return cseq;    
 }
 
-// lame attempt at 'cleaning' the single buffer output
-const geos::geom::Geometry* DoubleBuffer::cleanSingleBufferOutput(const geos::geom::Geometry* inputGeom) {
-    const geos::geom::Geometry* contourBufferUpClean;
-//    geos::geom::GeometryFactory geomFactory();
-    
-    if (inputGeom->getGeometryType() == "MultiLineString") {
-        // dirty way to get rid of buffer artifacts:
-        size_t maxPointsNum=0;
-        size_t maxPointsIndex;
-        for (int i = 0; i<inputGeom->getNumGeometries(); ++i) {
-            size_t numPoints = inputGeom->getGeometryN(i)->getNumPoints();
-            if (numPoints > maxPointsNum) {
-                maxPointsNum = numPoints;
-                maxPointsIndex = i;
-            }
-        }
-        contourBufferUpClean = inputGeom->getGeometryN(maxPointsIndex);
-//        contourBufferUpClean = geomFactory.createLineString(inputGeom->getCoordinates);
-    } else {
-        contourBufferUpClean = inputGeom;
-    }
-    
-    return contourBufferUpClean;
-}
-
 #ifdef WITHGEOSBIL
 CoordinateArraySequence* DoubleBuffer::doSingleBIL(CoordinateSequence* inputLine, double bufferTolerance) {
     std::auto_ptr<geos::geom::CoordinateSequence> coords_ = geos::operation::buffer::BufferInputLineSimplifier::simplify(*inputLine, bufferTolerance);
@@ -233,51 +208,18 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
         for (coordVec::iterator jt = it->second.begin(); jt != it->second.end(); ++jt) {
             
             const geos::geom::Geometry* contourBufferUp;
-//            const geos::geom::Geometry* contourBufferUp_;
             
             const geos::geom::LineString* geomLinestring = geomFactory.createLineString(*jt);
             contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
-//            contourBufferUp = geomFactory.createLineString(doSingleBIL( contourBufferUp_->getCoordinates(), 0.01));
-//            if (geomLinestring->isClosed()) {
-//                geos::geom::LinearRing* geom = geomFactory.createLinearRing(geomLinestring->getCoordinates());
-////                    const geos::geom::Geometry* poly = geomFactory.createPolygon(geom, NULL);
-////                    delete geomLinestring;
-////                    std::cerr << geomLinestring->toString() << std::endl;
-////                    contourBufferUp = bufferBuild.buffer(geomLinestring, bufferTolerance);
-////                    contourBufferUp = geom->buffer(bufferTolerance);
-//                contourBufferUp = bufferBuild.bufferLineSingleSided(geom, bufferTolerance, true);
-////                contourOut[it->first].push_back(contourBufferUp->getCoordinates());
-//            } else {
-////                    contourBufferUp = bufferBuild.buffer(geomLinestring, bufferTolerance);
-//                contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
-//            }
             
-
-//            const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp);
-//            contourOut[it->first].push_back(geom->getCoordinates());
-//            contourOut[it->first].push_back(contourBufferUp->getCoordinates());
-//            std::cerr << geom->toString() << std::endl;
-//            contourBufferUpClean->buffer(bufferTolerance);
-            if ( !contourBufferUp->isEmpty() ){
-                if ( contourBufferUp->getGeometryType() == "LineString" ) {
-                    const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp);
-                    std::cerr << geom->toString() << std::endl;
-                    const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
-                    intermediateOut[it->first].push_back(geom->getCoordinates());
-                    for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+            for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
+                const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
+                const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
+                intermediateOut[it->first].push_back(geom->getCoordinates());
+                for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+                    if ( !contourBufferUpDown->isEmpty() )
                         contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
-                    }
-                } else if ( contourBufferUp->getGeometryType() == "MultiLineString" ) {
-                    for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
-                        const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
-                        const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
-                        intermediateOut[it->first].push_back(geom->getCoordinates());
-                        for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
-                            contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
-                        }
-                    }
-                } else { std::cerr << "Don't know what to do with a " << contourBufferUp->getGeometryType() << std::endl; }
-                
+                }
             }
         }
     }

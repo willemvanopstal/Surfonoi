@@ -36,6 +36,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		41C735B81568F7D7001CEAE9 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +81,7 @@
 		4199CFE11567C9460008C906 /* XorHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XorHandler.h; sourceTree = "<group>"; };
 		4199CFE21567C9460008C906 /* ZshCompletionOutput.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZshCompletionOutput.h; sourceTree = "<group>"; };
 		4199CFF01567F4BF0008C906 /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = "../../build/geos-3.3.3/build/usr/local/GEOS.framework"; sourceTree = "<group>"; };
+		41C735BA1568F7D7001CEAE9 /* linecleaner */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = linecleaner; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,13 @@
 			files = (
 				4199CFF11567F4BF0008C906 /* GEOS.framework in Frameworks */,
 				4125DB6D1562895D0036C99A /* GDAL.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41C735B71568F7D7001CEAE9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				4125DB5D1562892A0036C99A /* doublebuffer */,
+				41C735BA1568F7D7001CEAE9 /* linecleaner */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +189,23 @@
 			productReference = 4125DB5D1562892A0036C99A /* doublebuffer */;
 			productType = "com.apple.product-type.tool";
 		};
+		41C735B91568F7D7001CEAE9 /* linecleaner */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41C735C31568F7D7001CEAE9 /* Build configuration list for PBXNativeTarget "linecleaner" */;
+			buildPhases = (
+				41C735B61568F7D7001CEAE9 /* Sources */,
+				41C735B71568F7D7001CEAE9 /* Frameworks */,
+				41C735B81568F7D7001CEAE9 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = linecleaner;
+			productName = linecleaner;
+			productReference = 41C735BA1568F7D7001CEAE9 /* linecleaner */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -192,6 +227,7 @@
 			projectRoot = "";
 			targets = (
 				4125DB5C1562892A0036C99A /* doublebuffer */,
+				41C735B91568F7D7001CEAE9 /* linecleaner */,
 			);
 		};
 /* End PBXProject section */
@@ -203,6 +239,13 @@
 			files = (
 				4125DB621562892A0036C99A /* main.cpp in Sources */,
 				4125DB6F156289900036C99A /* DoubleBuffer.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		41C735B61568F7D7001CEAE9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +317,20 @@
 			};
 			name = Release;
 		};
+		41C735C11568F7D7001CEAE9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		41C735C21568F7D7001CEAE9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -294,6 +351,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		41C735C31568F7D7001CEAE9 /* Build configuration list for PBXNativeTarget "linecleaner" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41C735C11568F7D7001CEAE9 /* Debug */,
+				41C735C21568F7D7001CEAE9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
