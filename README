@@ -11,3 +11,5 @@ CgalUtilities		-- Commandline utilities to interface with 'CgalProcessor'
 	filtersimplify/ -- Reads an .xyz file and simplifies the points based on a drop heuristics algorithm. Outputs to .xyz
 
 ContourVis/		-- Based on Ken's PhdVis. OpenGL Viewer for CGAL triangulations and derived structures (contous, Voronoi diagram).
+python/
+	lineCleaner.py	-- Clean linestrings from a shapefile based on length or pointcount
