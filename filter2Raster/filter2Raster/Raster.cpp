@@ -105,8 +105,8 @@ inline void Raster::max(double &x, double &y, double &val, float vals[], int16_t
 
 size_t Raster::getCoord(double &x, double &y)
 {
-    size_t r = static_cast<size_t>( floor((y-miny) / cellSize) );
-    size_t c = static_cast<size_t>( floor((x-minx) / cellSize) );
+    size_t r = static_cast<size_t>( round((y-miny) / cellSize) );
+    size_t c = static_cast<size_t>( round((x-minx) / cellSize) );
     
     return r * dimx + c;
 }
