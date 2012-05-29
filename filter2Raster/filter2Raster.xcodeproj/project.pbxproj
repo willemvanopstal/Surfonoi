@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4154DF30150559E600D5CE2D /* filter2Raster in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41CF2AA314DAD2C4003F0AD8 /* filter2Raster */; };
+		4161D23D1574E9D90061A7E7 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4161D23C1574E9D90061A7E7 /* main.cpp */; };
+		4161D23F1574E9D90061A7E7 /* qcraster.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4161D23E1574E9D90061A7E7 /* qcraster.1 */; };
 		41CF2AA814DAD2C4003F0AD8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41CF2AA714DAD2C4003F0AD8 /* main.cpp */; };
 		41CF2AAA14DAD2C4003F0AD8 /* filter2Raster.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41CF2AA914DAD2C4003F0AD8 /* filter2Raster.1 */; };
 		41CF2AB914DAE91A003F0AD8 /* Raster.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41CF2AB814DAE91A003F0AD8 /* Raster.cpp */; };
@@ -24,6 +26,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4161D2371574E9D90061A7E7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				4161D23F1574E9D90061A7E7 /* qcraster.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		41CF2AA114DAD2C4003F0AD8 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -37,6 +49,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4161D2391574E9D90061A7E7 /* qcraster */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = qcraster; sourceTree = BUILT_PRODUCTS_DIR; };
+		4161D23C1574E9D90061A7E7 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		4161D23E1574E9D90061A7E7 /* qcraster.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = qcraster.1; sourceTree = "<group>"; };
 		41B3A93414F7D558007C6E32 /* Arg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Arg.h; sourceTree = "<group>"; };
 		41B3A93514F7D558007C6E32 /* ArgException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgException.h; sourceTree = "<group>"; };
 		41B3A93614F7D558007C6E32 /* ArgTraits.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgTraits.h; sourceTree = "<group>"; };
@@ -71,6 +86,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		4161D2361574E9D90061A7E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41CF2AA014DAD2C4003F0AD8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,6 +103,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4161D23B1574E9D90061A7E7 /* qcraster */ = {
+			isa = PBXGroup;
+			children = (
+				4161D23C1574E9D90061A7E7 /* main.cpp */,
+				4161D23E1574E9D90061A7E7 /* qcraster.1 */,
+			);
+			path = qcraster;
+			sourceTree = "<group>";
+		};
 		41B3A93314F7D558007C6E32 /* tclap */ = {
 			isa = PBXGroup;
 			children = (
@@ -119,6 +150,7 @@
 			children = (
 				41B3A93314F7D558007C6E32 /* tclap */,
 				41CF2AA614DAD2C4003F0AD8 /* filter2Raster */,
+				4161D23B1574E9D90061A7E7 /* qcraster */,
 				41CF2AA414DAD2C4003F0AD8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -127,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				41CF2AA314DAD2C4003F0AD8 /* filter2Raster */,
+				4161D2391574E9D90061A7E7 /* qcraster */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -145,6 +178,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		4161D2381574E9D90061A7E7 /* qcraster */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4161D2421574E9D90061A7E7 /* Build configuration list for PBXNativeTarget "qcraster" */;
+			buildPhases = (
+				4161D2351574E9D90061A7E7 /* Sources */,
+				4161D2361574E9D90061A7E7 /* Frameworks */,
+				4161D2371574E9D90061A7E7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = qcraster;
+			productName = qcraster;
+			productReference = 4161D2391574E9D90061A7E7 /* qcraster */;
+			productType = "com.apple.product-type.tool";
+		};
 		41CF2AA214DAD2C4003F0AD8 /* filter2Raster */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41CF2AAD14DAD2C4003F0AD8 /* Build configuration list for PBXNativeTarget "filter2Raster" */;
@@ -181,11 +231,20 @@
 			projectRoot = "";
 			targets = (
 				41CF2AA214DAD2C4003F0AD8 /* filter2Raster */,
+				4161D2381574E9D90061A7E7 /* qcraster */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		4161D2351574E9D90061A7E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4161D23D1574E9D90061A7E7 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41CF2A9F14DAD2C4003F0AD8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -198,6 +257,32 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		4161D2401574E9D90061A7E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GDAL,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4161D2411574E9D90061A7E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				OTHER_LDFLAGS = (
+					"-framework",
+					GDAL,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		41CF2AAB14DAD2C4003F0AD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -272,6 +357,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		4161D2421574E9D90061A7E7 /* Build configuration list for PBXNativeTarget "qcraster" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4161D2401574E9D90061A7E7 /* Debug */,
+				4161D2411574E9D90061A7E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		41CF2A9D14DAD2C3003F0AD8 /* Build configuration list for PBXProject "filter2Raster" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
