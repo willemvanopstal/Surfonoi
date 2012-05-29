@@ -187,7 +187,9 @@ ContourMap DoubleBuffer::performBIL(double bufferTolerance) {
             contourOut[it->first].push_back( doSingleBIL(*jt, bufferTolerance) );
         }
     }
-
+    
+    writeShapefileLayer(contourOut, "bil");
+    
     return contourOut;
 }
 #endif
@@ -211,20 +213,25 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
             
             const geos::geom::LineString* geomLinestring = geomFactory.createLineString(*jt);
             contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
-            
-            for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
-                const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
-                const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
-                intermediateOut[it->first].push_back(geom->getCoordinates());
-                for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
-                    if ( !contourBufferUpDown->isEmpty() )
-                        contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
+
+            if(!contourBufferUp->isEmpty()) {
+                for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
+                    const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
+//                    std::cerr << geom->toString() << std::endl;
+                    if(!geom->isEmpty()) {
+                        const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
+                        intermediateOut[it->first].push_back(geom->getCoordinates());
+                        for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+                            if ( !contourBufferUpDown->isEmpty() )
+                                contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
+                        }
+                    }
                 }
             }
         }
     }
 
-    writeShapefileLayer(intermediateOut, "singlebuffered");
+//    writeShapefileLayer(intermediateOut, "singlebuffered");
     writeShapefileLayer(contourOut, "doublebuffered");
     
     return contourOut;

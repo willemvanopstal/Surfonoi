@@ -37,7 +37,7 @@ void Raster::getBounds()
 {
     double x, y, z;
     
-    if (ifs >> y >> x >> z)
+    if (ifs >> x >> y >> z)
     {
         minx=maxx=x;
         miny=maxy=y;
@@ -45,7 +45,7 @@ void Raster::getBounds()
         ifs.seekg(0);
     }
     
-    while (ifs >> y >> x >> z){
+    while (ifs >> x >> y >> z){
         if(x < minx) minx=x;
         if(x > maxx) maxx=x;
         if(y < miny) miny=y;
@@ -66,7 +66,7 @@ void Raster::compute(float val[], int16_t cnt[], alg a)
     std::cout << "Filled arrays" <<std::endl;
 
     double x, y, z;
-    while (ifs >> y >> x >> z)
+    while (ifs >> x >> y >> z)
     {
         if (a==MIN) {
             min(x,y,z, val, cnt);

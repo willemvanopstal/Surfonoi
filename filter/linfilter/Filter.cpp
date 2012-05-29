@@ -41,7 +41,7 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
         projectXY(maxx, maxy);
     }
     
-    ofs << std::setprecision(9);
+    ofs <<std::setprecision(2)<<std::fixed;
     
 }
 

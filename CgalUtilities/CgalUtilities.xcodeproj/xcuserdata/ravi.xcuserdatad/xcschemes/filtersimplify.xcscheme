@@ -56,6 +56,12 @@
             ReferencedContainer = "container:CgalUtilities.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <CommandLineArguments>
+         <CommandLineArgument
+            argument = "/Volumes/macData/dataset/atlis/Waal/waal_bm_1m_1_a2.xyz /Volumes/macData/dataset/atlis/Waal/waal_bm_1m_1_a2_simp0005.xyz -t 0.005"
+            isEnabled = "YES">
+         </CommandLineArgument>
+      </CommandLineArguments>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

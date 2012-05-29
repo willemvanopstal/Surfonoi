@@ -58,8 +58,16 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "/Volumes/macData/dataset/atlis/conform/london/contour/contour.shp /Volumes/macData/dataset/atlis/conform/london/contourBuf -d 6"
-            isEnabled = "YES">
+            argument = "/Volumes/macData/dataset/atlis/conform/london-VS/gdal_contour/Lvs_0.shp"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "/Volumes/macData/dataset/atlis/conform/london-VS/doublebuffer/Lvs_0"
+            isEnabled = "NO">
+         </CommandLineArgument>
+         <CommandLineArgument
+            argument = "-d 0.5"
+            isEnabled = "NO">
          </CommandLineArgument>
       </CommandLineArguments>
       <AdditionalOptions>

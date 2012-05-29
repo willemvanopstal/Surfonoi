@@ -16,6 +16,7 @@
 #include <cmath>
 #include <fstream>
 #include <vector>
+#include <string>
 
 #include <proj_api.h>
 

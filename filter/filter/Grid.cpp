@@ -11,7 +11,14 @@
 Grid::Grid(const char* inputFile, double cellSize, bool pfW, bool fSOZ, bool fXY): 
 ifs(inputFile), cellSize(cellSize), projectFromWGS84(pfW), flipSignOnZ(fSOZ), flipXY(fXY)
 {
-    findBounds();
+//    findBounds();
+    std::string inputFile_bounds = inputFile;
+    inputFile_bounds.append(".bounds");
+    
+    std::ifstream in_bounds(inputFile_bounds.c_str());
+    in_bounds >> minx >> maxx >> miny >> maxy >> minz >> maxz;
+    in_bounds.close();
+    
     std::cout << minx << " " << maxx << " " << miny << " " << maxy << " " << minz << " " << maxz <<std::endl;
 
     if(projectFromWGS84) {
@@ -105,16 +112,13 @@ void Grid::write(const char* outFile, char d)
 
     
     // print boundaries to first 6 lines
-    ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl;
-    if(flipSignOnZ)
-        ofs << -maxz << std::endl << -minz << std::endl;
-    else
-        ofs << minz << std::endl << maxz << std::endl;
+//    ofs << minx << std::endl << maxx << std::endl <<  miny << std::endl << maxy << std::endl;
+
 
     for(it=v.begin(); it!=v.end(); ++it)
     {
         if(it->isSet()) {
-            ofs << std::setprecision(9) << it->x() << d << it->y() << d;
+            ofs << std::setprecision(2)<<std::fixed << it->x() << d << it->y() << d;
             if(flipSignOnZ)
                 ofs << -it->z() << std::endl;
             else
@@ -123,6 +127,20 @@ void Grid::write(const char* outFile, char d)
     }
     
     ofs.close();
+    
+    std::string outFile_bounds = outFile;
+    outFile_bounds.append(".bounds");
+    
+    std::ofstream ofs_bounds(outFile_bounds.c_str());
+    ofs_bounds <<std::setprecision(2)<<std::fixed << minx << std::endl << maxx << 
+    std::endl << miny << std::endl << maxy << std::endl;
+
+    if(flipSignOnZ)
+        ofs_bounds << -maxz << std::endl << -minz << std::endl;
+    else
+        ofs_bounds << minz << std::endl << maxz << std::endl;
+    
+    ofs_bounds.close();
 }
 
 size_t Grid::getCoord(double x, double y)
