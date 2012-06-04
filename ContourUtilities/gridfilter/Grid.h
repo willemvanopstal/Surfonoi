@@ -27,7 +27,7 @@ class Grid
 public:
     //Grid(const char* inputFile, double cellSize);
     Grid(const char* inputFile, double cellSize, bool projectFromWGS84, bool flipZ, bool fXY);
-    void calcGrid(void (*func)(Point&, double&, double&, double&));
+    void calcGrid(void (*func)(Point::Point&, double&, double&, double&));
     void write(const char* outFile, char delimiter = ' ');
     
 private:
