@@ -1,0 +1,18 @@
+DEPENDENCIES:
+tested versions are between brackets
+	- GDAL [1.9.0]
+	- CGAL [3.9 and 4.0]
+	- GEOS [3.3.3]
+	- PROJ4 [4.8.0]
+
+BUILDING:
+(after installing dependencies)
+
+using cmake:
+	cd ContourUtilities/
+	mkdir build
+	cd build
+	cmake ..
+	make
+	make install
+or use xcode project file when using a mac
