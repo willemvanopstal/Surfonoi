@@ -98,7 +98,7 @@ void Grid::calcGrid(void (*func)(Point&, double&, double&, double&))
         size_t t = getCoord(x,y);
         
         if (!v[t].isSet())
-            v[t] = Point::Point(x, y, z);
+            v[t] = Point(x, y, z);
         else
             func(v[t],x, y, z);
     }
