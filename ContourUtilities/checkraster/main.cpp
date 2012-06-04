@@ -41,8 +41,6 @@ int main(int argc, const char * argv[])
         poBand = poDataset->GetRasterBand( 1 );
         poBand->GetBlockSize( &nBlockXSize, &nBlockYSize );
         noDataVal = poBand->GetNoDataValue();
-        adfMinMax[0] = poBand->GetMinimum( &bGotMin );
-        adfMinMax[1] = poBand->GetMaximum( &bGotMax );
         
         float *pafImage;
         int   nXSize = poBand->GetXSize();
