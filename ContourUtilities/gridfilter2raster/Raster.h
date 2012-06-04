@@ -15,10 +15,10 @@
 #include <cfloat>
 #include <fstream>
 
-#include <GDAL/gdal_priv.h>
-#include <GDAL/cpl_string.h>
-#include <GDAL/cpl_conv.h>
-#include <GDAL/ogr_spatialref.h>
+#include <gdal/gdal_priv.h>
+#include <gdal/cpl_string.h>
+#include <gdal/cpl_conv.h>
+#include <gdal/ogr_spatialref.h>
 
 enum alg {AVG,MIN,MAX};
 //enum {buffN = 4*16184};
