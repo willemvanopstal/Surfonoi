@@ -9,7 +9,7 @@
 #include "Raster.h"
 
 Raster::Raster(const char* inputFile, const char* WKGCS, double cellsize):
-        ifs(inputFile), cellSize(cellsize), lineCount(0)
+        cellSize(cellsize), lineCount(0), ifs(inputFile)
 {
 //    ifs.rdbuf()->pubsetbuf(_buffer, buffN);
     

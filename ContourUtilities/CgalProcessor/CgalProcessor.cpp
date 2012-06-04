@@ -158,8 +158,8 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
             if (orientation==CGAL::COLLINEAR) {
                 geos_ls = *sit;
                 std::cerr << "!!! failed to orient a contour line" << std::endl;
-            } else if ( !((orientation == CGAL::NEGATIVE) and (p3.z() > it->first) or 
-                   (orientation == CGAL::POSITIVE) and (p3.z() < it->first) ) ) 
+            } else if ( !(((orientation == CGAL::NEGATIVE) and (p3.z() > it->first)) or 
+                   ((orientation == CGAL::POSITIVE) and (p3.z() < it->first)) ) ) 
             {
                 geos::geom::Geometry* g = (*sit)->reverse();
                 geos_ls = dynamic_cast<geos::geom::LineString*>( g );
@@ -216,7 +216,7 @@ contourSegmentVec CgalProcessor::extractContours(std::vector<double> isoDepths) 
 //                        intersectionVec[*iD].push_back( p2 );
 //                    }
                     if(p1.z() != *iD and p2.z() != *iD) {
-                        if((p1.z() < *iD and p2.z() > *iD) or (p1.z() > *iD and p2.z() < *iD) and intersectionVec.size() < 2) {
+                        if((p1.z() < *iD and p2.z() > *iD) or ((p1.z() > *iD and p2.z() < *iD) and intersectionVec.size() < 2)) {
                                 c++;
                                 double lamda = (*iD - p1.z()) / (p2.z() - p1.z());
                                 double x = (1-lamda) * p1.x() + lamda * p2.x();
