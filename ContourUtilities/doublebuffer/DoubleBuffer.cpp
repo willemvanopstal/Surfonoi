@@ -215,13 +215,13 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
             contourBufferUp = bufferBuild.bufferLineSingleSided(geomLinestring, bufferTolerance, true);
 
             if(!contourBufferUp->isEmpty()) {
-                for (int i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
+                for (size_t i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
                     const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
 //                    std::cerr << geom->toString() << std::endl;
                     if(!geom->isEmpty()) {
                         const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
                         intermediateOut[it->first].push_back(geom->getCoordinates());
-                        for (int j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
+                        for (size_t j = 0; j<contourBufferUpDown->getNumGeometries(); ++j) {
                             if ( !contourBufferUpDown->isEmpty() )
                                 contourOut[it->first].push_back(contourBufferUpDown->getGeometryN(j)->getCoordinates());
                         }

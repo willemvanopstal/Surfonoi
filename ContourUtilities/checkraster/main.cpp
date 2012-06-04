@@ -24,8 +24,6 @@ int main(int argc, const char * argv[])
     if( poDataset != NULL ) {
 
         GDALRasterBand  *poBand;
-        int             nBlockXSize, nBlockYSize;
-        int             bGotMin, bGotMax;
         double          adfGeoTransform[6];
         double          tl_x,tl_y,cellsize_x, cellsize_y;
         double          noDataVal;
@@ -39,7 +37,6 @@ int main(int argc, const char * argv[])
         }
         
         poBand = poDataset->GetRasterBand( 1 );
-        poBand->GetBlockSize( &nBlockXSize, &nBlockYSize );
         noDataVal = poBand->GetNoDataValue();
         
         float *pafImage;
