@@ -16,20 +16,20 @@
 #include <vector>
 
 //OGR
-#include <GDAL/ogrsf_frmts.h>
+#include <gdal/ogrsf_frmts.h>
 
 //GEOS
-#include <GEOS/geom/Coordinate.h>
-#include <GEOS/geom/LineString.h>
-#include <GEOS/geom/PrecisionModel.h>
-#include <GEOS/geom/GeometryFactory.h>
-#include <GEOS/geom/CoordinateSequence.h>
-#include <GEOS/geom/CoordinateArraySequence.h>
-#include <GEOS/operation/buffer/BufferParameters.h>
-#include <GEOS/operation/buffer/BufferBuilder.h>
+#include <geos/geom/Coordinate.h>
+#include <geos/geom/LineString.h>
+#include <geos/geom/PrecisionModel.h>
+#include <geos/geom/GeometryFactory.h>
+#include <geos/geom/CoordinateSequence.h>
+#include <geos/geom/CoordinateArraySequence.h>
+#include <geos/operation/buffer/BufferParameters.h>
+#include <geos/operation/buffer/BufferBuilder.h>
 
 #ifdef WITHGEOSBIL
-#include <GEOS/operation/buffer/BufferInputLineSimplifier.h>
+#include <geos/operation/buffer/BufferInputLineSimplifier.h>
 #endif
 
 typedef std::vector< geos::geom::CoordinateSequence* > coordVec;

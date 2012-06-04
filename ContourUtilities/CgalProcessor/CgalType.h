@@ -20,27 +20,27 @@
 #undef Nil
 #endif
 
-#include <CGAL/Plane_3.h>
-#include <CGAL/intersections.h>
+#include <cgal/Plane_3.h>
+#include <cgal/intersections.h>
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/Triangulation_vertex_base_with_info_2.h>
-#include <CGAL/Triangulation_face_base_with_info_2.h>
-#include <CGAL/Projection_traits_xy_3.h>
-#include <CGAL/Delaunay_triangulation_2.h>
+#include <cgal/Exact_predicates_inexact_constructions_kernel.h>
+#include <cgal/Triangulation_vertex_base_with_info_2.h>
+#include <cgal/Triangulation_face_base_with_info_2.h>
+#include <cgal/Projection_traits_xy_3.h>
+#include <cgal/Delaunay_triangulation_2.h>
 
-#include <CGAL/Triangulation_hierarchy_2.h>
+#include <cgal/Triangulation_hierarchy_2.h>
 
 //#include <CGAL/Voronoi_diagram_2.h>
 //#include <CGAL/Delaunay_triangulation_adaptation_traits_2.h>
 //#include <CGAL/Delaunay_triangulation_adaptation_policies_2.h>
 
-#include <CGAL/natural_neighbor_coordinates_2.h>
+#include <cgal/natural_neighbor_coordinates_2.h>
 
 //#include <CGAL/Simple_cartesian.h>
-#include <CGAL/AABB_tree.h>
-#include <CGAL/AABB_traits.h>
-#include <CGAL/AABB_triangle_primitive.h>
+#include <cgal/AABB_tree.h>
+#include <cgal/AABB_traits.h>
+#include <cgal/AABB_triangle_primitive.h>
 #include <list>
 
 struct vertexInfo {

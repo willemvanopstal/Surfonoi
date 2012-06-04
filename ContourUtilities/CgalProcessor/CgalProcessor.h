@@ -8,15 +8,15 @@
 #include "CgalType.h"
 
 //OGR
-#include <GDAL/ogrsf_frmts.h>
+#include <gdal/ogrsf_frmts.h>
 //GEOS
-#include <GEOS/geom/Coordinate.h>
-#include <GEOS/geom/Point.h>
-#include <GEOS/geom/LineString.h>
-#include <GEOS/geom/PrecisionModel.h>
-#include <GEOS/geom/GeometryFactory.h>
-#include <GEOS/geom/CoordinateArraySequence.h>
-#include <GEOS/operation/linemerge/LineMerger.h>
+#include <geos/geom/Coordinate.h>
+#include <geos/geom/Point.h>
+#include <geos/geom/LineString.h>
+#include <geos/geom/PrecisionModel.h>
+#include <geos/geom/GeometryFactory.h>
+#include <geos/geom/CoordinateArraySequence.h>
+#include <geos/operation/linemerge/LineMerger.h>
 
 #include <map>
 #include <vector>
