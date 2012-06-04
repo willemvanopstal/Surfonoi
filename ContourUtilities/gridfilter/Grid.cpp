@@ -88,7 +88,7 @@ void Grid::findBounds()
     ifs.seekg(0);
 }
 
-void Grid::calcGrid(void (*func)(Point&, double&, double&, double&))
+void Grid::calcGrid(void (*func)(Point::Point&, double&, double&, double&))
 {
     double x,y,z;
 
