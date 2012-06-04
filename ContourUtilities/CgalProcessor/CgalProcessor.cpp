@@ -101,9 +101,8 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
     for (contourSegmentVec::iterator it = contours.begin(); it != contours.end(); ++it) {
 
         geos::operation::linemerge::LineMerger merger;
-        geos::geom::PrecisionModel::PrecisionModel* precisionModel;
-        precisionModel = new geos::geom::PrecisionModel(10000);
-        geos::geom::GeometryFactory geomFactory(precisionModel);
+        geos::geom::PrecisionModel::PrecisionModel precisionModel(10000);
+        geos::geom::GeometryFactory geomFactory(&precisionModel);
         
         // Convert CGAL segments to GEOS geometry and add them to the linemerger
         for (std::vector<CGAL::Segment_3<K> >::iterator sit = it->second.begin(); sit != it->second.end(); ++sit) {
@@ -111,10 +110,10 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
             geos::geom::CoordinateArraySequence* pseq = new geos::geom::CoordinateArraySequence();
 
             geos::geom::Coordinate source(sit->source().x(), sit->source().y(), sit->source().z());
-            precisionModel->makePrecise(source);
+            precisionModel.makePrecise(source);
             
             geos::geom::Coordinate target(sit->target().x(), sit->target().y(), sit->target().z());
-            precisionModel->makePrecise(target);
+            precisionModel.makePrecise(target);
             
             pseq->add(source);
             pseq->add(target);
