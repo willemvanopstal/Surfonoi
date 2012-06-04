@@ -26,7 +26,6 @@ int main(int argc, const char * argv[])
         GDALRasterBand  *poBand;
         int             nBlockXSize, nBlockYSize;
         int             bGotMin, bGotMax;
-        double          adfMinMax[2];
         double          adfGeoTransform[6];
         double          tl_x,tl_y,cellsize_x, cellsize_y;
         double          noDataVal;
