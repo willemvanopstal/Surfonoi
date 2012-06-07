@@ -195,48 +195,56 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
 contourSegmentVec CgalProcessor::extractContours(std::vector<double> isoDepths) {
     
     contourSegmentVec segmentVec;
+    double e = 1e-5;
     
-
+    // iterate over all triangles
     for( Face_iterator ib = dt.faces_begin();
         ib != dt.faces_end(); ++ib) {
 //        if(!ib->info().tooBig) {
             std::map<double, std::vector<PointDt> > intersectionVec;
             
             int a=0,b=0,c=0;
+            // iterate over the triangle edges
             for (int i=0; i<3; ++i) {
                 Vertex_handle v1 = ib->vertex(i);
                 PointDt p1 = v1->point();
                 Vertex_handle v2 = ib->vertex(ib->cw(i));
                 PointDt p2 = v2->point();
                 
+                // iterate over contour depths
                 for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
 
 //                    if(p1.z() == *iD and p2.z() == *iD) {//intersection is exactly along an edge of this triangle face
 //                        intersectionVec[*iD].push_back( p1 );
 //                        intersectionVec[*iD].push_back( p2 );
 //                    }
-                    if(p1.z() != *iD and p2.z() != *iD) {
-                        if((p1.z() < *iD and p2.z() > *iD) or ((p1.z() > *iD and p2.z() < *iD) and intersectionVec.size() < 2)) {
+                    // ensure contour depth is not 
+//                    if(p1.z() != *iD and p2.z() != *iD) {
+                        if((p1.z() < (*iD-e) and p2.z() > (*iD+e)) or ((p1.z() > (*iD+e) and p2.z() < (*iD-e)) )) {
                                 c++;
                                 double lamda = (*iD - p1.z()) / (p2.z() - p1.z());
                                 double x = (1-lamda) * p1.x() + lamda * p2.x();
                                 double y = (1-lamda) * p1.y() + lamda * p2.y();
                                 intersectionVec[*iD].push_back( PointDt(x,y,*iD) );
     //                            std::cout << "pushing " << *(intersectionVec[*iD].end()-1) << " " << *iD << std::endl;
-                        } else if (p1.z() == *iD and intersectionVec.size() < 2 ) {
+                        } else if (p1.z() < (*iD+e) and p1.z() > (*iD-e) ) {
                             intersectionVec[*iD].push_back( p1 );
                             a++;
-                        } else if (p2.z() == *iD and intersectionVec.size() < 2) {
+                        } else if (p2.z() < (*iD+e) and p2.z() > (*iD-e) ) {
                             intersectionVec[*iD].push_back( p2 );
                             b++;
                         }
                         
-                    }
+//                    }
                 }
             }
             
             for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
-                if (intersectionVec[*iD].size() == 2){
+                if (intersectionVec[*iD].size() != 0 and c==0){
+                    std::cout << "wth " << c << a << b << " " << intersectionVec[*iD].size() << " " << *iD << std::endl;
+                }
+                
+                if (intersectionVec[*iD].size() > 1){
                     segmentVec[*iD].push_back(CGAL::Segment_3<K>(intersectionVec[*iD][0], intersectionVec[*iD][1]));
 //                    std::cout << CGAL::Segment_3<K>(intersectionVec[*iD][0], intersectionVec[*iD][1]) <<std::endl;
 //                } else if (intersectionVec[*iD].size() == 6) {
