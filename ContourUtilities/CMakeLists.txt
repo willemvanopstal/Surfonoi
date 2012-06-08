@@ -9,7 +9,9 @@ find_package(CGAL)
 
 include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/CgalProcessor")
 
+set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "-g -Wall -frounding-math")
+
 add_subdirectory(prefilter)
 add_subdirectory(gridfilter)
 add_subdirectory(gridfilter2raster)
