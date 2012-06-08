@@ -89,7 +89,7 @@ public:
     void markBigTriangles(double maxEdgeLength);
     void printTags();
     
-    void smooth(smoothAlg);
+    void smooth(smoothAlg, bool upOnly=true);
     void densify(smoothAlg);
     void simplify(smoothAlg, double treshold, bool upOnly=true, bool dumpIntermediateStepsToOBJ=false);
         

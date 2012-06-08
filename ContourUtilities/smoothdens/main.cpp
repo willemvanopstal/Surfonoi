@@ -12,6 +12,8 @@ int main(int argc, const char * argv[])
         
         TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",true,2,"int", cmd);
         TCLAP::ValueArg<int> dArg("d","densify","Number of times to densify",true,2,"int", cmd);
+        TCLAP::SwitchArg uSwitch("u","unsafe","Smooth without attempting to respect bathymetric safety constraint", cmd, false);
+
         
         vector<string> allowed;
 		allowed.push_back("NN");
@@ -32,7 +34,7 @@ int main(int argc, const char * argv[])
             alg = LP;
         
         CgalProcessor cp(inputArg.getValue().c_str());
-        for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg);
+        for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
         for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg);
         cp.saveContourShp(levelArg.getValue(), outputArg.getValue().c_str());
         

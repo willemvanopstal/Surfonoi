@@ -482,7 +482,7 @@ double CgalProcessor::estimateZ(smoothAlg algorithm, Vertex_handle v) throw(Outs
     }
 }
 
-void CgalProcessor::smooth(smoothAlg algorithm)
+void CgalProcessor::smooth(smoothAlg algorithm, bool upOnly)
 {
     typedef std::pair< Vertex_handle, double > vdPair;
     std::vector< vdPair > newDepths;
@@ -493,7 +493,9 @@ void CgalProcessor::smooth(smoothAlg algorithm)
 
         double newZ = estimateZ(algorithm, vit);
         
-        if (oldZ < newZ){
+        if (!upOnly) {
+            newDepths.push_back(std::make_pair(vit, newZ));
+        } else if (oldZ < newZ) {
             newDepths.push_back(std::make_pair(vit, newZ));
         }
     }
