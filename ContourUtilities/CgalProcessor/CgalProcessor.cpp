@@ -393,7 +393,7 @@ double CgalProcessor::estimateZ_LIN(Vertex_handle v) throw(OutsideConvexHullExce
             t2.insert(vc->point());
     } while(++vc!=done);
     
-    // what should happen if this requested point is on the boudnary of the tin...
+    // what should happen if this requested point is on the boundary of the tin...
 
     Dt::Face_handle face = t2.locate(q);
     if (face==NULL) throw OutsideConvexHullException();
@@ -416,6 +416,8 @@ double CgalProcessor::estimateZ_NN(Vertex_handle v) throw(OutsideConvexHullExcep
     do{
         if(!dt.is_infinite(vc))
             t2.insert(vc->point());
+        else throw OutsideConvexHullException(); // meaning: this vertex is on the convexhull
+            
     } while(++vc!=done);
     
     Point_coordinate_vector coords;
@@ -450,7 +452,7 @@ double CgalProcessor::estimateZ_LP(Vertex_handle v) throw(OutsideConvexHullExcep
             
             rawWeights.push_back(LaplaceWeight(ts.x(), ts.y(), tt.x(), tt.y(), vs.x(), vs.y(), vt.x(), vt.y()));
             zDepth.push_back(ts.z());
-        }
+        } else throw OutsideConvexHullException(); // meaning: this vertex is on the convexhull
         
     } while(++iEdges != done);
     
@@ -490,14 +492,21 @@ void CgalProcessor::smooth(smoothAlg algorithm, bool upOnly)
     for( Dt::Finite_vertices_iterator vit=dt.finite_vertices_begin() ; vit != dt.finite_vertices_end(); ++vit ) {
         
         double oldZ = vit->point().z();
-
-        double newZ = estimateZ(algorithm, vit);
         
-        if (!upOnly) {
-            newDepths.push_back(std::make_pair(vit, newZ));
-        } else if (oldZ < newZ) {
-            newDepths.push_back(std::make_pair(vit, newZ));
+        try {
+            double newZ = estimateZ(algorithm, vit);
+            
+            if (!upOnly) {
+                newDepths.push_back(std::make_pair(vit, newZ));
+            } else if (oldZ < newZ) {
+                newDepths.push_back(std::make_pair(vit, newZ));
+            }
+            
+//            std::cerr << oldZ << " | " << newZ << std::endl;
+        } catch (OutsideConvexHullException& e) {
+//            std::cerr << "ohoh - outside convex hull";
         }
+    
     }
     
     for( std::vector<vdPair>::iterator it = newDepths.begin(); it != newDepths.end(); ++it ) {
