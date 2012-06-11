@@ -101,7 +101,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
     for (contourSegmentVec::iterator it = contours.begin(); it != contours.end(); ++it) {
 
         geos::operation::linemerge::LineMerger merger;
-        geos::geom::PrecisionModel precisionModel(10000);
+        geos::geom::PrecisionModel precisionModel(100);
         geos::geom::GeometryFactory geomFactory(&precisionModel);
         
         // Convert CGAL segments to GEOS geometry and add them to the linemerger
@@ -265,7 +265,7 @@ contourSegmentVec CgalProcessor::extractContours(std::vector<double> isoDepths) 
 }
 
 contourSegmentVec CgalProcessor::extractContoursCgalInt(std::vector<double> isoDepths) {
-    
+    // this method might extract some line segments twice: if we are contouring exactly along a triangle edge. Possibly this gives problems later with the geos linemerger, resulting in broken contours. Especially problematic for gridded input (e.g. de Waal dataset)
     contourSegmentVec segmentVec;
     
     for(std::vector<double>::iterator isoDepth = isoDepths.begin(); isoDepth != isoDepths.end(); ++isoDepth) {
