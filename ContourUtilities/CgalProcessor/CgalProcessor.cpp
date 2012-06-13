@@ -590,12 +590,17 @@ double CgalProcessor::verticalError(PointDt q)
 
 void CgalProcessor::updateCache(SimplificationCache &cache, smoothAlg algorithm, Vertex_handle v, bool upOnly)
 {
-    // check if point is not incident to infinite vertex
     try {
+        // following function call might throw OutsideConvexHullException
         double e = vertError(algorithm, v);
+        
+        // Are we performing 'safe' (only going up in this particular iteration) or regular simplification?
         if (upOnly){
+            // negative e means it is 'safe' to drop this points. Attempt to account for floating point error
             if (e < -1E-5){
                 cache.verts[v] = std::fabs(e);
+                
+            // remove point from simplification cache if its about to be moved downwards
             } else if (cache.verts.find(v) == cache.verts.end()) {
                 cache.verts.erase(v);
             }
@@ -603,9 +608,11 @@ void CgalProcessor::updateCache(SimplificationCache &cache, smoothAlg algorithm,
             cache.verts[v] = std::fabs(e);
         }
         
+        // keep record of the minimal error
         if (cache.minError.second > e){
             cache.minError = std::make_pair(v,e);
         }
+    // skip nasty points that might cause code to crash
     } catch (OutsideConvexHullException& e) {
         std::cerr << "Simpflification: Skipping point on boundary";
     }
