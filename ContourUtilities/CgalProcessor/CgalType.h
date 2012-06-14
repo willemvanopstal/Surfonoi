@@ -75,15 +75,10 @@ typedef CGAL::Triangulation_data_structure_2<Vb,Fb>         Tds;
 typedef CGAL::Delaunay_triangulation_2<Gt,Tds>              Dtt;
 typedef CGAL::Triangulation_hierarchy_2<Dtt>                Dt;
 
-//typedef CGAL::Delaunay_triangulation_adaptation_traits_2<Dt>                 AT;
-//typedef CGAL::Delaunay_triangulation_caching_degeneracy_removal_policy_2<Dt> AP;
-//typedef CGAL::Voronoi_diagram_2<Dt,AT,AP>                   Vd;
-
-typedef Dt::Vertex_handle                                   Vertex_handle;
-typedef Dt::Vertex_iterator                                 Vertex_iterator;
-//typedef Vd::Vertex_handle                                   Vertex_handle_vd;
-//typedef Vd::Vertex_iterator                                 Vertex_iterator_vd;
-typedef Dt::Face_iterator                                   Face_iterator;
+typedef Dt::Vertex_handle                                 Vertex_handle;
+typedef Dt::Face_handle                                   Face_handle;
+typedef Dt::Vertex_iterator                               Vertex_iterator;
+typedef Dt::Face_iterator                                 Face_iterator;
 
 typedef Dt::Point                                           PointDt;
 typedef K::Point_3                                          Point3D;

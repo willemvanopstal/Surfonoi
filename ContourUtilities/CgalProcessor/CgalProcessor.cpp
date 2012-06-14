@@ -101,7 +101,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
     for (contourSegmentVec::iterator it = contours.begin(); it != contours.end(); ++it) {
 
         geos::operation::linemerge::LineMerger merger;
-        geos::geom::PrecisionModel precisionModel(100);
+        geos::geom::PrecisionModel precisionModel(10000);
         geos::geom::GeometryFactory geomFactory(&precisionModel);
         
         // Convert CGAL segments to GEOS geometry and add them to the linemerger
@@ -193,7 +193,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
 }
 
 inline int CgalProcessor::cntrEvalVertex(Vertex_handle v, double depth) {
-    double e = 1e-5;
+    double e = 1e-7;
     double z = v->point().z();
 
     if (z < depth - e)
@@ -216,6 +216,9 @@ inline PointDt CgalProcessor::cntrIntersectEdge(Vertex_handle v1, Vertex_handle 
 }
 
 void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDepth) {
+    
+    std::set<Face_handle> faceCache;
+    
     for( Face_iterator ib = dt.finite_faces_begin();
         ib != dt.finite_faces_end(); ++ib) {
         
@@ -229,15 +232,21 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
         //its on a horizontal plane
         if (v0_ == v1_ && v1_ == v2_)
             continue;
-        //one edge is equal to isodepth, TODO: check if this segment has already been added
-        else if (v0_ == 0 && v1_ == 0)
-            segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v0->point(), v1->point()));
-        else if (v1_ == 0 && v2_ == 0)
-            segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v1->point(), v2->point()));            
-        else if (v2_ == 0 && v0_ == 0)
-            segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v2->point(), v0->point()));
+        //one edge is equal to isodepth, Uses faceCache to check if this segment has already been added
+        else if (v0_ == 0 && v1_ == 0) {
+            faceCache.insert(ib);
+            if( faceCache.find(ib->neighbor(2)) == faceCache.end() )
+                segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v0->point(), v1->point()));
+        } else if (v1_ == 0 && v2_ == 0) {
+            faceCache.insert(ib);
+            if( faceCache.find(ib->neighbor(0)) == faceCache.end() )
+                segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v1->point(), v2->point()));            
+        } else if (v2_ == 0 && v0_ == 0) {
+            faceCache.insert(ib);
+            if( faceCache.find(ib->neighbor(1)) == faceCache.end() )
+                segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v2->point(), v0->point()));
         //there is an intersecting line segment in between the interiors of the edges
-        else if ( (v0_ == -1 && v1_ == 1 && v2_ == 1) or (v0_ == 1 && v1_ == -1 && v2_ == -1) ){
+        } else if ( (v0_ == -1 && v1_ == 1 && v2_ == 1) or (v0_ == 1 && v1_ == -1 && v2_ == -1) ){
             PointDt p1 = cntrIntersectEdge(v0, v1, isoDepth);
             PointDt p2 = cntrIntersectEdge(v0, v2, isoDepth);
             segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(p1, p2));
@@ -266,84 +275,10 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
 contourSegmentVec CgalProcessor::extractContours(std::vector<double> isoDepths) {
     contourSegmentVec segmentVec;
     for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
-        std::cerr << "contouring" << " " << *iD << std::endl; 
         extractContour(segmentVec, *iD);
     }
     return segmentVec;
 }
-
-// following method does not work properly for degenerate cases!
-//contourSegmentVec CgalProcessor::extractContours_depreciated(std::vector<double> isoDepths) {
-//    
-//    contourSegmentVec segmentVec;
-//    double e = 1e-5;
-//    
-//    // iterate over all triangles
-//    for( Face_iterator ib = dt.faces_begin();
-//        ib != dt.faces_end(); ++ib) {
-////        if(!ib->info().tooBig) {
-//            std::map<double, std::vector<PointDt> > intersectionVec;
-//            
-//            int a=0,b=0,c=0;
-//            // iterate over the triangle edges
-//            for (int i=0; i<3; ++i) {
-//                Vertex_handle v1 = ib->vertex(i);
-//                PointDt p1 = v1->point();
-//                Vertex_handle v2 = ib->vertex(ib->cw(i));
-//                PointDt p2 = v2->point();
-//                
-//                // iterate over contour depths
-//                for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
-//
-////                    if(p1.z() == *iD and p2.z() == *iD) {//intersection is exactly along an edge of this triangle face
-////                        intersectionVec[*iD].push_back( p1 );
-////                        intersectionVec[*iD].push_back( p2 );
-////                    }
-//                    // ensure contour depth is not 
-////                    if(p1.z() != *iD and p2.z() != *iD) {
-//                        if((p1.z() < (*iD-e) and p2.z() > (*iD+e)) or ((p1.z() > (*iD+e) and p2.z() < (*iD-e)) )) {
-//                                c++;
-//                                double lamda = (*iD - p1.z()) / (p2.z() - p1.z());
-//                                double x = (1-lamda) * p1.x() + lamda * p2.x();
-//                                double y = (1-lamda) * p1.y() + lamda * p2.y();
-//                                intersectionVec[*iD].push_back( PointDt(x,y,*iD) );
-//    //                            std::cout << "pushing " << *(intersectionVec[*iD].end()-1) << " " << *iD << std::endl;
-//                        } else if (p1.z() < (*iD+e) and p1.z() > (*iD-e) ) {
-//                            intersectionVec[*iD].push_back( p1 );
-//                            a++;
-//                        } else if (p2.z() < (*iD+e) and p2.z() > (*iD-e) ) {
-//                            intersectionVec[*iD].push_back( p2 );
-//                            b++;
-//                        }
-//                        
-////                    }
-//                }
-//            }
-//            
-//            for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
-//                if (intersectionVec[*iD].size() != 0 and c==0){
-//                    std::cout << "wth " << c << a << b << " " << intersectionVec[*iD].size() << " " << *iD << std::endl;
-//                }
-//                
-//                if (intersectionVec[*iD].size() > 1){
-//                    segmentVec[*iD].push_back(CGAL::Segment_3<K>(intersectionVec[*iD][0], intersectionVec[*iD][1]));
-////                    std::cout << CGAL::Segment_3<K>(intersectionVec[*iD][0], intersectionVec[*iD][1]) <<std::endl;
-////                } else if (intersectionVec[*iD].size() == 6) {
-////                    segmentVec[*iD].push_back(CGAL::Segment_3<K>(intersectionVec[*iD][0], intersectionVec[*iD][1]));
-////                    segmentVec[*iD].push_back(CGAL::Segment_3<K>(intersectionVec[*iD][2], intersectionVec[*iD][3]));
-////                    segmentVec[*iD].push_back(CGAL::Segment_3<K>(intersectionVec[*iD][4], intersectionVec[*iD][5]));
-//                } else if (intersectionVec[*iD].size()!=0) {
-//                    std::cout << "wth " << c << a << b << " " << intersectionVec[*iD].size() << " " << *iD << std::endl;
-//                    ib->vertex(0)->info().metricSafety = true;
-//                    ib->vertex(1)->info().metricSafety = true;
-//                    ib->vertex(2)->info().metricSafety = true;   
-//                }
-//            }
-////        }
-//    }
-//    
-//    return segmentVec;
-//}
 
 contourSegmentVec CgalProcessor::extractContoursCgalInt(std::vector<double> isoDepths) {
     // this method might extract some line segments twice: if we are contouring exactly along a triangle edge. Possibly this gives problems later with the geos linemerger, resulting in broken contours. Especially problematic for gridded input (e.g. de Waal dataset)
