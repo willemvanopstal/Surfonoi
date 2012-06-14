@@ -55,6 +55,11 @@ private:
     
     inline double LaplaceWeight(double tsx, double tsy, double ttx, double tty, double vsx, double vsy, double vtx, double vty);
 
+    //contouring
+    inline int cntrEvalVertex(Vertex_handle v, double depth);
+    inline PointDt cntrIntersectEdge(Vertex_handle v1, Vertex_handle v2, double depth);
+    void extractContour(contourSegmentVec& segmentVec, double isoDepth);
+    
     double estimateZ_LP(Vertex_handle) throw(OutsideConvexHullException);
     double estimateZ_NN(Vertex_handle) throw(OutsideConvexHullException);
     double estimateZ_LIN(Vertex_handle) throw(OutsideConvexHullException);
