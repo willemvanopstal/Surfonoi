@@ -27,7 +27,8 @@
 #include <string>
 
 enum smoothAlg {LP, NN, LIN};
-typedef std::map<double, std::vector<CGAL::Segment_3<K> > > contourSegmentVec;
+typedef std::vector< CGAL::Segment_3<K> > segmentVec;
+typedef std::map<double, segmentVec > contourSegmentVec;
 
 // Simplfication
 typedef std::map<Vertex_handle, double> vdMap; // a vertex and an error

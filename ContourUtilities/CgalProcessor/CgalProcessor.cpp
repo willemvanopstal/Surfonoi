@@ -125,7 +125,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
         // Get merged linestrings
         std::vector<geos::geom::LineString*> * mergedSegments = merger.getMergedLineStrings();
 
-        // Orient properly, convert OGR geometry and save to shapefile layer
+        // Orient properly, convert to OGR geometry and save to shapefile layer
         for (std::vector<geos::geom::LineString*>::iterator sit = mergedSegments->begin(); sit != mergedSegments->end(); ++sit){
             geos::geom::LineString* geos_ls;
             OGRLineString *ls = new OGRLineString();
@@ -156,7 +156,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
 
             } while (orientation==CGAL::COLLINEAR && triangle_index<2);
 
-            if (orientation==CGAL::COLLINEAR) {
+            if (orientation==CGAL::COLLINEAR) { // this is not really supposed to happen. 
                 geos_ls = *sit;
                 std::cerr << "!!! failed to orient a contour line" << std::endl;
             } else if ( !(((orientation == CGAL::NEGATIVE) and (p3.z() > it->first)) or 
@@ -232,7 +232,7 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
         //its on a horizontal plane
         if (v0_ == v1_ && v1_ == v2_)
             continue;
-        //one edge is equal to isodepth, Uses faceCache to check if this segment has already been added
+        //one edge is equal to isodepth, Uses faceCache to check if this segment has already been added:
         else if (v0_ == 0 && v1_ == 0) {
             faceCache.insert(ib);
             if( faceCache.find(ib->neighbor(2)) == faceCache.end() )
@@ -245,7 +245,7 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
             faceCache.insert(ib);
             if( faceCache.find(ib->neighbor(1)) == faceCache.end() )
                 segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v2->point(), v0->point()));
-        //there is an intersecting line segment in between the interiors of the edges
+        //there is an intersecting line segment in between the interiors of the edges:
         } else if ( (v0_ == -1 && v1_ == 1 && v2_ == 1) or (v0_ == 1 && v1_ == -1 && v2_ == -1) ){
             PointDt p1 = cntrIntersectEdge(v0, v1, isoDepth);
             PointDt p2 = cntrIntersectEdge(v0, v2, isoDepth);
@@ -258,7 +258,7 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
             PointDt p1 = cntrIntersectEdge(v2, v0, isoDepth);
             PointDt p2 = cntrIntersectEdge(v2, v1, isoDepth);
             segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(p1, p2));
-        // one vertex is on the isodepth the others are above and below
+        // one vertex is on the isodepth the others are above and below:
         } else if ( v0_ == 0 && v1_ != v2_ ) {
             PointDt p = cntrIntersectEdge(v1, v2, isoDepth);
             segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v0->point(), p));
@@ -301,6 +301,19 @@ contourSegmentVec CgalProcessor::extractContoursCgalInt(std::vector<double> isoD
     }
     return segmentVec;
 }
+
+//segmentVec CgalProcessor::extractVoronoi() {
+//    segmentVec sVec;
+//    
+//    for( Face_iterator ib = dt.finite_faces_begin();
+//        ib != dt.finite_faces_end(); ++ib) {
+//    
+//        
+//    }
+//    
+//    return sVec;
+//}
+
 
 void CgalProcessor::clear(){
     dt.clear();
@@ -409,8 +422,6 @@ double CgalProcessor::estimateZ_LIN(Vertex_handle v) throw(OutsideConvexHullExce
             t2.insert(vc->point());
     } while(++vc!=done);
     
-    // what should happen if this requested point is on the boundary of the tin...
-
     Dt::Face_handle face = t2.locate(q);
     if (face==NULL) throw OutsideConvexHullException();
         
