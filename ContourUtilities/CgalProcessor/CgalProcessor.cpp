@@ -192,6 +192,7 @@ void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * f
     OGRDataSource::DestroyDataSource( poDS );    
 }
 
+// Evaluates whether a vertex is position under, above or on (within range +/- e) the (contour) depth.
 inline int CgalProcessor::cntrEvalVertex(Vertex_handle v, double depth) {
     double e = 1e-7;
     double z = v->point().z();
@@ -204,6 +205,7 @@ inline int CgalProcessor::cntrEvalVertex(Vertex_handle v, double depth) {
         return 0;
 }
 
+// Calculates and returns the point of intersection between the (contour) depth and the edge formed by two vertices v1 and v2.
 inline PointDt CgalProcessor::cntrIntersectEdge(Vertex_handle v1, Vertex_handle v2, double depth) {
     PointDt p1 = v1->point();
     PointDt p2 = v2->point();
@@ -215,13 +217,17 @@ inline PointDt CgalProcessor::cntrIntersectEdge(Vertex_handle v1, Vertex_handle 
     return PointDt(x,y,depth);
 }
 
+// Extracts the complete set of contour lines from the this triangulation for a given isoDepth.
 void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDepth) {
     
+    // faceCache is used to ensure line segments are outputted only once. It will contain faces that have an edge exactly on the contouring depth.
     std::set<Face_handle> faceCache;
     
+    // iterate over all triangle faces
     for( Face_iterator ib = dt.finite_faces_begin();
         ib != dt.finite_faces_end(); ++ib) {
         
+        // shorthand notations for the 3 triangle vertices and their position w.r.t. the contouring depth
         Vertex_handle v0 = ib->vertex(0);
         Vertex_handle v1 = ib->vertex(1);
         Vertex_handle v2 = ib->vertex(2);
@@ -229,10 +235,13 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
         int v1_ = cntrEvalVertex(v1, isoDepth);
         int v2_ = cntrEvalVertex(v2, isoDepth);
         
-        //its on a horizontal plane
+        // following is a big if-else-if statement to identify the basic triangle configuration (wrt the contouring depth)
+        
+        //its on a horizontal plane: skip it
         if (v0_ == v1_ && v1_ == v2_)
             continue;
-        //one edge is equal to isodepth, Uses faceCache to check if this segment has already been added:
+        
+        //one edge is equal to isodepth: extract that edge. Use faceCache to check if this segment hasn't been extracted earlier.
         else if (v0_ == 0 && v1_ == 0) {
             faceCache.insert(ib);
             if( faceCache.find(ib->neighbor(2)) == faceCache.end() )
@@ -245,7 +254,8 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
             faceCache.insert(ib);
             if( faceCache.find(ib->neighbor(1)) == faceCache.end() )
                 segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v2->point(), v0->point()));
-        //there is an intersecting line segment in between the interiors of the edges:
+        
+        //there is an intersecting line segment in between the interiors of 2 edges: calculate intersection points and extract that edge
         } else if ( (v0_ == -1 && v1_ == 1 && v2_ == 1) or (v0_ == 1 && v1_ == -1 && v2_ == -1) ){
             PointDt p1 = cntrIntersectEdge(v0, v1, isoDepth);
             PointDt p2 = cntrIntersectEdge(v0, v2, isoDepth);
@@ -258,7 +268,8 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
             PointDt p1 = cntrIntersectEdge(v2, v0, isoDepth);
             PointDt p2 = cntrIntersectEdge(v2, v1, isoDepth);
             segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(p1, p2));
-        // one vertex is on the isodepth the others are above and below:
+        
+        // one vertex is on the isodepth the others are above and below: return segment, consisting out of the vertex on the isodepth and the intersection on the opposing edge
         } else if ( v0_ == 0 && v1_ != v2_ ) {
             PointDt p = cntrIntersectEdge(v1, v2, isoDepth);
             segmentVec[isoDepth].push_back(CGAL::Segment_3<K>(v0->point(), p));
@@ -272,6 +283,7 @@ void CgalProcessor::extractContour(contourSegmentVec& segmentVec, double isoDept
     }
 }
 
+// extract contour sets for a range of iso-depths
 contourSegmentVec CgalProcessor::extractContours(std::vector<double> isoDepths) {
     contourSegmentVec segmentVec;
     for(std::vector<double>::iterator iD = isoDepths.begin(); iD != isoDepths.end(); ++iD) {
@@ -319,6 +331,7 @@ void CgalProcessor::clear(){
     dt.clear();
 }
 
+// dump all triangle vertices' coordinates to plain ascii
 void CgalProcessor::dumpXYZ(const char * outFile){
     
     std::string outFile_bounds = outFile;
@@ -346,6 +359,7 @@ void CgalProcessor::dumpXYZ(const char * outFile){
     ofs.close();
 }
 
+//dump triangulation to simple wavefront .obj format
 void CgalProcessor::dumpOBJ(const char * outFile){
    
     std::ofstream ofs(outFile);
@@ -404,6 +418,7 @@ Dt& CgalProcessor::t(){
     return dtr;
 }
 
+// calculates the weight for Laplace Interpolant
 inline double CgalProcessor::LaplaceWeight(double tsx, double tsy, double ttx, double tty, double vsx, double vsy, double vtx, double vty){
     return sqrt( pow( ( vtx - vsx ),2) +
                  pow( ( vty - vsy ),2)    ) /
@@ -411,6 +426,7 @@ inline double CgalProcessor::LaplaceWeight(double tsx, double tsy, double ttx, d
                  pow( ( tty - tsy ),2)    );
 }
 
+// estimate the depth on (x,y) position of vertex v after removal of that vertex, using Linear interpolation.
 double CgalProcessor::estimateZ_LIN(Vertex_handle v) throw(OutsideConvexHullException)
 {
     PointDt p1,p2,p3,q = v->point();
@@ -433,6 +449,7 @@ double CgalProcessor::estimateZ_LIN(Vertex_handle v) throw(OutsideConvexHullExce
     return - plane.a()/plane.c() * q.x() - plane.b()/plane.c()*q.y() - plane.d()/plane.c();
 }
 
+// estimate the depth on (x,y) position of vertex v after removal of that vertex, using Natural Neighbour interpolation.
 double CgalProcessor::estimateZ_NN(Vertex_handle v) throw(OutsideConvexHullException)
 {
     typedef std::vector< std::pair< Dt::Vertex_handle, Dt::Geom_traits::FT > > Point_coordinate_vector;
@@ -463,6 +480,7 @@ double CgalProcessor::estimateZ_NN(Vertex_handle v) throw(OutsideConvexHullExcep
     return newZ;
 }
 
+// estimate the depth on (x,y) position of vertex v after removal of that vertex, using Laplace Interpolant.
 double CgalProcessor::estimateZ_LP(Vertex_handle v) throw(OutsideConvexHullException)
 {
     std::vector< double > rawWeights, zDepth;
@@ -492,6 +510,7 @@ double CgalProcessor::estimateZ_LP(Vertex_handle v) throw(OutsideConvexHullExcep
     return newZ;
 }
 
+// estimate the depth on (x,y) position of vertex v after removal of that vertex, using specified interpolation method (smoothAlg).
 double CgalProcessor::estimateZ(smoothAlg algorithm, Vertex_handle v) throw(OutsideConvexHullException)
 {
     try {
@@ -502,7 +521,7 @@ double CgalProcessor::estimateZ(smoothAlg algorithm, Vertex_handle v) throw(Outs
         else if(algorithm == LIN)
             return estimateZ_LIN(v);
         else {
-            std::cerr << "Undefined smoothing algorithm";
+            std::cerr << "Undefined interpolation algorithm";
             exit(1);
         }
     }
