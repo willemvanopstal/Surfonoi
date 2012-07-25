@@ -38,29 +38,8 @@
 		41DE68A91578E42D0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68A81578E42D0063863B /* main.cpp */; };
 		41DE68B71578E4890063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68B61578E4890063863B /* main.cpp */; };
 		41DE68C51578E4CA0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68C41578E4CA0063863B /* main.cpp */; };
-		41DE68CE157A5F8F0063863B /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CD157A5F8F0063863B /* GDAL.framework */; };
-		41DE68CF157A5FFC0063863B /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CB157A5F8A0063863B /* GEOS.framework */; };
-		41DE68D0157A60030063863B /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CD157A5F8F0063863B /* GDAL.framework */; };
-		41DE68D3157A60440063863B /* libCGAL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D1157A60440063863B /* libCGAL.dylib */; };
-		41DE68D4157A60440063863B /* libCGAL_Core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D2157A60440063863B /* libCGAL_Core.dylib */; };
-		41DE68D6157A60620063863B /* libmpfr.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D5157A60620063863B /* libmpfr.dylib */; };
-		41DE68D8157A606D0063863B /* libgmp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D7157A606D0063863B /* libgmp.dylib */; };
-		41DE68DA157A60850063863B /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D9157A60850063863B /* libboost_thread-mt.dylib */; };
-		41DE68DD157A620E0063863B /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CD157A5F8F0063863B /* GDAL.framework */; };
-		41DE68DE157A62150063863B /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CB157A5F8A0063863B /* GEOS.framework */; };
 		41DE68E3157A62C10063863B /* CgalProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68E0157A62C10063863B /* CgalProcessor.cpp */; };
 		41DE68E4157A62C10063863B /* CgalProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68E0157A62C10063863B /* CgalProcessor.cpp */; };
-		41DE68E5157A634B0063863B /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D9157A60850063863B /* libboost_thread-mt.dylib */; };
-		41DE68E6157A634D0063863B /* libgmp.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D7157A606D0063863B /* libgmp.dylib */; };
-		41DE68E7157A63520063863B /* libmpfr.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D5157A60620063863B /* libmpfr.dylib */; };
-		41DE68E8157A63540063863B /* libCGAL.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D1157A60440063863B /* libCGAL.dylib */; };
-		41DE68E9157A63560063863B /* libCGAL_Core.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68D2157A60440063863B /* libCGAL_Core.dylib */; };
-		41DE68EA157A635E0063863B /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CD157A5F8F0063863B /* GDAL.framework */; };
-		41DE68EB157A63610063863B /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CB157A5F8A0063863B /* GEOS.framework */; };
-		41DE68ED157A64710063863B /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68EC157A64710063863B /* PROJ.framework */; };
-		41DE68EE157A64C50063863B /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68EC157A64710063863B /* PROJ.framework */; };
-		41DE68EF157A64D10063863B /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68CD157A5F8F0063863B /* GDAL.framework */; };
-		41DE68F0157A64F60063863B /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41DE68EC157A64710063863B /* PROJ.framework */; };
 		41DE68F3157A689C0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68501578C5E70063863B /* main.cpp */; };
 /* End PBXBuildFile section */
 
@@ -208,17 +187,9 @@
 		41DE68B61578E4890063863B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		41DE68C11578E4CA0063863B /* smoothdens */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = smoothdens; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DE68C41578E4CA0063863B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		41DE68CB157A5F8A0063863B /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = Library/Frameworks/GEOS.framework; sourceTree = SDKROOT; };
-		41DE68CD157A5F8F0063863B /* GDAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GDAL.framework; path = Library/Frameworks/GDAL.framework; sourceTree = SDKROOT; };
-		41DE68D1157A60440063863B /* libCGAL.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCGAL.dylib; path = usr/local/lib/libCGAL.dylib; sourceTree = SDKROOT; };
-		41DE68D2157A60440063863B /* libCGAL_Core.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCGAL_Core.dylib; path = usr/local/lib/libCGAL_Core.dylib; sourceTree = SDKROOT; };
-		41DE68D5157A60620063863B /* libmpfr.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpfr.dylib; path = usr/local/lib/libmpfr.dylib; sourceTree = SDKROOT; };
-		41DE68D7157A606D0063863B /* libgmp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.dylib; path = usr/local/lib/libgmp.dylib; sourceTree = SDKROOT; };
-		41DE68D9157A60850063863B /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "usr/local/lib/libboost_thread-mt.dylib"; sourceTree = SDKROOT; };
 		41DE68E0157A62C10063863B /* CgalProcessor.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CgalProcessor.cpp; sourceTree = "<group>"; };
 		41DE68E1157A62C10063863B /* CgalProcessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CgalProcessor.h; sourceTree = "<group>"; };
 		41DE68E2157A62C10063863B /* CgalType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CgalType.h; sourceTree = "<group>"; };
-		41DE68EC157A64710063863B /* PROJ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PROJ.framework; path = Library/Frameworks/PROJ.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,8 +197,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68D0157A60030063863B /* GDAL.framework in Frameworks */,
-				41DE68CF157A5FFC0063863B /* GEOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,7 +204,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68ED157A64710063863B /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -243,7 +211,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68EE157A64C50063863B /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +218,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68EF157A64D10063863B /* GDAL.framework in Frameworks */,
-				41DE68F0157A64F60063863B /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,13 +225,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68DE157A62150063863B /* GEOS.framework in Frameworks */,
-				41DE68DD157A620E0063863B /* GDAL.framework in Frameworks */,
-				41DE68DA157A60850063863B /* libboost_thread-mt.dylib in Frameworks */,
-				41DE68D8157A606D0063863B /* libgmp.dylib in Frameworks */,
-				41DE68D6157A60620063863B /* libmpfr.dylib in Frameworks */,
-				41DE68D3157A60440063863B /* libCGAL.dylib in Frameworks */,
-				41DE68D4157A60440063863B /* libCGAL_Core.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +232,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68CE157A5F8F0063863B /* GDAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,13 +239,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DE68EA157A635E0063863B /* GDAL.framework in Frameworks */,
-				41DE68EB157A63610063863B /* GEOS.framework in Frameworks */,
-				41DE68E8157A63540063863B /* libCGAL.dylib in Frameworks */,
-				41DE68E9157A63560063863B /* libCGAL_Core.dylib in Frameworks */,
-				41DE68E5157A634B0063863B /* libboost_thread-mt.dylib in Frameworks */,
-				41DE68E6157A634D0063863B /* libgmp.dylib in Frameworks */,
-				41DE68E7157A63520063863B /* libmpfr.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,14 +250,6 @@
 			children = (
 				41DE68DF157A62C10063863B /* CgalProcessor */,
 				41DE68471578C53E0063863B /* include */,
-				41DE68D9157A60850063863B /* libboost_thread-mt.dylib */,
-				41DE68D7157A606D0063863B /* libgmp.dylib */,
-				41DE68D5157A60620063863B /* libmpfr.dylib */,
-				41DE68D1157A60440063863B /* libCGAL.dylib */,
-				41DE68D2157A60440063863B /* libCGAL_Core.dylib */,
-				41DE68CD157A5F8F0063863B /* GDAL.framework */,
-				41DE68CB157A5F8A0063863B /* GEOS.framework */,
-				41DE68EC157A64710063863B /* PROJ.framework */,
 				41DE684F1578C5E70063863B /* doublebuffer */,
 				41DE68601578E23C0063863B /* prefilter */,
 				41DE68711578E2C50063863B /* gridfilter */,
@@ -675,7 +617,9 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks/;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
@@ -686,14 +630,16 @@
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					include/,
 					CgalProcessor/,
+					/usr/local/include/,
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -708,20 +654,24 @@
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CXX0X_EXTENSIONS = YES;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = /Library/Frameworks/;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
 					include/,
 					CgalProcessor/,
+					/usr/local/include/,
 				);
+				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
