@@ -27,6 +27,27 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		4105B90A15C942D3000BCE6C /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90915C942D3000BCE6C /* GEOS.framework */; };
+		4105B90C15C943C3000BCE6C /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		4105B90E15C943F0000BCE6C /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90D15C943F0000BCE6C /* PROJ.framework */; };
+		4105B90F15C9440E000BCE6C /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90D15C943F0000BCE6C /* PROJ.framework */; };
+		4105B91015C9441F000BCE6C /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		4105B91115C94421000BCE6C /* PROJ.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90D15C943F0000BCE6C /* PROJ.framework */; };
+		4105B91215C94435000BCE6C /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		4105B91315C94437000BCE6C /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90915C942D3000BCE6C /* GEOS.framework */; };
+		4109A95E15C9459500833C24 /* libCGAL_Core.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95C15C9459500833C24 /* libCGAL_Core.9.0.0.dylib */; };
+		4109A95F15C9459500833C24 /* libCGAL.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95D15C9459500833C24 /* libCGAL.9.0.0.dylib */; };
+		4109A96315C946DC00833C24 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */; };
+		4109A96415C946DC00833C24 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96115C946DB00833C24 /* libgmp.10.dylib */; };
+		4109A96515C946DC00833C24 /* libmpfr.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96215C946DB00833C24 /* libmpfr.4.dylib */; };
+		4109A96615C946FC00833C24 /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		4109A96715C9471000833C24 /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		4109A96815C9471200833C24 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90915C942D3000BCE6C /* GEOS.framework */; };
+		4109A96915C9471400833C24 /* libCGAL.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95D15C9459500833C24 /* libCGAL.9.0.0.dylib */; };
+		4109A96A15C9471600833C24 /* libCGAL_Core.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95C15C9459500833C24 /* libCGAL_Core.9.0.0.dylib */; };
+		4109A96B15C9471A00833C24 /* libmpfr.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96215C946DB00833C24 /* libmpfr.4.dylib */; };
+		4109A96C15C9472100833C24 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96115C946DB00833C24 /* libgmp.10.dylib */; };
+		4109A96D15C9472400833C24 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */; };
 		41DE68591578C84F0063863B /* DoubleBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68571578C84F0063863B /* DoubleBuffer.cpp */; };
 		41DE68621578E23C0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68611578E23C0063863B /* main.cpp */; };
 		41DE686A1578E2920063863B /* Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68681578E2920063863B /* Filter.cpp */; };
@@ -162,6 +183,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4105B90915C942D3000BCE6C /* GEOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GEOS.framework; path = ../../../../Library/Frameworks/GEOS.framework; sourceTree = "<group>"; };
+		4105B90B15C943C3000BCE6C /* GDAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GDAL.framework; path = ../../../../Library/Frameworks/GDAL.framework; sourceTree = "<group>"; };
+		4105B90D15C943F0000BCE6C /* PROJ.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PROJ.framework; path = ../../../../Library/Frameworks/PROJ.framework; sourceTree = "<group>"; };
+		4109A95C15C9459500833C24 /* libCGAL_Core.9.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCGAL_Core.9.0.0.dylib; path = ../../../../usr/local/lib/libCGAL_Core.9.0.0.dylib; sourceTree = "<group>"; };
+		4109A95D15C9459500833C24 /* libCGAL.9.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libCGAL.9.0.0.dylib; path = ../../../../usr/local/lib/libCGAL.9.0.0.dylib; sourceTree = "<group>"; };
+		4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../usr/local/Cellar/boost/1.49.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
+		4109A96115C946DB00833C24 /* libgmp.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.10.dylib; path = ../../../../usr/local/Cellar/gmp/5.0.5/lib/libgmp.10.dylib; sourceTree = "<group>"; };
+		4109A96215C946DB00833C24 /* libmpfr.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpfr.4.dylib; path = ../../../../usr/local/Cellar/mpfr/3.1.0/lib/libmpfr.4.dylib; sourceTree = "<group>"; };
 		41DE68471578C53E0063863B /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		41DE684D1578C5E70063863B /* doublebuffer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = doublebuffer; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DE68501578C5E70063863B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -197,6 +226,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4105B90C15C943C3000BCE6C /* GDAL.framework in Frameworks */,
+				4105B90A15C942D3000BCE6C /* GEOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4105B90E15C943F0000BCE6C /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4105B90F15C9440E000BCE6C /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,6 +251,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4105B91015C9441F000BCE6C /* GDAL.framework in Frameworks */,
+				4105B91115C94421000BCE6C /* PROJ.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +260,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4109A96315C946DC00833C24 /* libboost_thread-mt.dylib in Frameworks */,
+				4109A96415C946DC00833C24 /* libgmp.10.dylib in Frameworks */,
+				4109A96515C946DC00833C24 /* libmpfr.4.dylib in Frameworks */,
+				4109A95E15C9459500833C24 /* libCGAL_Core.9.0.0.dylib in Frameworks */,
+				4109A95F15C9459500833C24 /* libCGAL.9.0.0.dylib in Frameworks */,
+				4105B91215C94435000BCE6C /* GDAL.framework in Frameworks */,
+				4105B91315C94437000BCE6C /* GEOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,6 +274,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4109A96615C946FC00833C24 /* GDAL.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +282,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4109A96715C9471000833C24 /* GDAL.framework in Frameworks */,
+				4109A96815C9471200833C24 /* GEOS.framework in Frameworks */,
+				4109A96915C9471400833C24 /* libCGAL.9.0.0.dylib in Frameworks */,
+				4109A96A15C9471600833C24 /* libCGAL_Core.9.0.0.dylib in Frameworks */,
+				4109A96B15C9471A00833C24 /* libmpfr.4.dylib in Frameworks */,
+				4109A96C15C9472100833C24 /* libgmp.10.dylib in Frameworks */,
+				4109A96D15C9472400833C24 /* libboost_thread-mt.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +298,14 @@
 		41DE68241578BB530063863B = {
 			isa = PBXGroup;
 			children = (
+				4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */,
+				4109A96115C946DB00833C24 /* libgmp.10.dylib */,
+				4109A96215C946DB00833C24 /* libmpfr.4.dylib */,
+				4109A95C15C9459500833C24 /* libCGAL_Core.9.0.0.dylib */,
+				4109A95D15C9459500833C24 /* libCGAL.9.0.0.dylib */,
+				4105B90D15C943F0000BCE6C /* PROJ.framework */,
+				4105B90B15C943C3000BCE6C /* GDAL.framework */,
+				4105B90915C942D3000BCE6C /* GEOS.framework */,
 				41DE68DF157A62C10063863B /* CgalProcessor */,
 				41DE68471578C53E0063863B /* include */,
 				41DE684F1578C5E70063863B /* doublebuffer */,
@@ -613,7 +671,7 @@
 		41DE68371578BB530063863B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -640,7 +698,7 @@
 					/usr/local/include/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
@@ -650,7 +708,7 @@
 		41DE68381578BB530063863B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
+				ALWAYS_SEARCH_USER_PATHS = YES;
 				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -672,7 +730,7 @@
 					/usr/local/include/,
 				);
 				LIBRARY_SEARCH_PATHS = /usr/local/lib/;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				SDKROOT = macosx;
 				VALID_ARCHS = x86_64;
 			};
@@ -741,6 +799,12 @@
 		41DE68AD1578E42E0063863B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.49.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -748,6 +812,12 @@
 		41DE68AE1578E42E0063863B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.49.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -769,6 +839,12 @@
 		41DE68C91578E4CA0063863B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/boost/1.49.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -776,6 +852,12 @@
 		41DE68CA1578E4CA0063863B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/boost/1.49.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
