@@ -599,12 +599,17 @@ void CgalProcessor::densify(smoothAlg algorithm)
                             
     for (pfPair::iterator p = newPoints.begin(); p != newPoints.end(); ++p){
         
+    try{
         Vertex_handle v = dt.insert(p->first, p->second);
         
         double newZ = estimateZ(algorithm, v);
         
         v->set_point(PointDt(v->point().x(), v->point().y(), newZ ));
+    } catch (OutsideConvexHullException& e) {
+        // do somethin
     }
+    }
+    std::cout << "Densification success" << std::endl;
 }
 
 double CgalProcessor::vertError(smoothAlg algorithm, Vertex_handle v) throw(OutsideConvexHullException)
