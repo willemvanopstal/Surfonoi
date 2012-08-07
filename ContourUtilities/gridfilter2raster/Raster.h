@@ -20,7 +20,7 @@
 #include <gdal/cpl_conv.h>
 #include <gdal/ogr_spatialref.h>
 
-enum alg {AVG,MIN,MAX};
+enum alg {AVG,MIN,MAX,CNT};
 //enum {buffN = 4*16184};
 class Raster
 {
@@ -28,7 +28,7 @@ public:
     Raster(const char* inputFile, const char* WKGCS, double cellsize);
     void compute(float val[], int16_t cnt[], alg);
     size_t getCoord(double &x, double &y);
-    void write(float val[], const char* outFile);
+    void write(alg a, void * dataPtr, const char* outFile);
 
     double cellSize, minx, miny, maxx, maxy;
     int dimx, dimy;
@@ -36,8 +36,9 @@ public:
 private:
     void getBounds();
     void avg(double &x, double &y, double &val, float [], int16_t []);
-    void min(double &x, double &y, double &val, float [], int16_t []);
-    void max(double &x, double &y, double &val, float [], int16_t []);
+    void min(double &x, double &y, double &val, float []);
+    void max(double &x, double &y, double &val, float []);
+    void cnt(double &x, double &y, int16_t []);
     std::ifstream ifs;
     OGRSpatialReference oSRS;
 //    char _buffer[buffN];

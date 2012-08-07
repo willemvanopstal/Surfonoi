@@ -26,6 +26,7 @@ int main (int argc, const char * argv[])
 		allowed.push_back("min");
 		allowed.push_back("max");
 		allowed.push_back("avg");
+		allowed.push_back("cnt");
 		TCLAP::ValuesConstraint<string> allowedVals( allowed );
         
 		TCLAP::ValueArg<string> methodArg("m","method","method to use (min, max or avg)",true,"avg",&allowedVals, cmd);
@@ -45,13 +46,17 @@ int main (int argc, const char * argv[])
         
         if (methodArg.getValue()=="min") {
             r.compute(val, cnt, MIN);
+            r.write(MIN, val, outputArg.getValue().c_str());
         } else if (methodArg.getValue()=="max") {
             r.compute(val, cnt, MAX);
+            r.write(MAX, val, outputArg.getValue().c_str());
         } else if (methodArg.getValue()=="avg") {
             r.compute(val, cnt, AVG);
+            r.write(AVG, val, outputArg.getValue().c_str());
+        } else if (methodArg.getValue()=="cnt") {
+            r.compute(val, cnt, CNT);
+            r.write(CNT, cnt, outputArg.getValue().c_str());
         }
-        
-        r.write(val, outputArg.getValue().c_str());
         
         delete cnt;
         delete val;        

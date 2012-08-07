@@ -58,22 +58,24 @@ void Raster::getBounds()
 
 }
 
-void Raster::compute(float val[], int16_t cnt[], alg a)
+void Raster::compute(float val[], int16_t count[], alg a)
 {
     noDataVal = a==MIN ? 99999 : -99999;
     std::fill(val+0, val+dimx*dimy, noDataVal);
-    std::fill(cnt+0, cnt+dimx*dimy, 0);
+    std::fill(count+0, count+dimx*dimy, 0);
     std::cout << "Filled arrays" <<std::endl;
 
     double x, y, z;
     while (ifs >> x >> y >> z)
     {
         if (a==MIN) {
-            min(x,y,z, val, cnt);
+            min(x,y,z, val);
         } else if (a==MAX) {
-            max(x,y,z, val, cnt);
+            max(x,y,z, val);
         } else if (a==AVG) {
-            avg(x,y,z, val, cnt);
+            avg(x,y,z, val, count);
+        } else if (a==CNT) {
+            cnt(x,y, count);
         }
         
     }
@@ -89,17 +91,21 @@ inline void Raster::avg(double &x, double &y, double &val, float vals[], int16_t
     ++cnt[c];
 }
 
-inline void Raster::min(double &x, double &y, double &val, float vals[], int16_t cnt[])
+inline void Raster::min(double &x, double &y, double &val, float vals[])
 {
     size_t c = getCoord(x,y);
     if (vals[c]>val) vals[c] = val;
-    ++cnt[c];
 }
 
-inline void Raster::max(double &x, double &y, double &val, float vals[], int16_t cnt[])
+inline void Raster::max(double &x, double &y, double &val, float vals[])
 {
     size_t c = getCoord(x,y);
     if (vals[c]<val) vals[c] = val;
+}
+
+inline void Raster::cnt(double &x, double &y, int16_t cnt[])
+{
+    size_t c = getCoord(x,y);
     ++cnt[c];
 }
 
@@ -111,30 +117,36 @@ size_t Raster::getCoord(double &x, double &y)
     return r * dimx + c;
 }
 
-void Raster::write(float val[], const char* outFile)
+void Raster::write(alg a, void * dataPtr, const char* outFile)
 {
-    GDALDriver *poDriver = GetGDALDriverManager()->GetDriverByName("GTiff");    
+    GDALDriver *poDriver = GetGDALDriverManager()->GetDriverByName("GTiff");
     GDALDataset *poDstDS;
+    GDALDataType dataType;
+
+    if (a == CNT)
+        dataType = GDT_UInt16;
+    else
+        dataType = GDT_Float32;
     
     char **papszOptions = NULL;
-    poDstDS = poDriver->Create( outFile, dimx, dimy, 1, GDT_Float32, 
+    poDstDS = poDriver->Create( outFile, dimx, dimy, 1, dataType,
                                papszOptions );
     double adfGeoTransform[6] = { minx, cellSize, 0, miny, 0, cellSize };
     GDALRasterBand *poBand;
     
     poDstDS->SetGeoTransform( adfGeoTransform );
     
-//    std::cout << oSRS.SetWellKnownGeogCS( WKGCS );
-//    std::cout << pszSRS_WKT <<std::endl;
-
+    //    std::cout << oSRS.SetWellKnownGeogCS( WKGCS );
+    //    std::cout << pszSRS_WKT <<std::endl;
+    
     char *pszSRS_WKT = NULL;
     oSRS.exportToWkt( &pszSRS_WKT );
     poDstDS->SetProjection( pszSRS_WKT );
     CPLFree( pszSRS_WKT );
     
     poBand = poDstDS->GetRasterBand(1);
-    poBand->RasterIO( GF_Write, 0, 0, dimx, dimy, 
-                     val, dimx, dimy, GDT_Float32, 0, 0 );    
+    poBand->RasterIO( GF_Write, 0, 0, dimx, dimy,
+                     dataPtr, dimx, dimy, dataType, 0, 0 );
     poBand->SetNoDataValue(noDataVal);
     /* Once we're done, close properly the dataset */
     GDALClose( (GDALDatasetH) poDstDS );
