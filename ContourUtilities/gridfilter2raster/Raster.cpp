@@ -60,7 +60,13 @@ void Raster::getBounds()
 
 void Raster::compute(float val[], int16_t count[], alg a)
 {
-    noDataVal = a==MIN ? 99999 : -99999;
+    if (a==MIN)
+        noDataVal = 99999;
+    else if (a==CNT)
+        noDataVal = 0;
+    else
+        noDataVal = -99999;
+    
     std::fill(val+0, val+dimx*dimy, noDataVal);
     std::fill(count+0, count+dimx*dimy, 0);
     std::cout << "Filled arrays" <<std::endl;
