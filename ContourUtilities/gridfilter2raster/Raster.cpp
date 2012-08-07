@@ -111,8 +111,8 @@ inline void Raster::cnt(double &x, double &y, int16_t cnt[])
 
 size_t Raster::getCoord(double &x, double &y)
 {
-    size_t r = static_cast<size_t>( round((y-miny) / cellSize) );
-    size_t c = static_cast<size_t>( round((x-minx) / cellSize) );
+    size_t r = static_cast<size_t>( floor((y-miny) / cellSize) );
+    size_t c = static_cast<size_t>( floor((x-minx) / cellSize) );
     
     return r * dimx + c;
 }
