@@ -48,8 +48,14 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
     
     std::ofstream ofs_bounds(outFile_bounds.c_str());
     ofs_bounds <<std::setprecision(2)<<std::fixed << minx << std::endl << maxx <<
-    std::endl << miny << std::endl << maxy << std::endl << minz << std::endl << maxz;
+    std::endl << miny << std::endl << maxy << std::endl;
     
+    if(flipSignOnZ)
+        ofs_bounds << -maxz << std::endl << -minz << std::endl;
+    else
+        ofs_bounds << minz << std::endl << maxz << std::endl;
+    
+    // set precision of output file
     ofs <<std::setprecision(2)<<std::fixed;
 }
 
