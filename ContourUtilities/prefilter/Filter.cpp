@@ -17,8 +17,9 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
         exit(1);
     }
     
+    findBounds();
+    
     if(projectFromWGS84) {
-        findBounds();
         
         if (!(pj_latlong = pj_init_plus("+init=epsg:4326")) )
             exit(1);
@@ -41,8 +42,15 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
         projectXY(maxx, maxy);
     }
     
-    ofs <<std::setprecision(2)<<std::fixed;
+    // write .bounds file
+    std::string outFile_bounds = outFile;
+    outFile_bounds.append(".bounds");
     
+    std::ofstream ofs_bounds(outFile_bounds.c_str());
+    ofs_bounds <<std::setprecision(2)<<std::fixed << minx << std::endl << maxx <<
+    std::endl << miny << std::endl << maxy << std::endl << minz << std::endl << maxz;
+    
+    ofs <<std::setprecision(2)<<std::fixed;
 }
 
 void Filter::findBounds()

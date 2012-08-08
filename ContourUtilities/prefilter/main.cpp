@@ -15,7 +15,7 @@ int main (int argc, const char * argv[])
 {
     try {
         
-        TCLAP::CmdLine cmd("Keep every nth point or keep a specific percentage randomly.", ' ', "none", false);
+        TCLAP::CmdLine cmd("Keep every nth point, keep a specific percentage randomly or simply copy all points. Creates a .bounds file with the bounding box values.", ' ', "none", false);
 
         TCLAP::ValueArg<int> percentageArg("e","percentage","Keep percentage of the points randmonly",false,10,"int");
         TCLAP::ValueArg<int> nthArg("n","nth","Keep every nth point",false,10,"int");

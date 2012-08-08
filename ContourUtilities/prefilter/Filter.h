@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <sstream>
+#include <string>
 #include <iomanip>
 
 class Filter
