@@ -331,6 +331,64 @@ void CgalProcessor::clear(){
     dt.clear();
 }
 
+void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg alg){
+
+    float noDataVal = 99999;
+    size_t dim_x = static_cast<size_t> ((maxx-minx)/cellSize + 1);
+    size_t dim_y = static_cast<size_t> ((maxy-miny)/cellSize + 1);
+    
+    float *val; val = new float[dim_x*dim_y];
+    
+    for (size_t i=0; i<dim_x; ++i) {
+        for (size_t j=0; j<dim_y; ++j) {
+            double x_coord = minx + (i+0.5)*cellSize;
+            double y_coord = maxy - (j+0.5)*cellSize;
+            
+            double value;
+            try{
+                value = estimateZ_LP(PointDt(x_coord,y_coord,0));
+            } catch (OutsideConvexHullException& e) {
+                value = noDataVal;
+            }
+            val[j*dim_x+i] = static_cast<float> (value);
+            
+        }
+    }
+    
+    // here comes some GDAL stuff
+    GDALAllRegister();
+    
+    GDALDriver *poDriver = GetGDALDriverManager()->GetDriverByName("GTiff");
+    GDALDataset *poDstDS;
+    GDALDataType dataType;
+    
+    dataType = GDT_Float32;
+    
+    char **papszOptions = NULL;
+    poDstDS = poDriver->Create( outFile, dim_x, dim_y, 1, dataType,
+                               papszOptions );
+    double adfGeoTransform[6] = { minx, cellSize, 0, miny, 0, cellSize };
+    GDALRasterBand *poBand;
+    
+    poDstDS->SetGeoTransform( adfGeoTransform );
+    
+    //    std::cout << oSRS.SetWellKnownGeogCS( WKGCS );
+    //    std::cout << pszSRS_WKT <<std::endl;
+    
+    char *pszSRS_WKT = NULL;
+//    oSRS.exportToWkt( &pszSRS_WKT );
+//    poDstDS->SetProjection( pszSRS_WKT );
+    CPLFree( pszSRS_WKT );
+    
+    poBand = poDstDS->GetRasterBand(1);
+    poBand->RasterIO( GF_Write, 0, 0, dim_x, dim_y,
+                     val, dim_x, dim_y, dataType, 0, 0 );
+    poBand->SetNoDataValue(noDataVal);
+    /* Once we're done, close properly the dataset */
+    GDALClose( (GDALDatasetH) poDstDS );
+    
+}
+
 // dump all triangle vertices' coordinates to plain ascii
 void CgalProcessor::dumpXYZ(const char * outFile){
     
@@ -478,6 +536,23 @@ double CgalProcessor::estimateZ_NN(Vertex_handle v) throw(OutsideConvexHullExcep
             newZ += ( it->first->point().z() * (it->second/result.second) );
 
     return newZ;
+}
+
+// estimate the depth on (x,y) position of vertex v, using Laplace Interpolant.
+double CgalProcessor::estimateZ_LP(PointDt p) throw(OutsideConvexHullException)
+{
+    try {
+        //temporarily insert vertex at p:
+        Vertex_handle v = dt.insert(p);
+        //compute LP interpolant:
+        double newZ = estimateZ_LP(v);
+        //and remove the vertex again:
+        dt.remove(v);
+        
+        return newZ;
+    } catch (OutsideConvexHullException& e) {
+        throw e;
+    }
 }
 
 // estimate the depth on (x,y) position of vertex v after removal of that vertex, using Laplace Interpolant.

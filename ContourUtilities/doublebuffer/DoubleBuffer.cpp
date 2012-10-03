@@ -16,7 +16,6 @@ DoubleBuffer::DoubleBuffer(const char* inputFile, const char* outputFile, const 
 }
 
 DoubleBuffer::~DoubleBuffer() {
-
     OGRDataSource::DestroyDataSource( poDstDS );
 }
 

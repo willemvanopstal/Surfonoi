@@ -9,6 +9,11 @@
 
 //OGR
 #include <gdal/ogrsf_frmts.h>
+//GDAL
+#include <gdal/gdal_priv.h>
+#include <gdal/cpl_string.h>
+#include <gdal/cpl_conv.h>
+#include <gdal/ogr_spatialref.h>
 //GEOS
 #include <geos/geom/Coordinate.h>
 #include <geos/geom/Point.h>
@@ -62,6 +67,7 @@ private:
     inline PointDt cntrIntersectEdge(Vertex_handle v1, Vertex_handle v2, double depth);
     void extractContour(contourSegmentVec& segmentVec, double isoDepth);
     
+    double estimateZ_LP(PointDt) throw(OutsideConvexHullException);
     double estimateZ_LP(Vertex_handle) throw(OutsideConvexHullException);
     double estimateZ_NN(Vertex_handle) throw(OutsideConvexHullException);
     double estimateZ_LIN(Vertex_handle) throw(OutsideConvexHullException);
@@ -79,6 +85,7 @@ public:
     void clear();
 
     // export data
+    void toRaster(const char * outFile, double cellSize, smoothAlg alg);
     void dumpOBJ(const char * outfile);
     void dumpXYZ(const char * outFile);
     contourSegmentVec extractContours(std::vector<double> isoDepths);

@@ -6,7 +6,7 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-// (see http://trac.osgeo.org/geos/ticket/548 ) Patch is also in GEOS trunk now
+// (see http://trac.osgeo.org/geos/ticket/548 ) Patch is in GEOS trunk now and planned to be in GEOS 3.4
 //#define WITHGEOSBIL
 
 #ifndef doublebuffer_DoubleBuffer_h
