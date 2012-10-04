@@ -16,7 +16,7 @@ int main(int argc, const char * argv[])
         
         
         vector<string> allowed;
-//		allowed.push_back("NN");
+		allowed.push_back("NN");
 		allowed.push_back("LP");
 		TCLAP::ValuesConstraint<string> allowedVals( allowed );
 		TCLAP::ValueArg<string> methodArg("m","method","interpolation method to use (Natural Neighbour or LaPlace interpolant)",false,"LP",&allowedVals, cmd);

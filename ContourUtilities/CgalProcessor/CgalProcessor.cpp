@@ -346,7 +346,7 @@ void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg al
             
             double value;
             try{
-                value = estimateZ_LP(PointDt(x_coord,y_coord,0));
+                value = estimateZ(alg, PointDt(x_coord,y_coord,0));
             } catch (OutsideConvexHullException& e) {
                 value = noDataVal;
             }
@@ -538,18 +538,24 @@ double CgalProcessor::estimateZ_NN(Vertex_handle v) throw(OutsideConvexHullExcep
     return newZ;
 }
 
+
 // estimate the depth on (x,y) position of vertex v, using Laplace Interpolant.
-double CgalProcessor::estimateZ_LP(PointDt p) throw(OutsideConvexHullException)
+double CgalProcessor::estimateZ(smoothAlg alg, PointDt p) throw(OutsideConvexHullException)
 {
     try {
         //temporarily insert vertex at p:
         Vertex_handle v = dt.insert(p);
-        //compute LP interpolant:
-        double newZ = estimateZ_LP(v);
+        
+        double newZ;
+        
+        // estimate value
+        newZ = estimateZ(alg, v);
+        
         //and remove the vertex again:
         dt.remove(v);
         
         return newZ;
+        
     } catch (OutsideConvexHullException& e) {
         throw e;
     }
