@@ -43,19 +43,42 @@ void CgalProcessor::printTags(){
     std::cout << "end" << std::endl;
 }
 
-void CgalProcessor::markBigTriangles(double maxEdgeLength){
+void CgalProcessor::markBigTriangles_mel(double maxEdgeLength){
 
     for (Dt::All_edges_iterator ei = dt.all_edges_begin(); ei != dt.all_edges_end(); ++ei) {
-        Point3D p1 = ei->first->vertex(ei->first->cw(ei->second))->point();
-        Point3D p2 = ei->first->vertex(ei->first->ccw(ei->second))->point();
-        double edgeLength = CGAL::squared_distance(p1, p2);
-//        std::cout << edgeLength << std::endl;
-        if (edgeLength > maxEdgeLength){
-            ei->first->info().tooBig = true;
-            ei->first->neighbor(ei->second)->info().tooBig = true;
+        // check if this face hasnt been marked as too big already
+        if (ei->first->info().tooBig == false) {
+            // compute edge length
+            Point3D p1 = ei->first->vertex(ei->first->cw(ei->second))->point();
+            Point3D p2 = ei->first->vertex(ei->first->ccw(ei->second))->point();
+            double edgeLength = CGAL::squared_distance(p1, p2);
+    //        std::cout << edgeLength << std::endl;
+            // compare to userdefined maximum and if needed mark this face
+            if (edgeLength > maxEdgeLength){
+                ei->first->info().tooBig = true;
+                ei->first->neighbor(ei->second)->info().tooBig = true;
+            }
         }
     }
     
+}
+
+void CgalProcessor::markBigTriangles_mta(double maxDoubleArea){
+    // iterate over all triangle faces
+    for( Face_iterator ib = dt.finite_faces_begin();
+        ib != dt.finite_faces_end(); ++ib) {
+
+        // shorthand notations for the 3 triangle vertices and their position w.r.t. the contouring depth
+        PointDt p1 = ib->vertex(0)->point();
+        PointDt p2 = ib->vertex(1)->point();
+        PointDt p3 = ib->vertex(2)->point();
+        
+        double doubleArea = p1.x()*p2.y() + p1.y()*p3.x() + p2.x()*p3.y() - p1.x()*p3.y() - p1.y()*p2.x() - p2.y()*p3.x();
+        
+        if (doubleArea > maxDoubleArea){
+            ib->info().tooBig = true;
+        }
+    }
 }
 
 void CgalProcessor::saveContourShp(std::vector<double> isoDepths, const char * fileOut){
@@ -668,13 +691,13 @@ void CgalProcessor::smooth(smoothAlg algorithm, bool upOnly)
 //    }
 //}
 
-void CgalProcessor::densify(smoothAlg algorithm)
+void CgalProcessor::densify(smoothAlg algorithm, bool tooBigOnly)
 {
     typedef std::vector < std::pair< PointDt, Dt::Face_handle > > pfPair;
     pfPair newPoints;
     for( Dt::Finite_faces_iterator ib = dt.finite_faces_begin();
         ib != dt.finite_faces_end(); ++ib) {
-        if (!ib->info().tooBig)
+        if ((ib->info().tooBig && tooBigOnly) || (!tooBigOnly) )
             newPoints.push_back(std::make_pair(dt.circumcenter(ib), ib) );
     }
                             
