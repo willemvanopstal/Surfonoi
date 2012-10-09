@@ -10,10 +10,10 @@ int main(int argc, const char * argv[])
         
         TCLAP::CmdLine cmd("Smooth marked region in input points", ' ', "none", false);
         
-        //TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",true,2,"int", cmd);
-        //TCLAP::ValueArg<int> dArg("d","densify","Number of times to densify",true,2,"int", cmd);
+        TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",false,0,"int", cmd);
+        TCLAP::ValueArg<int> dArg("d","densify","Number of times to densify",false,0,"int", cmd);
         TCLAP::SwitchArg uSwitch("u","unsafe","Smooth without attempting to respect bathymetric safety constraint", cmd, false);
-        //TCLAP::ValueArg<double> bArg("b","bigonly","Only densify areas bigger than specified area",false,2,"double", cmd);
+        TCLAP::ValueArg<double> bArg("b","bigonly","Only densify areas bigger than specified area",false,2,"double", cmd);
         
         vector<string> allowed;
 		allowed.push_back("NN");
@@ -41,10 +41,10 @@ int main(int argc, const char * argv[])
 //            cp.markBigTriangles_mta(dArg.getValue());
 //        }
         
-//        for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
-//        for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg, dArg.isSet());
-        
+        for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
         cp.smoothRegion(alg, !uSwitch.getValue());
+        for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg, bArg.isSet());
+        
         cp.saveContourShp(levelArg.getValue(), outputArg1.getValue().c_str());
         cp.toRaster(outputArg2.getValue().c_str(), csArg.getValue(), alg);
         

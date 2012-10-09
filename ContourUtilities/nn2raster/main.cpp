@@ -17,8 +17,9 @@ int main(int argc, const char * argv[])
         vector<string> allowed;
 		allowed.push_back("NN");
 		allowed.push_back("LP");
+		allowed.push_back("LIN");
 		TCLAP::ValuesConstraint<string> allowedVals( allowed );
-		TCLAP::ValueArg<string> methodArg("m","method","interpolation method to use (Natural Neighbour or LaPlace interpolant)",false,"LP",&allowedVals, cmd);
+		TCLAP::ValueArg<string> methodArg("m","method","interpolation method to use (Natural Neighbour, LaPlace interpolant or LINear)",false,"LP",&allowedVals, cmd);
         
 //        TCLAP::MultiArg<double> levelArg("l", "level", "add a level to contour", true, "double", cmd );
         TCLAP::ValueArg<double> csArg("c","cellsize","Cellsize to be used for output raster, units as in source",true,10,"double", cmd);
@@ -33,8 +34,8 @@ int main(int argc, const char * argv[])
             alg = NN;
         else if (methodArg.getValue() == "LP")
             alg = LP;
-        else if (methodArg.getValue() == "TIN")
-            alg = TIN;
+        else if (methodArg.getValue() == "LIN")
+            alg = LIN;
         
         CgalProcessor cp(inputArg.getValue().c_str());
         for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
