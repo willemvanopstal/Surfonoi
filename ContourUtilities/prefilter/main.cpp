@@ -28,6 +28,7 @@ int main (int argc, const char * argv[])
         
         cmd.xorAdd(copymodes);
 
+        TCLAP::ValueArg<int> precArg("x","precision","Decimal precision in output file",false,2,"int",cmd);
 
         TCLAP::SwitchArg projectSwitch("p","project","Project x y values fron WGS84 to auto utm-zone", cmd, false);
         TCLAP::SwitchArg flipSignOnZSwitch("f","flip","flip the sign of z-values in output", cmd, false);
@@ -39,7 +40,7 @@ int main (int argc, const char * argv[])
         
         cmd.parse(argc,argv);
         
-        Filter f(inputArg.getValue().c_str(),outputArg.getValue().c_str(), projectSwitch.getValue(), flipSignOnZSwitch.getValue(), flipXYSwitch.getValue());
+        Filter f(inputArg.getValue().c_str(),outputArg.getValue().c_str(), projectSwitch.getValue(), flipSignOnZSwitch.getValue(), flipXYSwitch.getValue(), precArg.getValue());
 
         if (percentageArg.isSet())
             f.copy_percentage(percentageArg.getValue());

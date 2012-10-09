@@ -46,8 +46,9 @@
 struct vertexInfo {
     double metricL2;
     bool metricSafety;
-    bool tooBig;
-    vertexInfo():metricL2(0),metricSafety(0),tooBig(0){}
+    //bool tooBig;
+    bool regionSmooth;
+    vertexInfo():metricL2(0),metricSafety(0),regionSmooth(0){}
 };
 
 struct faceInfo {

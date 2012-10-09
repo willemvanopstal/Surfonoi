@@ -103,8 +103,9 @@ public:
     void markBigTriangles_mel(double maxEdgeLength);
     void markBigTriangles_mta(double maxDoubleArea);
     void printTags();
-    
+
     void smooth(smoothAlg, bool upOnly=true);
+    void smoothRegion(smoothAlg, bool upOnly=true);
     void densify(smoothAlg, bool tooBigOnly=false);
     void simplify(smoothAlg, double treshold, bool upOnly=true, bool dumpIntermediateStepsToOBJ=false);
         

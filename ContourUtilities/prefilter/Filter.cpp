@@ -8,9 +8,9 @@
 
 #include "Filter.h"
 
-Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, bool fXY): 
+Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, bool fXY, int precise):
     ifs(inFile), ofs(outFile), lineCount(0), delimiter(' '), 
-    projectFromWGS84(pfW), flipXY(fXY), flipSignOnZ(fSOZ)
+    projectFromWGS84(pfW), flipXY(fXY), flipSignOnZ(fSOZ), precision(precise)
 {
     if(!ifs) {
         std::cerr << "Unable to open file" << std::endl;
@@ -47,7 +47,7 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
     outFile_bounds.append(".bounds");
     
     std::ofstream ofs_bounds(outFile_bounds.c_str());
-    ofs_bounds <<std::setprecision(2)<<std::fixed << minx << std::endl << maxx <<
+    ofs_bounds <<std::setprecision(precision)<<std::fixed << minx << std::endl << maxx <<
     std::endl << miny << std::endl << maxy << std::endl;
     
     if(flipSignOnZ)
@@ -56,7 +56,7 @@ Filter::Filter(const char *inFile, const char *outFile, bool pfW, bool fSOZ, boo
         ofs_bounds << minz << std::endl << maxz << std::endl;
     
     // set precision of output file
-    ofs <<std::setprecision(2)<<std::fixed;
+    ofs <<std::setprecision(precision)<<std::fixed;
 }
 
 void Filter::findBounds()

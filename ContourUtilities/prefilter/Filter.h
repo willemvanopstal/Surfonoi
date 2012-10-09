@@ -22,7 +22,7 @@
 class Filter
 {
 public:
-    Filter(const char*, const char*, bool pfW, bool fSOZ, bool fXY);
+    Filter(const char*, const char*, bool pfW, bool fSOZ, bool fXY, int precise);
     void copy_all();
     void copy_nth(int);
     void copy_percentage(int);
@@ -43,6 +43,7 @@ private:
     projPJ pj_utm, pj_latlong;
     bool flipXY;
     bool flipSignOnZ;
+    int precision;
 };
 
 

@@ -10,8 +10,7 @@ int main(int argc, const char * argv[])
         
         TCLAP::CmdLine cmd("Performs Natural Neighbour interpolation from input points to a raster output. ", ' ', "none", false);
         
-        TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",true,2,"int", cmd);
-        TCLAP::ValueArg<int> dArg("d","densify","Number of times to densify",true,2,"int", cmd);
+        TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",false,0,"int", cmd);
         TCLAP::SwitchArg uSwitch("u","unsafe","Smooth without attempting to respect bathymetric safety constraint", cmd, false);
         
         
@@ -34,10 +33,11 @@ int main(int argc, const char * argv[])
             alg = NN;
         else if (methodArg.getValue() == "LP")
             alg = LP;
+        else if (methodArg.getValue() == "TIN")
+            alg = TIN;
         
         CgalProcessor cp(inputArg.getValue().c_str());
         for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
-        for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg);
 
         cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg);
         

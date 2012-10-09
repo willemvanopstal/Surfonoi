@@ -49,6 +49,15 @@
 		4109A96B15C9471A00833C24 /* libmpfr.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96215C946DB00833C24 /* libmpfr.4.dylib */; };
 		4109A96C15C9472100833C24 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96115C946DB00833C24 /* libgmp.10.dylib */; };
 		4109A96D15C9472400833C24 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */; };
+		41443E2A1622CDDD00B86E50 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41443E291622CDDD00B86E50 /* main.cpp */; };
+		41443E311622D07300B86E50 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */; };
+		41443E321622D07500B86E50 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96115C946DB00833C24 /* libgmp.10.dylib */; };
+		41443E331622D07900B86E50 /* libmpfr.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96215C946DB00833C24 /* libmpfr.4.dylib */; };
+		41443E341622D07E00B86E50 /* libCGAL_Core.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95C15C9459500833C24 /* libCGAL_Core.9.0.0.dylib */; };
+		41443E351622D08200B86E50 /* libCGAL.9.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A95D15C9459500833C24 /* libCGAL.9.0.0.dylib */; };
+		41443E361622D08600B86E50 /* GDAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90B15C943C3000BCE6C /* GDAL.framework */; };
+		41443E371622D08900B86E50 /* GEOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4105B90915C942D3000BCE6C /* GEOS.framework */; };
+		41443E381622D0EA00B86E50 /* CgalProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68E0157A62C10063863B /* CgalProcessor.cpp */; };
 		41DE68591578C84F0063863B /* DoubleBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68571578C84F0063863B /* DoubleBuffer.cpp */; };
 		41DE68621578E23C0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68611578E23C0063863B /* main.cpp */; };
 		41DE686A1578E2920063863B /* Filter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68681578E2920063863B /* Filter.cpp */; };
@@ -64,7 +73,6 @@
 		41DE68E4157A62C10063863B /* CgalProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68E0157A62C10063863B /* CgalProcessor.cpp */; };
 		41DE68F3157A689C0063863B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68501578C5E70063863B /* main.cpp */; };
 		41EC5893161C8F4400DB5797 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41EC5892161C8F4400DB5797 /* main.cpp */; };
-		41EC5895161C8F4400DB5797 /* nn2raster.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 41EC5894161C8F4400DB5797 /* nn2raster.1 */; };
 		41EC589B161C91D500DB5797 /* CgalProcessor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 41DE68E0157A62C10063863B /* CgalProcessor.cpp */; };
 		41EC589C161C91ED00DB5797 /* libboost_thread-mt.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */; };
 		41EC589D161C91ED00DB5797 /* libgmp.10.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4109A96115C946DB00833C24 /* libgmp.10.dylib */; };
@@ -135,6 +143,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		41443E241622CDDD00B86E50 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		41DE684B1578C5E70063863B /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -204,7 +221,6 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				41EC5895161C8F4400DB5797 /* nn2raster.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
@@ -219,6 +235,8 @@
 		4109A96015C946DB00833C24 /* libboost_thread-mt.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libboost_thread-mt.dylib"; path = "../../../../usr/local/Cellar/boost/1.49.0/lib/libboost_thread-mt.dylib"; sourceTree = "<group>"; };
 		4109A96115C946DB00833C24 /* libgmp.10.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libgmp.10.dylib; path = ../../../../usr/local/Cellar/gmp/5.0.5/lib/libgmp.10.dylib; sourceTree = "<group>"; };
 		4109A96215C946DB00833C24 /* libmpfr.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmpfr.4.dylib; path = ../../../../usr/local/Cellar/mpfr/3.1.0/lib/libmpfr.4.dylib; sourceTree = "<group>"; };
+		41443E261622CDDD00B86E50 /* regionsmooth */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = regionsmooth; sourceTree = BUILT_PRODUCTS_DIR; };
+		41443E291622CDDD00B86E50 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		41DE68471578C53E0063863B /* include */ = {isa = PBXFileReference; lastKnownFileType = folder; path = include; sourceTree = "<group>"; };
 		41DE684D1578C5E70063863B /* doublebuffer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = doublebuffer; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DE68501578C5E70063863B /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -249,10 +267,23 @@
 		41DE68E2157A62C10063863B /* CgalType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CgalType.h; sourceTree = "<group>"; };
 		41EC588F161C8F4400DB5797 /* nn2raster */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = nn2raster; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EC5892161C8F4400DB5797 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		41EC5894161C8F4400DB5797 /* nn2raster.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = nn2raster.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		41443E231622CDDD00B86E50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41443E311622D07300B86E50 /* libboost_thread-mt.dylib in Frameworks */,
+				41443E321622D07500B86E50 /* libgmp.10.dylib in Frameworks */,
+				41443E331622D07900B86E50 /* libmpfr.4.dylib in Frameworks */,
+				41443E341622D07E00B86E50 /* libCGAL_Core.9.0.0.dylib in Frameworks */,
+				41443E351622D08200B86E50 /* libCGAL.9.0.0.dylib in Frameworks */,
+				41443E361622D08600B86E50 /* GDAL.framework in Frameworks */,
+				41443E371622D08900B86E50 /* GEOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41DE684A1578C5E70063863B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -340,6 +371,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41443E281622CDDD00B86E50 /* regionsmooth */ = {
+			isa = PBXGroup;
+			children = (
+				41443E291622CDDD00B86E50 /* main.cpp */,
+			);
+			path = regionsmooth;
+			sourceTree = "<group>";
+		};
 		41DE68241578BB530063863B = {
 			isa = PBXGroup;
 			children = (
@@ -361,6 +400,7 @@
 				41DE68B51578E4890063863B /* checkraster */,
 				41DE68C31578E4CA0063863B /* smoothdens */,
 				41EC5891161C8F4400DB5797 /* nn2raster */,
+				41443E281622CDDD00B86E50 /* regionsmooth */,
 				41DE68301578BB530063863B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -376,6 +416,7 @@
 				41DE68B31578E4890063863B /* checkraster */,
 				41DE68C11578E4CA0063863B /* smoothdens */,
 				41EC588F161C8F4400DB5797 /* nn2raster */,
+				41443E261622CDDD00B86E50 /* regionsmooth */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -460,7 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				41EC5892161C8F4400DB5797 /* main.cpp */,
-				41EC5894161C8F4400DB5797 /* nn2raster.1 */,
 			);
 			path = nn2raster;
 			sourceTree = "<group>";
@@ -468,6 +508,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		41443E251622CDDD00B86E50 /* regionsmooth */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 41443E2F1622CDDE00B86E50 /* Build configuration list for PBXNativeTarget "regionsmooth" */;
+			buildPhases = (
+				41443E221622CDDD00B86E50 /* Sources */,
+				41443E231622CDDD00B86E50 /* Frameworks */,
+				41443E241622CDDD00B86E50 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = regionsmooth;
+			productName = regionsmooth;
+			productReference = 41443E261622CDDD00B86E50 /* regionsmooth */;
+			productType = "com.apple.product-type.tool";
+		};
 		41DE684C1578C5E70063863B /* doublebuffer */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41DE68541578C5E70063863B /* Build configuration list for PBXNativeTarget "doublebuffer" */;
@@ -633,11 +690,21 @@
 				41DE68C01578E4CA0063863B /* smoothdens */,
 				41EC588E161C8F4400DB5797 /* nn2raster */,
 				41DE68F4157A6BC50063863B /* All */,
+				41443E251622CDDD00B86E50 /* regionsmooth */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		41443E221622CDDD00B86E50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				41443E2A1622CDDD00B86E50 /* main.cpp in Sources */,
+				41443E381622D0EA00B86E50 /* CgalProcessor.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		41DE68491578C5E70063863B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,6 +823,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		41443E2D1622CDDE00B86E50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_WARN_EMPTY_BODY = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.49.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		41443E2E1622CDDE00B86E50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "compiler-default";
+				CLANG_WARN_EMPTY_BODY = NO;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/boost/1.49.0/lib,
+					/usr/local/Cellar/gmp/5.0.5/lib,
+					/usr/local/Cellar/mpfr/3.1.0/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		41DE68371578BB530063863B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1005,6 +1110,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		41443E2F1622CDDE00B86E50 /* Build configuration list for PBXNativeTarget "regionsmooth" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41443E2D1622CDDE00B86E50 /* Debug */,
+				41443E2E1622CDDE00B86E50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		41DE68291578BB530063863B /* Build configuration list for PBXProject "ContourUtilities" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1093,6 +1206,7 @@
 				41EC5898161C8F4400DB5797 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

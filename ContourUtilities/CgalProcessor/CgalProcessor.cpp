@@ -11,9 +11,24 @@ CgalProcessor::CgalProcessor(const char *inputFile){
     in_bounds >> minx >> maxx >> miny >> maxy >> minz >> maxz;
     in_bounds.close();
 
-    std::ifstream in(inputFile);    
-    std::istream_iterator<Point3D> begin(in), end;
-    dt.insert(begin, end);
+    std::ifstream in(inputFile);
+    std::string inputFileStr = inputFile;
+    double x,y,z;
+    bool e;
+
+    if(inputFileStr.find("xyze")!=std::string::npos){
+        std::cout << "found it!" << std::endl;
+        while (in >> x >> y >> z >> e)
+        {
+            Vertex_handle v = dt.insert(PointDt(x,y,z));
+            v->info().regionSmooth = e;
+        }
+    } else {
+        std::cout << "didnt find it :(" << std::endl;
+        std::istream_iterator<Point3D> begin(in), end;
+        dt.insert(begin, end);
+    }
+    in.close();
     
     std::cout << "Succesfully opened " << inputFile << std::endl;
     std::cout << "  X range: " << minx << " to " << maxx << " ("<<maxx-minx<<" m)" << std::endl;
@@ -373,7 +388,7 @@ void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg al
             } catch (OutsideConvexHullException& e) {
                 value = noDataVal;
             }
-            val[j*dim_x+i] = static_cast<float> (value);
+            val[(dim_y-j)*dim_x+i] = static_cast<float> (value);
             
         }
     }
@@ -632,6 +647,55 @@ double CgalProcessor::estimateZ(smoothAlg algorithm, Vertex_handle v) throw(Outs
     catch (OutsideConvexHullException& e) {
         throw e;
     }
+}
+
+void CgalProcessor::smoothRegion(smoothAlg algorithm, bool upOnly)
+{
+    
+    std::vector< Vertex_handle > tmpVertexVec;
+    typedef std::pair< PointDt, double > pdPair;
+    std::vector< pdPair > regionPoints;
+    
+    for( Dt::Finite_vertices_iterator vit=dt.finite_vertices_begin() ; vit != dt.finite_vertices_end(); ++vit ) {
+        
+        // temporarily remove all marked vertices and push them in a vector
+        if (vit->info().regionSmooth) {
+            regionPoints.push_back(std::make_pair(vit->point(), vit->point().z()));
+            tmpVertexVec.push_back(vit);
+        }
+        
+    }
+    
+    for( std::vector<Vertex_handle>::iterator it = tmpVertexVec.begin(); it != tmpVertexVec.end(); ++it ) {
+        dt.remove(*it);
+    }
+    
+    
+    // estimate new depths
+    for( std::vector<pdPair>::iterator it = regionPoints.begin(); it != regionPoints.end(); ++it ) {
+        //dt.remove(it->first);
+        Vertex_handle v = dt.insert(it->first);
+        
+        try {
+            double newZ = estimateZ(algorithm, v);
+            
+            if (it->second < newZ)
+                it->second = newZ;
+            
+            //            std::cerr << oldZ << " | " << newZ << std::endl;
+        } catch (OutsideConvexHullException& e) {
+            //            std::cerr << "ohoh - outside convex hull";
+        }
+        
+        dt.remove(v);
+    }
+    
+    // re-insert regionpoints to triangulation
+    for( std::vector<pdPair>::iterator it = regionPoints.begin(); it != regionPoints.end(); ++it ) {
+        dt.insert(PointDt(it->first.x(), it->first.y(), it->second));
+    }
+    
+    std::cout << "Smoothing success" << std::endl;
 }
 
 void CgalProcessor::smooth(smoothAlg algorithm, bool upOnly)
