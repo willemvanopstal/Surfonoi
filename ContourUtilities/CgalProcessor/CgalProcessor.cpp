@@ -761,8 +761,29 @@ void CgalProcessor::densify(smoothAlg algorithm, bool tooBigOnly)
     pfPair newPoints;
     for( Dt::Finite_faces_iterator ib = dt.finite_faces_begin();
         ib != dt.finite_faces_end(); ++ib) {
-        if ((ib->info().tooBig && tooBigOnly) || (!tooBigOnly) )
+        if ((ib->info().tooBig && tooBigOnly) || (!tooBigOnly) ){
+            
+            // Wikipedia says this is how to calculate the coordinates of the incenter
+            // http://en.wikipedia.org/wiki/Incenter#Coordinates_of_the_incenter
+//            PointDt pa = ib->vertex(0)->point();
+//            PointDt pb = ib->vertex(1)->point();
+//            PointDt pc = ib->vertex(2)->point();
+//            
+//            double a = CGAL::squared_distance(pb, pc);
+//            double b = CGAL::squared_distance(pa, pc);
+//            double c = CGAL::squared_distance(pa, pb);
+//            
+//            double P = a+b+c;
+//            
+//            double ic_x = (a*pa.x() + b*pb.x() + c*pc.x())/P;
+//            double ic_y = (a*pa.y() + b*pb.y() + c*pc.y())/P;
+//            
+//            newPoints.push_back(std::make_pair(PointDt(ic_x,ic_y,0), ib) );
+
+            // but circumcenter should be better than incircle
             newPoints.push_back(std::make_pair(dt.circumcenter(ib), ib) );
+            
+        }
     }
                             
     for (pfPair::iterator p = newPoints.begin(); p != newPoints.end(); ++p){        
