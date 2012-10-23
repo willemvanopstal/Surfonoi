@@ -40,7 +40,7 @@ int main(int argc, const char * argv[])
         }
         
         for (int i = 0; i < sArg.getValue(); ++i)   cp.smooth(alg, !uSwitch.getValue());
-        for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg, bArg.isSet());
+        for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg, !bArg.isSet());
         cp.saveContourShp(levelArg.getValue(), outputArg.getValue().c_str());
         
     } catch (TCLAP::ArgException &e)  // catch any exceptions

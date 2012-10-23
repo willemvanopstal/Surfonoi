@@ -17,14 +17,13 @@ CgalProcessor::CgalProcessor(const char *inputFile){
     bool e;
 
     if(inputFileStr.find("xyze")!=std::string::npos){
-        std::cout << "found it!" << std::endl;
+        std::cout << "Detected xyze!" << std::endl;
         while (in >> x >> y >> z >> e)
         {
             Vertex_handle v = dt.insert(PointDt(x,y,z));
             v->info().regionSmooth = e;
         }
     } else {
-        std::cout << "didnt find it :(" << std::endl;
         std::istream_iterator<Point3D> begin(in), end;
         dt.insert(begin, end);
     }
@@ -369,18 +368,19 @@ void CgalProcessor::clear(){
     dt.clear();
 }
 
-void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg alg){
+void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg alg, double xmin, double xmax, double ymin, double ymax){
 
     float noDataVal = 99999;
-    size_t dim_x = static_cast<size_t> ((maxx-minx)/cellSize + 1);
-    size_t dim_y = static_cast<size_t> ((maxy-miny)/cellSize + 1);
+    size_t dim_x = static_cast<size_t> ((xmax-xmin)/cellSize + 1);
+    size_t dim_y = static_cast<size_t> ((ymax-ymin)/cellSize + 1);
     
     float *val; val = new float[dim_x*dim_y];
     
+    int dropcount=0;
     for (size_t i=0; i<dim_x; ++i) {
         for (size_t j=0; j<dim_y; ++j) {
-            double x_coord = minx + (i+0.5)*cellSize;
-            double y_coord = maxy - (j+0.5)*cellSize;
+            double x_coord = xmin + (i+0.5)*cellSize;
+            double y_coord = ymax - (j+0.5)*cellSize;
             
             double value;
             try{
@@ -388,11 +388,14 @@ void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg al
             } catch (OutsideConvexHullException& e) {
                 value = noDataVal;
             }
-            val[(dim_y-j)*dim_x+i] = static_cast<float> (value);
-            
+            if ( (dim_y-j)*dim_x+i < dim_x*dim_y )
+                val[(dim_y-j)*dim_x+i] = static_cast<float> (value);
+            else
+                dropcount++;
         }
     }
-    
+    std::cout << "number of indexs out of range " <<dropcount << "  " << dim_x*dim_y << std::endl;
+
     // here comes some GDAL stuff
     GDALAllRegister();
     
@@ -405,7 +408,7 @@ void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg al
     char **papszOptions = NULL;
     poDstDS = poDriver->Create( outFile, dim_x, dim_y, 1, dataType,
                                papszOptions );
-    double adfGeoTransform[6] = { minx, cellSize, 0, miny, 0, cellSize };
+    double adfGeoTransform[6] = { xmin, cellSize, 0, ymin, 0, cellSize };
     GDALRasterBand *poBand;
     
     poDstDS->SetGeoTransform( adfGeoTransform );
