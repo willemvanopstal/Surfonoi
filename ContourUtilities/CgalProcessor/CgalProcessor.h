@@ -85,6 +85,7 @@ public:
     void clear();
 
     // export data
+    void toRaster(const char * outFile, double cellSize, smoothAlg alg);
     void toRaster(const char * outFile, double cellSize, smoothAlg alg, double xmin, double xmax, double ymin, double ymax);
     void dumpOBJ(const char * outfile);
     void dumpXYZ(const char * outFile);

@@ -368,9 +368,13 @@ void CgalProcessor::clear(){
     dt.clear();
 }
 
+void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg alg){
+    toRaster(outFile, cellSize, alg, minx, maxx, miny, maxy);
+}
+
 void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg alg, double xmin, double xmax, double ymin, double ymax){
 
-    float noDataVal = 99999;
+    float noDataVal = 9999;
     size_t dim_x = static_cast<size_t> ((xmax-xmin)/cellSize + 1);
     size_t dim_y = static_cast<size_t> ((ymax-ymin)/cellSize + 1);
     
@@ -388,6 +392,9 @@ void CgalProcessor::toRaster(const char * outFile, double cellSize, smoothAlg al
             } catch (OutsideConvexHullException& e) {
                 value = noDataVal;
             }
+//            if ((value > maxz) || (value < minz))
+//                value = noDataVal;
+            
             if ( (dim_y-j)*dim_x+i < dim_x*dim_y )
                 val[(dim_y-j)*dim_x+i] = static_cast<float> (value);
             else

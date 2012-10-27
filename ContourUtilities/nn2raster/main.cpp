@@ -45,7 +45,7 @@ int main(int argc, const char * argv[])
         for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg);
 
 //        std::cout << "set:" << alg <<", LIN: " <<LIN<<std::endl;
-        cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg, cp.MinX(), cp.MaxX(), cp.MinY(), cp.MaxY());
+        cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg);
         
     } catch (TCLAP::ArgException &e)  // catch any exceptions
 	{ std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; }

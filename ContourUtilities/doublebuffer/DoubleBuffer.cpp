@@ -216,7 +216,7 @@ ContourMap DoubleBuffer::performDB(double bufferTolerance) {
             if(!contourBufferUp->isEmpty()) {
                 for (size_t i = 0; i<contourBufferUp->getNumGeometries(); ++i) {
                     const geos::geom::LineString* geom = dynamic_cast<const geos::geom::LineString*>(contourBufferUp->getGeometryN(i));
-//                    std::cerr << geom->toString() << std::endl;
+                    std::cerr << geom->toString() << std::endl;
                     if(!geom->isEmpty()) {
                         const geos::geom::Geometry* contourBufferUpDown = bufferBuild.bufferLineSingleSided(geom->reverse(), bufferTolerance, true);
                         intermediateOut[it->first].push_back(geom->getCoordinates());

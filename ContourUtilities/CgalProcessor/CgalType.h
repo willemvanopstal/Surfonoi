@@ -19,6 +19,12 @@
 #ifdef Nil
 #undef Nil
 #endif
+#ifdef handle
+#undef handle
+#endif
+#ifdef Handle
+#undef Handle
+#endif
 
 #include <CGAL/Plane_3.h>
 #include <CGAL/intersections.h>
