@@ -12,6 +12,7 @@ int main(int argc, const char * argv[])
         
         TCLAP::ValueArg<int> sArg("s","smooth","Number of times to smooth",false,0,"int", cmd);
         TCLAP::ValueArg<int> dArg("d","densify","Number of times to densify",false,0,"int", cmd);
+        TCLAP::ValueArg<double> lArg("l","clip","Clip to this margin",false,0,"double", cmd);
 
         TCLAP::SwitchArg uSwitch("u","unsafe","Smooth without attempting to respect bathymetric safety constraint", cmd, false);
         
@@ -45,7 +46,13 @@ int main(int argc, const char * argv[])
         for (int i = 0; i < dArg.getValue(); ++i)   cp.densify(alg);
 
 //        std::cout << "set:" << alg <<", LIN: " <<LIN<<std::endl;
-        cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg);
+        if (lArg.isSet()) {
+            double m = lArg.getValue();
+            cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg, cp.MinX()+m, cp.MaxX()-m, cp.MinY()+m, cp.MaxY()-m );
+        } else {
+            cp.toRaster(outputArg.getValue().c_str(), csArg.getValue(), alg);
+        }
+
         
     } catch (TCLAP::ArgException &e)  // catch any exceptions
 	{ std::cerr << "error: " << e.error() << " for arg " << e.argId() << std::endl; }

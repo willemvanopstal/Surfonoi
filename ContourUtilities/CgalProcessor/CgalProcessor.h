@@ -87,8 +87,9 @@ public:
     // export data
     void toRaster(const char * outFile, double cellSize, smoothAlg alg);
     void toRaster(const char * outFile, double cellSize, smoothAlg alg, double xmin, double xmax, double ymin, double ymax);
-    void dumpOBJ(const char * outfile);
+    void dumpOBJ(const char * outfile, double zExageration=1);
     void dumpXYZ(const char * outFile);
+    void dumpDiffs(CgalProcessor &otherSurface, const char * outFile);
     contourSegmentVec extractContours(std::vector<double> isoDepths);
     contourSegmentVec extractContoursCgalInt(std::vector<double> isoDepths);
     void saveContourShp(std::vector<double> isoDepths, const char * fileOut);

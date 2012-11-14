@@ -9,6 +9,8 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
+#include <iomanip>
+
 
 #include <gdal/gdal_priv.h>
 #include <gdal/cpl_conv.h>
@@ -58,6 +60,8 @@ int main(int argc, const char * argv[])
         int lineCount=0;
         
         std::ifstream ifs(argv[2]);
+        std::ofstream ofs(argv[3]);
+        ofs <<std::setprecision(2)<<std::fixed;
         while (ifs >> x >> y >> z) {
             col = floor( (x-tl_x)/cellsize_x );
             row = floor( (y-tl_y)/cellsize_y );
@@ -67,16 +71,26 @@ int main(int argc, const char * argv[])
             if ( (col<nXSize and row<nYSize) and pafImage[row*nXSize+col] != noDataVal ) {
                 
                 vert_dist = pafImage[row*nXSize+col]-z;
-                
-                if (vert_dist > -epsilon) ++safeCount;
+//                std::cout << pafImage[row*nXSize+col] << " " << z  << " diff: " << vert_dist <<std::endl;
+                if ((vert_dist < epsilon) and (vert_dist > -epsilon)) vert_dist=0;
                 squared_sum += (vert_dist*vert_dist);
-                ++pointCount;
+                ++pointCount;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                
+                if (vert_dist >= 0) safeCount++;
                 
                 max_vdist = max_vdist < vert_dist ? vert_dist : max_vdist;
                 min_vdist = min_vdist > vert_dist ? vert_dist : min_vdist;
+                
+                ofs << " " << x;
+                ofs << " " << y;
+                ofs << " " << z;
+                ofs << " " << vert_dist;
+                ofs << std::endl;
+                
             } else std::cerr << "point outside raster boundaries" << std::endl;
             ++lineCount;
         }
+        ofs.close();
         ifs.close();
         
         std::cout << "Safe points: " << safeCount << " out of " << pointCount << " ( " << lineCount << " )" << std::endl;

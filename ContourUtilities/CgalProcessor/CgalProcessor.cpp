@@ -466,7 +466,7 @@ void CgalProcessor::dumpXYZ(const char * outFile){
 }
 
 //dump triangulation to simple wavefront .obj format
-void CgalProcessor::dumpOBJ(const char * outFile){
+void CgalProcessor::dumpOBJ(const char * outFile, double zExageration){
    
     std::ofstream ofs(outFile);
     
@@ -481,7 +481,7 @@ void CgalProcessor::dumpOBJ(const char * outFile){
 
         ofs << " " << (vit->point().cartesian(0) - x_offset) ;
         ofs << " " << (vit->point().cartesian(1) - y_offset) ;
-        ofs << " " << 100*(vit->point().cartesian(2) - z_offset);
+        ofs << " " << zExageration*(vit->point().cartesian(2) - z_offset);
 
         ofs << std::endl;
         V[vit] = ++jnum;
@@ -960,4 +960,27 @@ void CgalProcessor::metricSafety(CgalProcessor &otherSurface)
 
     }
     std::cout << "# unsafe points: " << NofUnsafePoints << std::endl;
+}
+
+void CgalProcessor::dumpDiffs(CgalProcessor &otherSurface, const char * outFile)
+{
+    
+    std::ofstream ofs(outFile);
+    ofs <<std::setprecision(2)<<std::fixed;
+    
+    for( Dt::Finite_vertices_iterator vit=dt.finite_vertices_begin() ; vit != dt.finite_vertices_end(); ++vit ) {
+        double d = otherSurface.verticalError(vit->point());
+        
+        if (d<1E-5 and d>-1E-5)
+            d=0;
+
+        ofs << " " << (vit->point().cartesian(0));
+        ofs << " " << (vit->point().cartesian(1));
+        ofs << " " << (vit->point().cartesian(2));
+        ofs << " " << d;
+        ofs << std::endl;
+        
+    }
+    
+    ofs.close();
 }
