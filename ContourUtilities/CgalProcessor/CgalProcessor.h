@@ -8,12 +8,12 @@
 #include "CgalType.h"
 
 //OGR
-#include <gdal/ogrsf_frmts.h>
+#include <ogrsf_frmts.h>
 //GDAL
-#include <gdal/gdal_priv.h>
-#include <gdal/cpl_string.h>
-#include <gdal/cpl_conv.h>
-#include <gdal/ogr_spatialref.h>
+#include <gdal_priv.h>
+#include <cpl_string.h>
+#include <cpl_conv.h>
+#include <ogr_spatialref.h>
 //GEOS
 #include <geos/geom/Coordinate.h>
 #include <geos/geom/Point.h>

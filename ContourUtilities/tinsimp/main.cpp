@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
         TCLAP::UnlabeledValueArg<std::string>  outputArg( "ouput", "path to .xyz file", true, "", "output file", cmd);
         cmd.parse(argc,argv);
         
-        smoothAlg alg;
+        smoothAlg alg = LIN;
         if (methodArg.getValue() == "LIN")
             alg = LIN;
         else if (methodArg.getValue() == "NN")

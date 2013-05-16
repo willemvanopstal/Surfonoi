@@ -16,7 +16,7 @@
 #include <vector>
 
 //OGR
-#include <gdal/ogrsf_frmts.h>
+#include <ogrsf_frmts.h>
 
 //GEOS
 #include <geos/geom/Coordinate.h>
