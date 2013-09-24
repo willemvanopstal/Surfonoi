@@ -9,10 +9,9 @@ BUILDING:
 (after installing dependencies)
 
 using cmake:
-	cd ContourUtilities/
+	cd Surfonoi/
 	mkdir build
 	cd build
 	cmake ..
 	make
 	make install
-or use xcode project file when using a mac
