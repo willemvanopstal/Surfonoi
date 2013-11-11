@@ -28,6 +28,7 @@ find_package(CGAL)
 
 include(${CGAL_USE_FILE})
 include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/CgalProcessor")
+include_directories(${GDAL_INCLUDE_DIR})
 
 set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS "-g -Wall -frounding-math")
