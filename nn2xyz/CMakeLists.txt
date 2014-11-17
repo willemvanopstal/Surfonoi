@@ -17,28 +17,7 @@
 #You should have received a copy of the GNU General Public License
 #along with Surfonoi.  If not, see <http://www.gnu.org/licenses/>.
 
-cmake_minimum_required(VERSION 2.6)
-project(ContourUtilities)
+add_executable(nn2xyz main.cpp "${CMAKE_SOURCE_DIR}/CgalProcessor/CgalProcessor.cpp")
+target_link_libraries(nn2xyz ${GDAL_LIBRARY} ${GEOS_LIBRARY} ${CGAL_LIBRARIES} ${CGAL_3RD_PARTY_LIBRARIES})
 
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
-find_package(GDAL)
-find_package(GEOS)
-find_package(PROJ4)
-find_package(CGAL)
-
-include(${CGAL_USE_FILE})
-include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/CgalProcessor")
-include_directories(${GDAL_INCLUDE_DIR})
-
-set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS "-g -Wall -frounding-math")
-
-add_subdirectory(prefilter)
-add_subdirectory(gridfilter)
-add_subdirectory(gridfilter2raster)
-add_subdirectory(checkraster)
-add_subdirectory(doublebuffer)
-add_subdirectory(tinsimp)
-add_subdirectory(smoothdens)
-add_subdirectory(nn2raster)
-add_subdirectory(nn2xyz)
+install (TARGETS nn2xyz DESTINATION bin)
