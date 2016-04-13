@@ -31,7 +31,7 @@ include_directories("${CMAKE_SOURCE_DIR}/include" "${CMAKE_SOURCE_DIR}/CgalProce
 include_directories(${GDAL_INCLUDE_DIR})
 
 set(CMAKE_BUILD_TYPE Release)
-set(CMAKE_CXX_FLAGS "-g -Wall -frounding-math")
+set(CMAKE_CXX_FLAGS "-g -Wall")
 
 add_subdirectory(prefilter)
 add_subdirectory(gridfilter)
