@@ -54,6 +54,14 @@ class Measurement(object):
                 #print item.depth_queue
 
     @classmethod
+    def asCsv(cls, filepath):
+        with open(filepath, 'w') as fh:
+            fh.write('x;y;depth\n')
+            for item in cls._instances:
+                stringer = str(item.loc_x) + ';' + str(item.loc_y) + ';' + str(item.depth_current) + '\n'
+                fh.write(stringer)
+
+    @classmethod
     def totalObjects(cls):
         return len(cls._instances)
 
