@@ -8,6 +8,10 @@ import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 from math import sqrt
 import time
+try:
+    import pickle
+except:
+    print '> pickle not available\n'
 
 def set_aspect_equal_3d(ax):
     """Fix equal aspect bug for 3D plots.
@@ -47,6 +51,10 @@ class Measurement(object):
 
     _instances = []
     _easyIndex = {}
+    _iterations = 0
+    _changes = {}
+    DT = False
+    VD = False
 
     depth_queue = None
 
@@ -82,6 +90,33 @@ class Measurement(object):
                 # print item.depth_queue
 
     @classmethod
+    def status(cls):
+        cls.findMinMax()
+        if cls.DT:
+            dt = 'True'
+        else:
+            dt = 'False'
+        if cls.VD:
+            vd = 'True'
+        else:
+            vd = 'False'
+        print '\n/////// STATUS REPORT ///////'
+        print 'Total objects:\t\t', cls.totalObjects()
+        print 'Delaunay:\t\t', dt
+        print 'Voronoi:\t\t', vd
+        print 'Iterations:\t\t', cls._iterations
+        print 'X min max:\t\t{0} {1}'.format(cls.xmin, cls.xmax)
+        print 'Y min max:\t\t{0} {1}'.format(cls.ymin, cls.ymax)
+        print 'Z min max:\t\t{0} {1}'.format(cls.dmin, cls.dmax)
+        print '///////  CHANGE LOG  ///////'
+        totalUpdates = 0
+        for key in cls._changes:
+            print 'iter {0} had {1} changes'.format(key, cls._changes[key])
+            totalUpdates += cls._changes[key]
+            print 'total: ', totalUpdates
+        print '/////// STATUS REPORT ///////\n'
+
+    @classmethod
     def findMinMax(cls):
         xmin = 9999999999.9
         xmax = 0.0
@@ -113,13 +148,10 @@ class Measurement(object):
         cls.dmax = dmax
 
     @classmethod
-    def visTin(cls):
+    def visTriangles(cls):
         #https://stackoverflow.com/questions/43393162/how-to-plot-3d-triangles-in-matplotlib-with-triangles-verticess-coordinates-9
         visTime = time.time()
         cls.findMinMax()
-
-        fig = plt.figure()
-        ax = fig.add_subplot(111, projection='3d')
 
         fList = []
         for triangle in cls.DT.points[cls.DT.simplices]:
@@ -131,12 +163,13 @@ class Measurement(object):
             vArray = np.array(vList)
             fList.append(vArray)
         fArray = np.array(fList)
-        print fArray[0][-1], fArray[0][-4], fArray[0][-7]
 
         cmap = cm.get_cmap('ocean')
         poly3d = [[ fArray[i, j*3:j*3+3] for j in range(3)  ] for i in range(fArray.shape[0])]
         fc = [cmap(((fArray[i][-1]+fArray[i][-4]+fArray[i][-7])/3)/(cls.dmax-cls.dmin)) for i in range(fArray.shape[0])]
 
+        fig = plt.figure()
+        ax = fig.add_subplot(111, projection='3d')
         ax.add_collection3d(Poly3DCollection(poly3d, facecolors=fc, linewidths=0))
         ax.set_xlim(cls.xmin, cls.xmax)
         ax.set_ylim(cls.ymin, cls.ymax)
@@ -144,10 +177,22 @@ class Measurement(object):
         ax.invert_zaxis()
 
         print 'visualizationTime:\t', time.time()-visTime
-        #plt.gca().set_aspect('equal', adjustable='box')
-        ax.set_aspect(1)
-        #set_aspect_equal_3d(ax)
+        plt.gca().set_aspect('equal', adjustable='box')
+        #ax.set_aspect(1)
         plt.show()
+
+    @classmethod
+    def fromCsv(cls, source, delimiter=','):
+        cls.sourceFile = source.split('.')[0]
+        with open(source) as srci:
+            identifier = 0
+            for line in srci.readlines()[1:]:
+                itemList = []
+                for item in line.split(delimiter):
+                    itemList.append(float(item))
+                cls(itemList, identifier)
+                identifier += 1
+        return
 
     @classmethod
     def asCsv(cls, filepath):
@@ -191,11 +236,18 @@ class Measurement(object):
 
     @classmethod
     def updateQueue(cls):
+        marker = False
+        updates = 0
         for item in cls._instances:
             if item.depth_queue:
                 item.depth_current = item.depth_queue
                 item.updateNr += 1
+                marker = True
+                updates += 1
             item.depth_queue = None
+        if marker:
+            cls._iterations += 1
+            cls._changes[cls._iterations] = updates
         print 'instances updated'
 
 

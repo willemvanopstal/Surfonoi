@@ -4,21 +4,15 @@
 import time
 from pysurfonoi import *
 
-def establishPoints(source):
-    with open(source) as srci:
-        identifier = 0
-        for line in srci.readlines()[1:]:
-            itemList = []
-            for item in line.split(','):
-                itemList.append(float(item))
-            Measurement(itemList, identifier)
-            identifier += 1
-    return
+
 
 
 startTime = time.time()
 
-establishPoints('small_portion.csv')
+Measurement.fromCsv('small_portion.csv')
+
+
+
 #Measurement.asCsv('set_points.csv')
 print '--------------------------------\ntotal objects:\t\t', Measurement.totalObjects()
 
@@ -43,5 +37,5 @@ print 'csv exported'
 
 print 'starting visualization'
 #Measurement.printAllInstances()
-Measurement.visTin()
+Measurement.visTriangles()
 
