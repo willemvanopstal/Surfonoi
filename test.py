@@ -17,69 +17,17 @@ def ccw(Ax, Bx, Cx, Ay, By, Cy):
     return (Cy-Ay) * (Bx-Ax) > (By-Ay) * (Cx-Ax)
 
 def intersect(Ax, Bx, Cx, Dx, Ay, By, Cy, Dy):
-    return ccw(Ax, Cx, Dx, Ay, Cy, Dy) != ccw(Bx, Cx, Dx, By, Cy, Dy) and ccw(Ax, Bx, Cx, Ay, By, Cy) != ccw(Ax, Bx, Dx, Ay, By, Dy)	
-	
-def checkIntersect(Ax, Bx, Cx, Dx, Ay, By, Cy, Dy):
-	# https://stackoverflow.com/questions/3838329/how-can-i-check-if-two-segments-intersect
-	
-	
-	
-	
-	'''slope=(Dy-Cy)/(Dx-Cx)
-	dist1=slope*(Cx-Ax)+Ay-Cy
-	dist2=slope*(Dx-Bx)+By-Dy
-	# return dist1*dist2<0'''
-	
-	'''if min(Ax, Bx) < max(Cx, Dx) and min(Ay, By) < max(Cy, Dy) and max(Ax, Bx) > min(Cx, Dx) and max(Ay, By) > min(Cy, Dy):
-		print 'bbox is intersecting'
-	else:
-		print ''
-	'''
-	
-	
+    return ccw(Ax, Cx, Dx, Ay, Cy, Dy) != ccw(Bx, Cx, Dx, By, Cy, Dy) and ccw(Ax, Bx, Cx, Ay, By, Cy) != ccw(Ax, Bx, Dx, Ay, By, Dy)
 
 def establishPoints(source):
 	with open(source) as srci:
 		identifier = 0
-		for line in srci.readlines()[1:]:
+		for line in srci.readlines()[1:50]:
 			itemList = []
 			for item in line.split(';'):
 				itemList.append(float(item))
 			Measurement(itemList, identifier)
 			identifier += 1
-	return
-
-def establishNeighbors():
-	index = Measurement._easyIndex
-	triangles = Measurement.DT.points[Measurement.DT.vertices]
-	for item in triangles:
-		index[str(item[0])].neighbors.add(index[str(item[1])])
-		index[str(item[0])].neighbors.add(index[str(item[2])])
-		index[str(item[1])].neighbors.add(index[str(item[0])])
-		index[str(item[1])].neighbors.add(index[str(item[2])])
-		index[str(item[2])].neighbors.add(index[str(item[0])])
-		index[str(item[2])].neighbors.add(index[str(item[1])])
-
-	# Natural Neighbors > Measurement.VD
-	for k, point in enumerate(Measurement.VD.points):
-		
-		ring = Measurement.VD.point_region[k]
-		if -1 in Measurement.VD.regions[ring]:
-			continue
-		else:
-			vList = []
-			for i in range(len(Measurement.VD.regions[ring])):
-				if not Measurement.VD.regions[ring][i] == -1:
-					vList.append(Measurement.VD.vertices[Measurement.VD.regions[ring][i]])
-				else:
-					print ''
-			if not Measurement.VD.regions[ring][0] == -1:
-				vList.append(Measurement.VD.vertices[Measurement.VD.regions[ring][0]])
-			else:
-				print ''
-
-			index[str(point)].voronoiRing = vList
-	
 	return
 
 class Measurement(object):
@@ -88,12 +36,13 @@ class Measurement(object):
 	_easyIndex = {}
 
 	def __init__(self, initList, identification):
+		self.depth_queue = None
 		self.neighbors = set()
 		self.voronoiRing = []
 		self.loc_x = initList[0]
 		self.loc_y = initList[1]
 		self.depth_measurement = initList[2]
-		self.depth_original = initList[2]
+		self.depth_current = initList[2]
 		self.identification = identification
 		self._instances.append(self)
 		self.easyIndexer(self.loc_x, self.loc_y)
@@ -110,8 +59,10 @@ class Measurement(object):
 		for item in cls._instances:
 			if len(item.voronoiRing) != 0:
 				print '---'
-				print item.neighbors
-				print item.voronoiRing
+				print item.identification
+				print item.depth_measurement
+				print item.depth_current
+				print item.depth_queue
 
 	@classmethod
 	def totalObjects(cls):
@@ -137,9 +88,50 @@ class Measurement(object):
 		return Voronoi(array)
 
 	@classmethod
+	def updateQueue(cls):
+		for item in cls._instances:
+			if item.depth_queue:
+				item.depth_current = item.depth_queue
+			item.depth_queue = None
+		print 'instances updated'
+
+
+	@classmethod
+	def establishNeighbors(cls):
+		index = cls._easyIndex
+		triangles = cls.DT.points[cls.DT.vertices]
+		for item in triangles:
+			index[str(item[0])].neighbors.add(index[str(item[1])])
+			index[str(item[0])].neighbors.add(index[str(item[2])])
+			index[str(item[1])].neighbors.add(index[str(item[0])])
+			index[str(item[1])].neighbors.add(index[str(item[2])])
+			index[str(item[2])].neighbors.add(index[str(item[0])])
+			index[str(item[2])].neighbors.add(index[str(item[1])])
+
+		# Natural Neighbors > Measurement.VD
+		for k, point in enumerate(cls.VD.points):
+
+			ring = cls.VD.point_region[k]
+			if -1 in cls.VD.regions[ring]:
+				continue
+			else:
+				vList = []
+				for i in range(len(cls.VD.regions[ring])):
+					if not cls.VD.regions[ring][i] == -1:
+						vList.append(cls.VD.vertices[cls.VD.regions[ring][i]])
+					else:
+						print ''
+				if not cls.VD.regions[ring][0] == -1:
+					vList.append(cls.VD.vertices[cls.VD.regions[ring][0]])
+				else:
+					print ''
+
+				index[str(point)].voronoiRing = vList
+
+		return
+
+	@classmethod
 	def iterateAll(cls):
-		# Use me for testing purposes :)
-			
 		for item in cls._instances:
 			sumOfWeights = 0.0
 			upper = 0.0
@@ -149,31 +141,48 @@ class Measurement(object):
 				print 'depth:\t\t{0} m'.format(item.depth_measurement)
 				print 'neighbors:\t{0}'.format(len(item.voronoiRing)-1)
 				for neighbor in item.neighbors:
-					print 'neighbor:\t{0}'.format(neighbor)
+					#print 'neighbor:\t{0}'.format(neighbor)
 					dtDistance = distance(item.loc_x, item.loc_y, neighbor.loc_x, neighbor.loc_y)
-					print 'DT distance:\t{0}'.format(dtDistance)
+					#print 'DT distance:\t{0}'.format(dtDistance)
 					
 					# check formulas...
 					for p in range(len(item.voronoiRing)-1):
 						checker = intersect(item.loc_x, neighbor.loc_x, item.voronoiRing[p][0], item.voronoiRing[p+1][0], item.loc_y, neighbor.loc_y, item.voronoiRing[p][1], item.voronoiRing[p+1][1])
 						if checker:
 							vdDistance = distance(item.voronoiRing[p][0], item.voronoiRing[p][1], item.voronoiRing[p+1][0], item.voronoiRing[p+1][1])
-							print 'VD distance:\t{0}'.format(vdDistance)
+							#print 'VD distance:\t{0}'.format(vdDistance)
 					weightNbr = vdDistance/dtDistance
 					sumOfWeights += weightNbr
 					upper += (weightNbr * neighbor.depth_measurement)
-				print item.depth_measurement
-				print upper/sumOfWeights
-			
-		
+				#print item.depth_measurement
+				interpolated_depth = upper/sumOfWeights
+				print 'interpolated depth:\t{0}'.format(interpolated_depth)
+				if interpolated_depth < item.depth_current:
+					item.depth_queue = interpolated_depth
+				else:
+					item.depth_queue = None
+				print 'queue:\t\t:{0}'.format(item.depth_queue)
+
+print 'establish points'
 establishPoints('hdwest.csv')
+print 'established points'
+print 'pointcount:', Measurement.totalObjects()
+print 'start DT'
 Measurement.fullDelaunay()
+print 'finish DT'
+print 'start VD'
 Measurement.fullVoronoi()
+print 'finish VD'
+print 'find neighbors'
 establishNeighbors()
+print 'found neighbors'
 print '\n########'
 
 #Measurement.printAllInstances()
 Measurement.iterateAll()
+Measurement.updateQueue()
+
+Measurement.printAllInstances()
 
 
 '''
