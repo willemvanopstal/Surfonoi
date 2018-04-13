@@ -21,6 +21,6 @@ Measurement.status()
 Measurement.visTriangles()
 ```
 
-Original             |  90 iterations
-:-------------------------:|:-------------------------:
-![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/original.PNG)  |  ![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/90_iterations.PNG)
+Original             |  90 iterations | 200 iterations  | 300 iterations
+:-------------------------:|:-------------------------:|:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/output/original.PNG)  |  ![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/output/90_iterations.PNG)|  ![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/output/200_iterations.PNG)|  ![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/output/300_iterations.PNG)
