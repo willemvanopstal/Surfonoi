@@ -80,7 +80,7 @@ class Measurement(object):
 
     depth_queue = None
 
-    def __init__(self, initList, identification):
+    def __init__(self, initList, identification, densifier=False):
         self.updateNr = 0
         self.neighbors = set()
         self.voronoiRing = []
@@ -91,6 +91,8 @@ class Measurement(object):
         self.identification = identification
         self._instances.append(self)
         self.easyIndexer(self.loc_x, self.loc_y)
+
+        self.densePoint = densifier
 
     def __str__(self):
         return str(self.loc_x) + ";" + str(self.loc_y) + ";" + str(self.depth_measurement)
@@ -149,6 +151,8 @@ class Measurement(object):
         dmax = 0
 
         for item in cls._instances:
+            if item.depth_current == 99999.9:
+                continue
             if item.loc_x < xmin:
                 xmin = item.loc_x
             if item.loc_x > xmax:
@@ -177,13 +181,16 @@ class Measurement(object):
 
         fList = []
         for triangle in cls.DT.points[cls.DT.simplices]:
-            vList = []
-            for vertex in triangle:
-                vList.append(vertex[0])
-                vList.append(vertex[1])
-                vList.append(cls._easyIndex[str(vertex)].depth_current)
-            vArray = np.array(vList)
-            fList.append(vArray)
+            if cls._easyIndex[str(triangle[0])].depth_current == 99999.9 or cls._easyIndex[str(triangle[1])].depth_current == 99999.9 or cls._easyIndex[str(triangle[2])].depth_current == 99999.9 :
+                continue
+            else:
+                vList = []
+                for vertex in triangle:
+                    vList.append(vertex[0])
+                    vList.append(vertex[1])
+                    vList.append(cls._easyIndex[str(vertex)].depth_current)
+                vArray = np.array(vList)
+                fList.append(vArray)
         fArray = np.array(fList)
 
         cmap = cm.get_cmap('ocean')
@@ -270,7 +277,13 @@ class Measurement(object):
         if marker:
             cls._iterations += 1
             cls._changes[cls._iterations] = updates
-        print 'instances updated'
+        print 'instances updated', updates
+
+    @classmethod
+    def cleanNeighbors(cls):
+        for item in cls._instances:
+            item.neighbors = set()
+            item.voronoiRing = []
 
     @classmethod
     def densify(cls):
@@ -278,24 +291,77 @@ class Measurement(object):
         triangles = cls.DT.points[cls.DT.vertices]
 
         latestId = cls._instances[-1].identification
+        startId = latestId + 1
         print latestId
 
         for item in triangles:
             triArea = area(item[0], item[1], item[2])
-            if triArea > 800:                                       # THRESHOLD
+            if triArea > 1000:                                       # THRESHOLD
                 latestId += 1
                 print triArea
                 newPoint = circumcenter(item[0], item[1], item[2])
                 newList = newPoint.tolist()
                 newList.append(99999.9)
-                print newList, latestId
+                #print newList, latestId
 
-                cls(newList, latestId) # create new instances
+                cls(newList, latestId, True) # create new instances, including hint on dense point
                 cls.DT = False
                 cls.VD = False
+        endId = latestId
 
+        print 'establishing network/neighbors again..'
+        cls.cleanNeighbors()
+        cls.establishNetwork()
+        cls.establishNeighbors()
 
+        queued = 0
+        for item in cls._instances:
+            if item.identification >= startId and item.identification <= endId:
+                sumOfWeights = 0.0
+                upper = 0.0
+                if len(item.voronoiRing) != 0:  # now im only an inner point in the VD
+                    '''
+                    print '---'
+                    print 'location:\t{0};{1}'.format(item.loc_x, item.loc_y)
+                    print 'depth:\t\t{0} m'.format(item.depth_measurement)
+                    print 'neighbors:\t{0}'.format(len(item.voronoiRing ) -1)
+                    '''
+                    for neighbor in item.neighbors:
+                        if neighbor.depth_current == 99999.9:
+                            continue
+                        # print 'neighbor:\t{0}'.format(neighbor)
+                        dtDistance = distance(item.loc_x, item.loc_y, neighbor.loc_x, neighbor.loc_y)
+                        # print 'DT distance:\t{0}'.format(dtDistance)
 
+                        # check formulas...
+                        for p in range(len(item.voronoiRing) - 1):
+                            checker = intersect(item.loc_x, neighbor.loc_x, item.voronoiRing[p][0],
+                                                item.voronoiRing[p + 1][0], item.loc_y, neighbor.loc_y,
+                                                item.voronoiRing[p][1], item.voronoiRing[p + 1][1])
+                            if checker:
+                                vdDistance = distance(item.voronoiRing[p][0], item.voronoiRing[p][1],
+                                                      item.voronoiRing[p + 1][0], item.voronoiRing[p + 1][1])
+                                break
+                            # print 'VD distance:\t{0}'.format(vdDistance)
+                        weightNbr = vdDistance / dtDistance
+                        sumOfWeights += weightNbr
+                        upper += (weightNbr * neighbor.depth_current)
+                    print item.depth_measurement
+                    if sumOfWeights == 0.0:
+                        interpolated_depth = 99999.9
+                    else:
+                        interpolated_depth = upper / sumOfWeights
+                    print 'interpolated depth:\t{0}'.format(interpolated_depth)
+                    if interpolated_depth < item.depth_current:
+                        item.depth_queue = interpolated_depth
+                        queued += 1
+                    else:
+                        continue
+            else:
+                continue
+        print 'queued points:\t\t', queued
+
+        cls.updateQueue()
 
         return
 
