@@ -2,6 +2,7 @@
 # date: april 10 2018
 
 import numpy as np
+from numpy.linalg import norm
 from scipy.spatial import Delaunay, Voronoi, voronoi_plot_2d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import matplotlib.pyplot as plt
@@ -12,6 +13,27 @@ try:
     import pickle
 except:
     print '> pickle not available\n'
+
+def circumcenter(vert1, vert2, vert3):
+    #https://gist.github.com/dhermes/9ce057da49df63345c33
+    # H/T: wikipedia.org/wiki/Circumscribed_circle
+    Ax, Ay = vert1
+    Bx, By = vert2
+    Cx, Cy = vert3
+
+    D = 2 * (Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By))
+    norm_A = Ax ** 2 + Ay ** 2
+    norm_B = Bx ** 2 + By ** 2
+    norm_C = Cx ** 2 + Cy ** 2
+
+    Ux = norm_A * (By - Cy) + norm_B * (Cy - Ay) + norm_C * (Ay - By)
+    Uy = -(norm_A * (Bx - Cx) + norm_B * (Cx - Ax) + norm_C * (Ax - Bx))
+
+    return np.array([Ux, Uy]) / D
+
+def area(a, b, c):
+    '''numpy arrays'''
+    return 0.5 * norm( np.cross( b-a, c-a ) )
 
 def set_aspect_equal_3d(ax):
     """Fix equal aspect bug for 3D plots.
@@ -250,6 +272,32 @@ class Measurement(object):
             cls._changes[cls._iterations] = updates
         print 'instances updated'
 
+    @classmethod
+    def densify(cls):
+        index = cls._easyIndex
+        triangles = cls.DT.points[cls.DT.vertices]
+
+        latestId = cls._instances[-1].identification
+        print latestId
+
+        for item in triangles:
+            triArea = area(item[0], item[1], item[2])
+            if triArea > 800:                                       # THRESHOLD
+                latestId += 1
+                print triArea
+                newPoint = circumcenter(item[0], item[1], item[2])
+                newList = newPoint.tolist()
+                newList.append(99999.9)
+                print newList, latestId
+
+                cls(newList, latestId) # create new instances
+                cls.DT = False
+                cls.VD = False
+
+
+
+
+        return
 
     @classmethod
     def establishNeighbors(cls):
