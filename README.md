@@ -20,3 +20,7 @@ Measurement.status()
 
 Measurement.visTriangles()
 ```
+
+Original             |  90 iterations
+:-------------------------:|:-------------------------:
+![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/original.PNG)  |  ![](https://raw.githubusercontent.com/willemvanopstal/Surfonoi/proto/90_iterations.PNG)
