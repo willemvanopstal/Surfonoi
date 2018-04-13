@@ -113,7 +113,7 @@ class Measurement(object):
         for key in cls._changes:
             print 'iter {0} had {1} changes'.format(key, cls._changes[key])
             totalUpdates += cls._changes[key]
-            print 'total: ', totalUpdates
+        print 'total: ', totalUpdates
         print '/////// STATUS REPORT ///////\n'
 
     @classmethod
