@@ -1,73 +1,19 @@
 # author: Willem van Opstal
 # date: april 10 2018
 
+from utility_functions import *
+
 import numpy as np
-from numpy.linalg import norm
 from scipy.spatial import Delaunay, Voronoi, voronoi_plot_2d
 from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from math import sqrt
 import time
 try:
     import pickle
 except:
     print '> pickle not available\n'
 
-def circumcenter(vert1, vert2, vert3):
-    #https://gist.github.com/dhermes/9ce057da49df63345c33
-    # H/T: wikipedia.org/wiki/Circumscribed_circle
-    Ax, Ay = vert1
-    Bx, By = vert2
-    Cx, Cy = vert3
-
-    D = 2 * (Ax * (By - Cy) + Bx * (Cy - Ay) + Cx * (Ay - By))
-    norm_A = Ax ** 2 + Ay ** 2
-    norm_B = Bx ** 2 + By ** 2
-    norm_C = Cx ** 2 + Cy ** 2
-
-    Ux = norm_A * (By - Cy) + norm_B * (Cy - Ay) + norm_C * (Ay - By)
-    Uy = -(norm_A * (Bx - Cx) + norm_B * (Cx - Ax) + norm_C * (Ax - Bx))
-
-    return np.array([Ux, Uy]) / D
-
-def area(a, b, c):
-    '''numpy arrays'''
-    return 0.5 * norm( np.cross( b-a, c-a ) )
-
-def set_aspect_equal_3d(ax):
-    """Fix equal aspect bug for 3D plots.
-    https://stackoverflow.com/a/35126679/5011857"""
-
-    xlim = ax.get_xlim3d()
-    ylim = ax.get_ylim3d()
-    zlim = ax.get_zlim3d()
-
-    from numpy import mean
-    xmean = mean(xlim)
-    ymean = mean(ylim)
-    zmean = mean(zlim)
-
-    plot_radius = max([abs(lim - mean_)
-                       for lims, mean_ in ((xlim, xmean),
-                                           (ylim, ymean),
-                                           (zlim, zmean))
-                       for lim in lims])
-
-    ax.set_xlim3d([xmean - plot_radius, xmean + plot_radius])
-    ax.set_ylim3d([ymean - plot_radius, ymean + plot_radius])
-    ax.set_zlim3d([zmean - plot_radius, zmean + plot_radius])
-
-def distance(xone, yone, xtwo, ytwo):
-    xdif = pow((xtwo - xone),2)
-    ydif = pow((ytwo - yone),2)
-    return sqrt(xdif + ydif)
-
-def ccw(Ax, Bx, Cx, Ay, By, Cy):
-    return (Cy-Ay) * (Bx-Ax) > (By-Ay) * (Cx-Ax)
-
-def intersect(Ax, Bx, Cx, Dx, Ay, By, Cy, Dy):
-    return ccw(Ax, Cx, Dx, Ay, Cy, Dy) != ccw(Bx, Cx, Dx, By, Cy, Dy) and ccw(Ax, Bx, Cx, Ay, By, Cy) != ccw(Ax, Bx, Dx, Ay, By, Dy)
 
 class Measurement(object):
 
@@ -79,6 +25,7 @@ class Measurement(object):
     VD = False
 
     depth_queue = None
+
 
     def __init__(self, initList, identification, densifier=False):
         self.updateNr = 0
@@ -94,11 +41,14 @@ class Measurement(object):
 
         self.densePoint = densifier
 
+
     def __str__(self):
         return str(self.loc_x) + ";" + str(self.loc_y) + ";" + str(self.depth_measurement)
 
+
     def easyIndexer(self, lox, loy):
         self._easyIndex[str(np.array([lox, loy]))] = self
+
 
     @classmethod
     def printAllInstances(cls):
@@ -113,21 +63,15 @@ class Measurement(object):
                 print item.updateNr
                 # print item.depth_queue
 
+
     @classmethod
     def status(cls):
         cls.findMinMax()
-        if cls.DT:
-            dt = 'True'
-        else:
-            dt = 'False'
-        if cls.VD:
-            vd = 'True'
-        else:
-            vd = 'False'
+
         print '\n/////// STATUS REPORT ///////'
         print 'Total objects:\t\t', cls.totalObjects()
-        print 'Delaunay:\t\t', dt
-        print 'Voronoi:\t\t', vd
+        print 'Delaunay:\t\t', str(cls.DT)
+        print 'Voronoi:\t\t', str(cls.VD)
         print 'Iterations:\t\t', cls._iterations
         print 'X min max:\t\t{0} {1}'.format(cls.xmin, cls.xmax)
         print 'Y min max:\t\t{0} {1}'.format(cls.ymin, cls.ymax)
@@ -139,6 +83,7 @@ class Measurement(object):
             totalUpdates += cls._changes[key]
         print 'total: ', totalUpdates
         print '/////// STATUS REPORT ///////\n'
+
 
     @classmethod
     def findMinMax(cls):
@@ -172,6 +117,7 @@ class Measurement(object):
         cls.ymax = ymax
         cls.dmin = dmin
         cls.dmax = dmax
+
 
     @classmethod
     def visTriangles(cls):
@@ -210,6 +156,7 @@ class Measurement(object):
         #ax.set_aspect(1)
         plt.show()
 
+
     @classmethod
     def fromCsv(cls, source, delimiter=','):
         cls.sourceFile = source.split('.')[0]
@@ -223,6 +170,7 @@ class Measurement(object):
                 identifier += 1
         return
 
+
     @classmethod
     def asCsv(cls, filepath):
         with open(filepath, 'w') as fh:
@@ -231,9 +179,11 @@ class Measurement(object):
                 stringer = str(item.loc_x) + ';' + str(item.loc_y) + ';' + str(item.depth_current) + '\n'
                 fh.write(stringer)
 
+
     @classmethod
     def totalObjects(cls):
         return len(cls._instances)
+
 
     @classmethod
     def npArray(cls):
@@ -242,12 +192,6 @@ class Measurement(object):
             npList.append([item.loc_x, item.loc_y])
         return np.array(npList)
 
-    @classmethod
-    def fullDelaunay(cls):
-        #gone
-        array = cls.npArray()
-        cls.DT = Delaunay(array)
-        return Delaunay(array)    \
 
     @classmethod
     def establishNetwork(cls):
@@ -256,12 +200,6 @@ class Measurement(object):
         cls.VD = Voronoi(array)
         return
 
-    @classmethod
-    def fullVoronoi(cls):
-        #gone
-        array = cls.npArray()
-        cls.VD = Voronoi(array)
-        return Voronoi(array)
 
     @classmethod
     def updateQueue(cls):
@@ -279,11 +217,13 @@ class Measurement(object):
             cls._changes[cls._iterations] = updates
         print 'instances updated', updates
 
+
     @classmethod
     def cleanNeighbors(cls):
         for item in cls._instances:
             item.neighbors = set()
             item.voronoiRing = []
+
 
     @classmethod
     def densify(cls):
@@ -320,12 +260,6 @@ class Measurement(object):
                 sumOfWeights = 0.0
                 upper = 0.0
                 if len(item.voronoiRing) != 0:  # now im only an inner point in the VD
-                    '''
-                    print '---'
-                    print 'location:\t{0};{1}'.format(item.loc_x, item.loc_y)
-                    print 'depth:\t\t{0} m'.format(item.depth_measurement)
-                    print 'neighbors:\t{0}'.format(len(item.voronoiRing ) -1)
-                    '''
                     for neighbor in item.neighbors:
                         if neighbor.depth_current == 99999.9:
                             continue
@@ -365,6 +299,7 @@ class Measurement(object):
 
         return
 
+
     @classmethod
     def establishNeighbors(cls):
         index = cls._easyIndex
@@ -397,6 +332,7 @@ class Measurement(object):
             else:
                 continue
         return
+
 
     @classmethod
     def iterateAll(cls):
